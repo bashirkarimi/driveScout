@@ -6,7 +6,6 @@ jspm_packages/
 dist/
 build/
 out/
-*.js
 *.d.ts
 *.map
 !jest.config.js
