@@ -20,7 +20,7 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 
 1. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 2. Copy the environment template and populate it:
    ```bash
@@ -29,11 +29,11 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
    Fill in your Contentful credentials. Adjust `CONTENTFUL_CAR_CONTENT_TYPE` if your content model uses a different ID.
 3. Run the MCP server locally (the React widget is bundled automatically on the first request in development):
    ```bash
-   npm run dev
+   pnpm dev
    ```
    To work on the iframe UI in isolation, run:
    ```bash
-   npm run widget:dev
+   pnpm run widget:dev
    ```
    Then open the printed preview URL (defaults to `http://localhost:4173/index.html`).
 4. (Optional) Test locally with the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector):
@@ -52,7 +52,7 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 
 ## Project Layout
 
-- `server.js` – MCP server that registers the widget resource and the `search_inventory` tool.
+- `server/src/server.js` – MCP server that registers the widget resource and the `search_inventory` tool.
 - `src/contentful.js` – Contentful integration with graceful fallbacks and structured result mapping.
 - `src/fallback-data.js` – Shared demo inventory used when Contentful credentials are absent.
 - `public/car-widget.html` – HTML/CSS shell that the React widget hydrates when served in ChatGPT.
@@ -68,4 +68,4 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 
 ## Deploying
 
-When ready, deploy `server.js` to a public environment that supports Node.js (e.g., Vercel, Fly.io, Azure). Ensure the `/mcp` endpoint remains reachable over HTTPS and keep your Contentful tokens secure via environment variables.
+When ready, deploy `server/src/server.js` (or package the `car-search-server` workspace) to a public environment that supports Node.js (e.g., Vercel, Fly.io, Azure). Ensure the `/mcp` endpoint remains reachable over HTTPS and keep your Contentful tokens secure via environment variables.
