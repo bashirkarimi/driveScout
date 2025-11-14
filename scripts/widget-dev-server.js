@@ -8,12 +8,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const projectRoot = resolve(__dirname, "..");
-const templatePath = resolve(projectRoot, "public/car-widget.html");
-const entryPoint = resolve(projectRoot, "widget/index.jsx");
+const serverPublicDir = resolve(projectRoot, "apps/car-search-server/public");
+const templatePath = resolve(serverPublicDir, "car-widget.html");
+const widgetPackageRoot = resolve(projectRoot, "packages/car-search-widget");
+const entryPoint = resolve(widgetPackageRoot, "src/index.jsx");
 const outputDir = resolve(projectRoot, ".ui-dev");
 const outputHtmlPath = join(outputDir, "index.html");
 const outputScriptPath = join(outputDir, "widget.js");
-const publicDir = resolve(projectRoot, "public");
+const publicDir = serverPublicDir;
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 
 const port = Number(process.env.WIDGET_DEV_PORT ?? 4173);
@@ -46,6 +48,7 @@ async function startDevServer() {
     format: "esm",
     platform: "browser",
     target: ["es2020"],
+  absWorkingDir: widgetPackageRoot,
     jsx: "automatic",
     sourcemap: true,
     define: {

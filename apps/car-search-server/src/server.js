@@ -6,16 +6,19 @@ import dotenv from "dotenv";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
-import { searchCars } from "../../src/contentful.js";
+import { searchCars } from "@drive-scout/car-search-data";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const projectRoot = resolve(__dirname, "..", "..");
+const serverRoot = resolve(__dirname, "..");
+const workspaceRoot = resolve(serverRoot, "..", "..");
+const widgetPackageRoot = resolve(workspaceRoot, "packages/car-search-widget");
 
-dotenv.config({ path: resolve(projectRoot, ".env") });
-const widgetTemplatePath = resolve(projectRoot, "public/car-widget.html");
-const widgetEntryPoint = resolve(projectRoot, "widget/index.jsx");
-const publicDir = resolve(projectRoot, "public");
+dotenv.config({ path: resolve(workspaceRoot, ".env") });
+
+const widgetTemplatePath = resolve(serverRoot, "public/car-widget.html");
+const widgetEntryPoint = resolve(widgetPackageRoot, "src/index.jsx");
+const publicDir = resolve(serverRoot, "public");
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -94,7 +97,7 @@ async function buildWidgetHtml() {
     format: "esm",
     platform: "browser",
     target: ["es2020"],
-    absWorkingDir: projectRoot,
+  absWorkingDir: widgetPackageRoot,
     write: false,
     minify: !isDevelopment,
     jsx: "automatic",

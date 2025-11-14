@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FALLBACK_RESULTS } from "../src/fallback-data.js";
+import { FALLBACK_RESULTS } from "@drive-scout/car-search-data";
 
 const PLACEHOLDER_IMAGE = "/images/vehicle-placeholder.svg";
 const FALLBACK_LIMIT = 9;
