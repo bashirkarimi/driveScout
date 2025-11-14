@@ -8,7 +8,7 @@ export const FALLBACK_RESULTS = [
       "Sporty all-electric Gran Coupé delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "https://images.unsplash.com/photo-1616789260648-5d8e6fb912b7?auto=format&fit=crop&w=800&q=80",
+      url: "/images/bmw-i4.svg",
     },
     price: { formatted: "€73,900" },
     ctaUrl: "https://example.com/bmw-i4",
@@ -23,7 +23,7 @@ export const FALLBACK_RESULTS = [
       "Plug-in hybrid SUV combining electric comfort with long-distance efficiency.",
     badge: "Featured",
     image: {
-      url: "https://images.unsplash.com/photo-1619761429034-3d4d218c6369?auto=format&fit=crop&w=800&q=80",
+      url: "/images/mercedes-glc.svg",
     },
     price: { formatted: "€64,500" },
     ctaUrl: "https://example.com/mb-glc",
@@ -38,7 +38,7 @@ export const FALLBACK_RESULTS = [
       "Spacious electric crossover with dual-motor traction and rapid charging.",
     badge: "New arrival",
     image: {
-      url: "https://images.unsplash.com/photo-1601197980726-0c2400afaf87?auto=format&fit=crop&w=800&q=80",
+      url: "/images/vw-id4.svg",
     },
     price: { formatted: "€56,200" },
     ctaUrl: "https://example.com/vw-id4",

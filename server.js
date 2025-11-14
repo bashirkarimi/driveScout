@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { dirname, resolve, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -15,6 +15,7 @@ const __dirname = dirname(__filename);
 const projectRoot = __dirname;
 const widgetTemplatePath = resolve(__dirname, "public/car-widget.html");
 const widgetEntryPoint = resolve(__dirname, "widget/index.jsx");
+const publicDir = resolve(__dirname, "public");
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -71,6 +72,15 @@ const FALLBACK_WIDGET_HTML = `<!DOCTYPE html>
 </html>`;
 
 let widgetHtmlCache = null;
+
+const MIME_TYPES = {
+  ".svg": "image/svg+xml",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".gif": "image/gif",
+};
 
 const readWidgetTemplate = () => readFileSync(widgetTemplatePath, "utf8");
 
@@ -260,6 +270,23 @@ const httpServer = createServer(async (req, res) => {
   if (req.method === "GET" && url.pathname === "/") {
     res.writeHead(200, { "content-type": "text/plain" }).end("Car search MCP server");
     return;
+  }
+
+  if (req.method === "GET" && !url.pathname.startsWith(MCP_PATH)) {
+    const candidatePath = resolve(publicDir, `.${url.pathname}`);
+    if (candidatePath.startsWith(publicDir)) {
+      try {
+        const asset = readFileSync(candidatePath);
+        const ext = extname(candidatePath).toLowerCase();
+        const mimeType = MIME_TYPES[ext] ?? "application/octet-stream";
+        res.writeHead(200, { "content-type": mimeType }).end(asset);
+        return;
+      } catch (error) {
+        if (error.code !== "ENOENT" && error.code !== "EISDIR") {
+          console.error("Static asset error", error);
+        }
+      }
+    }
   }
 
   const MCP_METHODS = new Set(["POST", "GET", "DELETE"]);

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#cbd5f5" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="#0f172a" />
+  <rect x="40" y="140" width="720" height="220" rx="24" fill="url(#g)" opacity="0.9" />
+  <g fill="#f8fafc" font-family="'Inter', system-ui, sans-serif" text-anchor="middle">
+    <text x="400" y="240" font-size="68" font-weight="700">Mercedes-Benz GLC 300e</text>
+    <text x="400" y="300" font-size="30" font-weight="500">4MATIC AMG Line · Hybrid</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="6" opacity="0.25" fill="none">
+    <circle cx="160" cy="400" r="80" />
+    <circle cx="640" cy="400" r="80" />
+  </g>
+</svg>

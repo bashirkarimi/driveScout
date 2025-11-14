@@ -24502,7 +24502,7 @@ var FALLBACK_RESULTS = [
     description: "Sporty all-electric Gran Coup\xE9 delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "https://images.unsplash.com/photo-1616789260648-5d8e6fb912b7?auto=format&fit=crop&w=800&q=80"
+      url: "/images/bmw-i4.svg"
     },
     price: { formatted: "\u20AC73,900" },
     ctaUrl: "https://example.com/bmw-i4",
@@ -24516,7 +24516,7 @@ var FALLBACK_RESULTS = [
     description: "Plug-in hybrid SUV combining electric comfort with long-distance efficiency.",
     badge: "Featured",
     image: {
-      url: "https://images.unsplash.com/photo-1619761429034-3d4d218c6369?auto=format&fit=crop&w=800&q=80"
+      url: "/images/mercedes-glc.svg"
     },
     price: { formatted: "\u20AC64,500" },
     ctaUrl: "https://example.com/mb-glc",
@@ -24530,7 +24530,7 @@ var FALLBACK_RESULTS = [
     description: "Spacious electric crossover with dual-motor traction and rapid charging.",
     badge: "New arrival",
     image: {
-      url: "https://images.unsplash.com/photo-1601197980726-0c2400afaf87?auto=format&fit=crop&w=800&q=80"
+      url: "/images/vw-id4.svg"
     },
     price: { formatted: "\u20AC56,200" },
     ctaUrl: "https://example.com/vw-id4",
@@ -24540,7 +24540,7 @@ var FALLBACK_RESULTS = [
 
 // widget/App.jsx
 var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
-var PLACEHOLDER_IMAGE = "https://placehold.co/600x400?text=Vehicle";
+var PLACEHOLDER_IMAGE = "/images/vehicle-placeholder.svg";
 var FALLBACK_LIMIT = 9;
 var getInitialToolOutput = () => {
   const toolOutput = window.openai?.toolOutput ?? {};

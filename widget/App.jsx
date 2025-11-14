@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FALLBACK_RESULTS } from "../src/fallback-data.js";
 
-const PLACEHOLDER_IMAGE = "https://placehold.co/600x400?text=Vehicle";
+const PLACEHOLDER_IMAGE = "/images/vehicle-placeholder.svg";
 const FALLBACK_LIMIT = 9;
 
 const getInitialToolOutput = () => {
