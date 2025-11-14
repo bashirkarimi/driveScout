@@ -8,7 +8,7 @@ export const FALLBACK_RESULTS = [
       "Sporty all-electric Gran Coupé delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "/images/bmw-i4.svg",
+      url: "https://fastly.picsum.photos/id/111/4400/2656.jpg?hmac=leq8lj40D6cqFq5M_NLXkMYtV-30TtOOnzklhjPaAAQ",
     },
     price: { formatted: "€73,900" },
     ctaUrl: "https://example.com/bmw-i4",
@@ -23,7 +23,7 @@ export const FALLBACK_RESULTS = [
       "Plug-in hybrid SUV combining electric comfort with long-distance efficiency.",
     badge: "Featured",
     image: {
-      url: "/images/mercedes-glc.svg",
+      url: "https://picsum.photos/id/183/300/400",
     },
     price: { formatted: "€64,500" },
     ctaUrl: "https://example.com/mb-glc",
@@ -38,7 +38,7 @@ export const FALLBACK_RESULTS = [
       "Spacious electric crossover with dual-motor traction and rapid charging.",
     badge: "New arrival",
     image: {
-      url: "/images/vw-id4.svg",
+      url: "https://picsum.photos/id/419/300/400",
     },
     price: { formatted: "€56,200" },
     ctaUrl: "https://example.com/vw-id4",
@@ -53,10 +53,10 @@ export const FALLBACK_RESULTS = [
       "Compact premium SUV with 210 kW output and up to 520 km WLTP range.",
     badge: "0% financing",
     image: {
-      url: "/images/audi-q4.svg",
+      url: "https://picsum.photos/id/495/300/400",
     },
     price: { formatted: "€65,890" },
-    ctaUrl: "https://example.com/audi-q4",
+    ctaUrl: "https://picsum.photos/id/514/300/400",
     ctaLabel: "Check availability",
   },
   {
@@ -68,10 +68,10 @@ export const FALLBACK_RESULTS = [
       "Sport-focused electric coupé with adaptive chassis and rapid 135 kW charging.",
     badge: "Manager special",
     image: {
-      url: "/images/skoda-enyaq.svg",
+      url: "https://picsum.photos/id/362/300/400",
     },
     price: { formatted: "€61,450" },
-    ctaUrl: "https://example.com/skoda-enyaq",
+    ctaUrl: "https://picsum.photos/id/551/300/400",
     ctaLabel: "Reserve now",
   },
   {
@@ -83,10 +83,10 @@ export const FALLBACK_RESULTS = [
       "High-performance plug-in hybrid crossover delivering 245 PS with 55 km EV range.",
     badge: "Demo vehicle",
     image: {
-      url: "/images/cupra-formentor.svg",
+      url: "https://picsum.photos/id/433/300/400",
     },
     price: { formatted: "€49,990" },
-    ctaUrl: "https://example.com/cupra-formentor",
+    ctaUrl: "https://picsum.photos/id/183/300/400",
     ctaLabel: "Schedule visit",
   },
   {
@@ -98,10 +98,10 @@ export const FALLBACK_RESULTS = [
       "Electric fastback with BlueCruise hands-free tech and 540 km maximum range.",
     badge: "Certified pre-owned",
     image: {
-      url: "/images/mach-e.svg",
+      url: "https://picsum.photos/id/401/300/400",
     },
     price: { formatted: "€58,750" },
-    ctaUrl: "https://example.com/ford-mache",
+    ctaUrl: "https://picsum.photos/id/670/300/400",
     ctaLabel: "See offer",
   },
   {
@@ -113,10 +113,10 @@ export const FALLBACK_RESULTS = [
       "Family SUV pairing advanced driver aids with 265 PS plug-in hybrid efficiency.",
     badge: "Service included",
     image: {
-      url: "/images/hyundai-tucson.svg",
+      url: "https://picsum.photos/id/582/300/400",
     },
     price: { formatted: "€46,400" },
-    ctaUrl: "https://example.com/hyundai-tucson",
+    ctaUrl: "https://picsum.photos/id/1072/300/400",
     ctaLabel: "Start contract",
   },
   {
@@ -128,10 +128,10 @@ export const FALLBACK_RESULTS = [
       "Sporty all-electric Gran Coupé delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "/images/bmw-i4.svg",
+      url: "https://picsum.photos/id/1050/300/400",
     },
     price: { formatted: "€7,900" },
-    ctaUrl: "https://example.com/bmw-i4",
+    ctaUrl: "https://picsum.photos/id/1071/300/400",
     ctaLabel: "Configure",
   },
   {
@@ -143,10 +143,10 @@ export const FALLBACK_RESULTS = [
       "Sporty all-electric Gran Coupé delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "/images/bmw-i4.svg",
+      url: "https://picsum.photos/id/1043/300/400",
     },
     price: { formatted: "€7,900" },
-    ctaUrl: "https://example.com/bmw-i4",
+    ctaUrl: "https://picsum.photos/id/1070/300/400",
     ctaLabel: "Configure",
   },
 ];

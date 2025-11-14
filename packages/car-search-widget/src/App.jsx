@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FALLBACK_RESULTS } from "@drive-scout/car-search-data";
 
-const PLACEHOLDER_IMAGE = "/images/vehicle-placeholder.svg";
+const PLACEHOLDER_IMAGE = "https://via.placeholder.com/400x260?text=Vehicle";
 const FALLBACK_LIMIT = 9;
 
 const getInitialToolOutput = () => {

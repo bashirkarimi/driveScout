@@ -97,7 +97,7 @@ async function buildWidgetHtml() {
     format: "esm",
     platform: "browser",
     target: ["es2020"],
-  absWorkingDir: widgetPackageRoot,
+    absWorkingDir: widgetPackageRoot,
     write: false,
     minify: !isDevelopment,
     jsx: "automatic",
