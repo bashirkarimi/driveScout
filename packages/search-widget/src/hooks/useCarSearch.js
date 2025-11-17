@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { FALLBACK_RESULTS } from "@drive-scout/car-search-data";
+import { FALLBACK_RESULTS } from "@drive-scout/search-data";
 import { FALLBACK_LIMIT } from "../constants.js";
 import { getInitialToolOutput, normalizeEngineType } from "../utils/cars.js";
 

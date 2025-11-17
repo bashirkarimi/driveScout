@@ -1,5 +1,5 @@
 {
-  "name": "@drive-scout/car-search-widget",
+  "name": "@drive-scout/search-widget",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "preview": "vite preview --host 127.0.0.1 --port 4173"
   },
   "dependencies": {
-    "@drive-scout/car-search-data": "workspace:^",
+    "@drive-scout/search-data": "workspace:^",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

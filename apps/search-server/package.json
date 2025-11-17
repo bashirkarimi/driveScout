@@ -1,5 +1,5 @@
 {
-  "name": "@drive-scout/car-search-server",
+  "name": "@drive-scout/search-server",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,8 +9,8 @@
     "start": "NODE_ENV=production node src/server.js"
   },
   "dependencies": {
-    "@drive-scout/car-search-data": "workspace:^",
-    "@drive-scout/car-search-widget": "workspace:^",
+    "@drive-scout/search-data": "workspace:^",
+    "@drive-scout/search-widget": "workspace:^",
     "@modelcontextprotocol/sdk": "^1.20.2",
     "@tailwindcss/postcss": "^4.1.17",
     "dotenv": "^16.4.5",

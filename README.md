@@ -52,10 +52,10 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 
 ## Project Layout
 
-- `apps/car-search-server/src/server.js` – MCP server that registers the widget resource and the `search_inventory` tool.
-- `apps/car-search-server/public/` – HTML/CSS shell and static assets served with the widget bundle.
-- `packages/car-search-data/src/` – Contentful integration and demo data shared across packages.
-- `packages/car-search-widget/src/` – React sources compiled on-demand into the widget iframe.
+- `apps/search-server/src/server.js` – MCP server that registers the widget resource and the `search_inventory` tool.
+- `apps/search-server/public/` – HTML/CSS shell and static assets served with the widget bundle.
+- `packages/search-data/src/` – Contentful integration and demo data shared across packages.
+- `packages/search-widget/src/` – React sources compiled on-demand into the widget iframe.
 - `scripts/widget-dev-server.js` – esbuild-powered preview server for developing the widget locally.
 - `.env.example` – Template for required environment variables.
 
@@ -67,4 +67,4 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 
 ## Deploying
 
-When ready, deploy `apps/car-search-server/src/server.js` (or package the `@drive-scout/car-search-server` workspace) to a public environment that supports Node.js (e.g., Vercel, Fly.io, Azure). Ensure the `/mcp` endpoint remains reachable over HTTPS and keep your Contentful tokens secure via environment variables.
+When ready, deploy `apps/search-server/src/server.js` (or package the `@drive-scout/search-server` workspace) to a public environment that supports Node.js (e.g., Vercel, Fly.io, Azure). Ensure the `/mcp` endpoint remains reachable over HTTPS and keep your Contentful tokens secure via environment variables.

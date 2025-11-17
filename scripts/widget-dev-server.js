@@ -8,9 +8,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const projectRoot = resolve(__dirname, "..");
-const serverPublicDir = resolve(projectRoot, "apps/car-search-server/public");
+const serverPublicDir = resolve(projectRoot, "apps/search-server/public");
 const templatePath = resolve(serverPublicDir, "car-widget.html");
-const widgetPackageRoot = resolve(projectRoot, "packages/car-search-widget");
+const widgetPackageRoot = resolve(projectRoot, "packages/search-widget");
 const entryPoint = resolve(widgetPackageRoot, "src/index.jsx");
 const outputDir = resolve(projectRoot, ".ui-dev");
 const outputHtmlPath = join(outputDir, "index.html");

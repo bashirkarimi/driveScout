@@ -1,7 +1,7 @@
-import { SearchForm } from "./components/SearchForm.jsx";
-import { StatusMessage } from "./components/StatusMessage.jsx";
-import { CardGrid } from "./components/card-grid.jsx";
-import { EmptyState } from "./components/EmptyState.jsx";
+import { SearchForm } from "./components/search-form";
+import { StatusMessage } from "./components/status-message";
+import { CardGrid } from "./components/card-grid";
+import { EmptyState } from "./components/empty-state";
 import { useCarSearch } from "./hooks/useCarSearch.js";
 
 export default function App() {
