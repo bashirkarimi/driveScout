@@ -8,10 +8,11 @@ export const FALLBACK_RESULTS = [
       "Sporty all-electric Gran Coupé delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "https://fastly.picsum.photos/id/111/4400/2656.jpg?hmac=leq8lj40D6cqFq5M_NLXkMYtV-30TtOOnzklhjPaAAQ",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000083473391600120003.jpg",
     },
     price: { formatted: "€73,900" },
-    ctaUrl: "https://example.com/bmw-i4",
+    ctaUrl:
+      "https://avemo-group.de/fahrzeugsuche?bmw-x-4-xdrive-30-d-msport-hud-sthzg-ahk-laser-360-20-z_carId48657",
     ctaLabel: "View details",
   },
   {
@@ -23,7 +24,7 @@ export const FALLBACK_RESULTS = [
       "Plug-in hybrid SUV combining electric comfort with long-distance efficiency.",
     badge: "Featured",
     image: {
-      url: "https://picsum.photos/id/183/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000081351181600120001.jpg",
     },
     price: { formatted: "€64,500" },
     ctaUrl: "https://example.com/mb-glc",
@@ -38,7 +39,7 @@ export const FALLBACK_RESULTS = [
       "Spacious electric crossover with dual-motor traction and rapid charging.",
     badge: "New arrival",
     image: {
-      url: "https://picsum.photos/id/419/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000075413641600120001.jpg",
     },
     price: { formatted: "€56,200" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
@@ -53,7 +54,7 @@ export const FALLBACK_RESULTS = [
       "Compact premium SUV with 210 kW output and up to 520 km WLTP range.",
     badge: "0% financing",
     image: {
-      url: "https://picsum.photos/id/495/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000082900351600120001.jpg",
     },
     price: { formatted: "€65,890" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
@@ -68,7 +69,7 @@ export const FALLBACK_RESULTS = [
       "Sport-focused electric coupé with adaptive chassis and rapid 135 kW charging.",
     badge: "Manager special",
     image: {
-      url: "https://picsum.photos/id/362/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000082900351600120001.jpg",
     },
     price: { formatted: "€61,450" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
@@ -83,7 +84,7 @@ export const FALLBACK_RESULTS = [
       "High-performance plug-in hybrid crossover delivering 245 PS with 55 km EV range.",
     badge: "Demo vehicle",
     image: {
-      url: "https://picsum.photos/id/433/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000082537621600120001.jpg",
     },
     price: { formatted: "€49,990" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
@@ -98,7 +99,7 @@ export const FALLBACK_RESULTS = [
       "Electric fastback with BlueCruise hands-free tech and 540 km maximum range.",
     badge: "Certified pre-owned",
     image: {
-      url: "https://picsum.photos/id/401/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000082240431600120003.jpg",
     },
     price: { formatted: "€58,750" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
@@ -113,7 +114,7 @@ export const FALLBACK_RESULTS = [
       "Family SUV pairing advanced driver aids with 265 PS plug-in hybrid efficiency.",
     badge: "Service included",
     image: {
-      url: "https://picsum.photos/id/582/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000082537621600120001.jpg",
     },
     price: { formatted: "€46,400" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
@@ -128,7 +129,7 @@ export const FALLBACK_RESULTS = [
       "Sporty all-electric Gran Coupé delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "https://picsum.photos/id/1050/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000082240431600120003.jpg",
     },
     price: { formatted: "€7,900" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
@@ -143,7 +144,7 @@ export const FALLBACK_RESULTS = [
       "Sporty all-electric Gran Coupé delivering 400 kW and 510 km WLTP range.",
     badge: "Immediate delivery",
     image: {
-      url: "https://picsum.photos/id/1043/400/300",
+      url: "https://cdn.ars-mia.de/v0/vehicles/0000082240431600120003.jpg",
     },
     price: { formatted: "€7,900" },
     ctaUrl: "https://avemo-group.de/fahrzeugsuche/",

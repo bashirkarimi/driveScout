@@ -10,6 +10,7 @@ out/
 *.map
 !jest.config.js
 !.eslintrc.js
+.ui-dev/
 
 # Environment variables
 .env
