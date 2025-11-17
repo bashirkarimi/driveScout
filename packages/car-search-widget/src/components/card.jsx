@@ -1,6 +1,6 @@
 import { PLACEHOLDER_IMAGE } from "../constants.js";
 
-export const VehicleCard = ({ car }) => (
+export const Card = ({ car }) => (
   <article className="flex w-full max-w-2xl flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-md shadow-slate-900/10">
     <img
       alt={car.name ?? "Vehicle"}
@@ -39,7 +39,7 @@ export const VehicleCard = ({ car }) => (
         <div className="pt-3">
           <a
             href={car.ctaUrl}
-            rel="noopener"
+            rel="noopener noreferrer"
             target="_blank"
             className="inline-flex items-center rounded-md bg-slate-200 px-3 py-2 font-semibold text-slate-800 transition-colors hover:bg-orange-500 hover:text-white"
           >

@@ -1,6 +1,6 @@
 import { SearchForm } from "./components/SearchForm.jsx";
 import { StatusMessage } from "./components/StatusMessage.jsx";
-import { VehicleResults } from "./components/VehicleResults.jsx";
+import { CardGrid } from "./components/card-grid.jsx";
 import { EmptyState } from "./components/EmptyState.jsx";
 import { useCarSearch } from "./hooks/useCarSearch.js";
 
@@ -34,7 +34,7 @@ export default function App() {
         query={query}
       />
       <StatusMessage isLoading={isLoading} message={statusMessage} />
-      <VehicleResults cars={results} />
+      <CardGrid data={results} />
       <EmptyState shouldHide={results.length !== 0} />
     </main>
   );
