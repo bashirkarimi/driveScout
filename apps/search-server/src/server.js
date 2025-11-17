@@ -18,6 +18,7 @@ dotenv.config({ path: resolve(workspaceRoot, ".env") });
 
 const widgetTemplatePath = resolve(serverRoot, "public/car-widget.html");
 const widgetEntryPoint = resolve(widgetPackageRoot, "src/index.jsx");
+const widgetCssPath = resolve(widgetPackageRoot, "dist/widget-style.css");
 const publicDir = resolve(serverRoot, "public");
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -103,22 +104,47 @@ async function buildWidgetHtml() {
     jsx: "automatic",
     sourcemap: isDevelopment,
     outfile: "car-widget.js",
+    loader: {
+      ".css": "text",
+    },
     define: {
       "process.env.NODE_ENV": JSON.stringify(isDevelopment ? "development" : "production"),
     },
   });
 
   const jsOutput = (result.outputFiles ?? []).find((file) => file.path.endsWith(".js"));
+  const cssOutput = (result.outputFiles ?? []).find((file) => file.path.endsWith(".css"));
+  
   if (!jsOutput?.text) {
     throw new Error("Widget build produced no output.");
   }
 
-  const scriptTag = `<script type="module">\n${jsOutput.text}\n</script>`;
+  // Include CSS as inline style tag and JavaScript as inline script
+  let replacement = "";
+  
+  // Try to read the pre-built Tailwind CSS from the widget package
+  try {
+    const prebuiltCss = readFileSync(widgetCssPath, "utf8");
+    if (prebuiltCss) {
+      replacement += `<style>\n${prebuiltCss}\n</style>\n`;
+    }
+  } catch (error) {
+    console.warn("Could not load pre-built widget CSS from", widgetCssPath);
+    console.warn("Run 'pnpm build' in the search-widget package to generate styles.");
+  }
+  
+  // Also include any CSS bundled by esbuild (though this might be empty with current config)
+  if (cssOutput?.text) {
+    replacement += `<style>\n${cssOutput.text}\n</style>\n`;
+  }
+  
+  replacement += `<script type="module">\n${jsOutput.text}\n</script>`;
+  
   if (template.includes(WIDGET_PLACEHOLDER)) {
-    return template.replace(WIDGET_PLACEHOLDER, scriptTag);
+    return template.replace(WIDGET_PLACEHOLDER, replacement);
   }
 
-  return `${template}\n${scriptTag}`;
+  return `${template}\n${replacement}`;
 }
 
 async function getWidgetHtml() {
