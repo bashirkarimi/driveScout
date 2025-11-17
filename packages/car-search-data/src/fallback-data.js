@@ -12,7 +12,7 @@ export const FALLBACK_RESULTS = [
     },
     price: { formatted: "€73,900" },
     ctaUrl: "https://example.com/bmw-i4",
-    ctaLabel: "Configure",
+    ctaLabel: "View details",
   },
   {
     id: "fallback-2",
@@ -41,7 +41,7 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/419/400/300",
     },
     price: { formatted: "€56,200" },
-    ctaUrl: "https://example.com/vw-id4",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
     ctaLabel: "Book test drive",
   },
   {
@@ -56,7 +56,7 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/495/400/300",
     },
     price: { formatted: "€65,890" },
-    ctaUrl: "https://picsum.photos/id/514/400/300",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
     ctaLabel: "Check availability",
   },
   {
@@ -71,7 +71,7 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/362/400/300",
     },
     price: { formatted: "€61,450" },
-    ctaUrl: "https://picsum.photos/id/551/400/300",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
     ctaLabel: "Reserve now",
   },
   {
@@ -86,7 +86,7 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/433/400/300",
     },
     price: { formatted: "€49,990" },
-    ctaUrl: "https://picsum.photos/id/183/400/300",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
     ctaLabel: "Schedule visit",
   },
   {
@@ -101,7 +101,7 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/401/400/300",
     },
     price: { formatted: "€58,750" },
-    ctaUrl: "https://picsum.photos/id/670/400/300",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
     ctaLabel: "See offer",
   },
   {
@@ -116,7 +116,7 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/582/400/300",
     },
     price: { formatted: "€46,400" },
-    ctaUrl: "https://picsum.photos/id/1072/400/300",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
     ctaLabel: "Start contract",
   },
   {
@@ -131,8 +131,8 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/1050/400/300",
     },
     price: { formatted: "€7,900" },
-    ctaUrl: "https://picsum.photos/id/1071/400/300",
-    ctaLabel: "Configure",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
+    ctaLabel: "View details",
   },
   {
     id: "fallback-10",
@@ -146,7 +146,7 @@ export const FALLBACK_RESULTS = [
       url: "https://picsum.photos/id/1043/400/300",
     },
     price: { formatted: "€7,900" },
-    ctaUrl: "https://picsum.photos/id/1070/400/300",
-    ctaLabel: "Configure",
+    ctaUrl: "https://avemo-group.de/fahrzeugsuche/",
+    ctaLabel: "View details",
   },
 ];

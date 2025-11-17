@@ -19,7 +19,7 @@ export default function App() {
   return (
     <main>
       <header>
-        <h1>Fahrzeugsuche</h1>
+        <h1>Car Scout</h1>
         <p className="description">
           Search the live inventory to discover cars that match your needs. Pick a preferred engine type or browse
           everything.

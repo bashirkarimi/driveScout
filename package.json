@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "pnpm --filter @drive-scout/car-search-widget build",
     "dev": "pnpm --filter @drive-scout/car-search-server dev",
     "start": "pnpm --filter @drive-scout/car-search-server start",
     "widget:dev": "pnpm --filter @drive-scout/car-search-widget dev"
