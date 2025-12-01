@@ -111,6 +111,8 @@ export const useCarSearch = () => {
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
+      
+      // Sanitize and validate input
       const trimmedQuery = query.trim();
       if (!trimmedQuery) {
         setStatusMessage("Enter a search term to see cars.");
@@ -118,11 +120,23 @@ export const useCarSearch = () => {
         return;
       }
 
+      // Limit query length to prevent abuse
+      const sanitizedQuery = trimmedQuery.slice(0, 120);
+      
+      // Remove potentially harmful characters
+      const cleanQuery = sanitizedQuery.replace(/[<>"'`]/g, '');
+      
+      if (!cleanQuery) {
+        setStatusMessage("Please enter a valid search term.");
+        setResults([]);
+        return;
+      }
+
       const normalizedEngine = engineType === "any" ? undefined : engineType;
 
       await callSearchTool(
-        { query: trimmedQuery, engineType: normalizedEngine, limit: FALLBACK_LIMIT },
-        { query: trimmedQuery, engineType }
+        { query: cleanQuery, engineType: normalizedEngine, limit: FALLBACK_LIMIT },
+        { query: cleanQuery, engineType }
       );
     },
     [callSearchTool, engineType, query]
