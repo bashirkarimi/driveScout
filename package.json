@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "pnpm --filter @drive-scout/search-widget build",
-    "dev": "pnpm --filter @drive-scout/search-server dev",
-    "start": "pnpm --filter @drive-scout/search-server start",
+    "dev": "pnpm build && pnpm --filter @drive-scout/search-server dev",
+    "start": "pnpm build && pnpm --filter @drive-scout/search-server start",
     "widget:dev": "pnpm --filter @drive-scout/search-widget dev"
   },
   "devDependencies": {
