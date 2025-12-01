@@ -1,20 +1,20 @@
 # Drive Scout SDK APP
 
-This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps SDK](https://developers.openai.com/apps-sdk) and the [Apps SDK quickstart](https://developers.openai.com/apps-sdk/quickstart) patterns. The app connects ChatGPT to a Contentful headless CMS, renders a custom vehicle search experience inside ChatGPT via an iframe widget, and exposes a tool that streams structured inventory results to both the LLM and the user interface.
+This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps SDK](https://developers.openai.com/apps-sdk) and the [Apps SDK quickstart](https://developers.openai.com/apps-sdk/quickstart) patterns. The app connects ChatGPT to a headless CMS, renders a custom vehicle search experience inside ChatGPT via an iframe widget, and exposes a tool that streams structured inventory results to both the LLM and the user interface.
 
 ## Features
 
-- **Headless CMS integration:** Queries vehicle inventory stored in Contentful using the Content Delivery API with optional engine-type filtering.
+- **Headless CMS integration:** Queries vehicle inventory from a headless CMS with optional engine-type filtering.
 - **Custom UX in ChatGPT:** Renders a responsive widget visually inspired by [avemo-group.de/fahrzeugsuche](https://avemo-group.de/fahrzeugsuche) inside ChatGPT.
 - **React-powered widget:** Uses a React component (bundled on-demand with esbuild) to manage form state and render the iframe UI.
 - **Apps SDK + MCP server:** Implements an MCP server that exposes the widget resource and a `search_inventory` tool, keeping UI and structured content in sync through `window.openai`.
-- **Local mock data:** Provides high-quality fallback inventory data so the widget can be previewed without live Contentful credentials.
+- **Local mock data:** Provides high-quality fallback inventory data so the widget can be previewed without live CMS credentials.
 
 ## Prerequisites
 
 - Node.js 18 or newer.
-- A Contentful space with a `car` content type (configurable) that includes fields for `name`, `model`, `engineType`, `description`, `heroImage`, optional `price`, `ctaUrl`, `ctaLabel`, and `statusBadge`.
-- A Contentful Content Delivery (CDA) access token.
+- A headless CMS with a `car` content type that includes fields for `name`, `model`, `engineType`, `description`, `heroImage`, optional `price`, `ctaUrl`, `ctaLabel`, and `statusBadge`.
+- API access credentials for your headless CMS.
 
 ## Setup
 
@@ -26,7 +26,7 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
    ```bash
    cp .env.example .env
    ```
-   Fill in your Contentful credentials. Adjust `CONTENTFUL_CAR_CONTENT_TYPE` if your content model uses a different ID.
+   Fill in your headless CMS credentials. Adjust the CMS configuration variables based on your CMS provider.
 3. Run the MCP server locally (the React widget is bundled automatically on the first request in development):
    ```bash
    pnpm dev
@@ -54,7 +54,7 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 
 - `apps/search-server/src/server.js` – MCP server that registers the widget resource and the `search_inventory` tool.
 - `apps/search-server/public/` – HTML/CSS shell and static assets served with the widget bundle.
-- `packages/search-data/src/` – Contentful integration and demo data shared across packages.
+- `packages/search-data/src/` – Headless CMS integration and demo data shared across packages.
 - `packages/search-widget/src/` – React sources compiled on-demand into the widget iframe.
 - `scripts/widget-dev-server.js` – esbuild-powered preview server for developing the widget locally.
 - `.env.example` – Template for required environment variables.
@@ -62,9 +62,9 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 ## Customization Tips
 
 - Update the widget styling in `public/car-widget.html` to further match brand guidelines or add additional filters (price range, body style, etc.).
-- Extend `searchCars` in `src/contentful.js` to map additional fields such as mileage or availability dates.
+- Extend `searchCars` in `packages/search-data/src/data-provider.js` to integrate with your CMS and map additional fields such as mileage or availability dates.
 - When you change tools or metadata, refresh the connector in ChatGPT (Settings → Connectors → Refresh) so the new schema is picked up.
 
 ## Deploying
 
-When ready, deploy `apps/search-server/src/server.js` (or package the `@drive-scout/search-server` workspace) to a public environment that supports Node.js (e.g., Vercel, Fly.io, Azure). Ensure the `/mcp` endpoint remains reachable over HTTPS and keep your Contentful tokens secure via environment variables.
+When ready, deploy `apps/search-server/src/server.js` (or package the `@drive-scout/search-server` workspace) to a public environment that supports Node.js (e.g., Vercel, Fly.io, Azure). Ensure the `/mcp` endpoint remains reachable over HTTPS and keep your CMS API credentials secure via environment variables.

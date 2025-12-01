@@ -250,7 +250,7 @@ function createCarServer() {
     "search_inventory",
     {
       title: "Search car inventory",
-      description: "Searches the latest vehicles stored in Contentful.",
+      description: "Searches the latest vehicles from the headless CMS.",
       inputSchema: searchInputSchema,
       _meta: {
         "openai/outputTemplate": "ui://widget/car-widget.html",

@@ -48,7 +48,7 @@ export const useCarSearch = () => {
             : `Showing ${filtered.length} ${audience} from the demo catalogue.`
         );
       } else {
-        setStatusMessage("No demo vehicles matched. Configure Contentful credentials for live data.");
+        setStatusMessage("No demo vehicles matched. Configure CMS credentials for live data.");
       }
     },
     [setResults, setStatusMessage]
