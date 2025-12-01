@@ -122,20 +122,20 @@ async function buildWidgetHtml() {
   // Include CSS as inline style tag and JavaScript as inline script
   let replacement = "";
   
-  // Try to read the pre-built Tailwind CSS from the widget package
+  // Try to read the pre-built Tailwind CSS from the widget package first
+  // This ensures Tailwind styles are included even if esbuild doesn't bundle them
   try {
     const prebuiltCss = readFileSync(widgetCssPath, "utf8");
     if (prebuiltCss) {
       replacement += `<style>\n${prebuiltCss}\n</style>\n`;
     }
   } catch (error) {
-    console.warn("Could not load pre-built widget CSS from", widgetCssPath);
-    console.warn("Run 'pnpm build' in the search-widget package to generate styles.");
-  }
-  
-  // Also include any CSS bundled by esbuild (though this might be empty with current config)
-  if (cssOutput?.text) {
-    replacement += `<style>\n${cssOutput.text}\n</style>\n`;
+    // Fallback to esbuild CSS output if pre-built CSS is not available
+    if (cssOutput?.text) {
+      replacement += `<style>\n${cssOutput.text}\n</style>\n`;
+    } else {
+      console.warn("No CSS found. Run 'pnpm build' in the search-widget package to generate styles.");
+    }
   }
   
   replacement += `<script type="module">\n${jsOutput.text}\n</script>`;
@@ -172,6 +172,18 @@ async function getWidgetHtml() {
 }
 
 await getWidgetHtml();
+
+// Validate environment variables on startup
+if (!isDevelopment) {
+  const requiredEnvVars = ['PORT', 'MCP_PATH'];
+  const missing = requiredEnvVars.filter(key => !process.env[key]);
+  if (missing.length > 0) {
+    console.warn(`Warning: Missing environment variables: ${missing.join(', ')}. Using defaults.`);
+  }
+  if (!process.env.ALLOWED_ORIGIN) {
+    console.log('ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com');
+  }
+}
 
 const searchInputSchema = {
   query: z
@@ -290,8 +302,9 @@ const httpServer = createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host ?? "localhost"}`);
 
   if (req.method === "OPTIONS" && url.pathname.startsWith(MCP_PATH)) {
+    const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
     res.writeHead(204, {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": allowedOrigin,
       "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "content-type, mcp-session-id",
       "Access-Control-Expose-Headers": "Mcp-Session-Id",
@@ -324,7 +337,8 @@ const httpServer = createServer(async (req, res) => {
 
   const MCP_METHODS = new Set(["POST", "GET", "DELETE"]);
   if (url.pathname.startsWith(MCP_PATH) && req.method && MCP_METHODS.has(req.method)) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
     res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
 
     const server = createCarServer();
