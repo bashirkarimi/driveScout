@@ -290,6 +290,34 @@ function createCarServer() {
   return server;
 }
 
+// Exported handler for both serverless and traditional server usage
+export async function handleMcpRequest(req, res) {
+  const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
+  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+  res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
+
+  const server = createCarServer();
+  const transport = new StreamableHTTPServerTransport({
+    enableJsonResponse: true,
+  });
+
+  res.on("close", () => {
+    transport.close();
+    server.close();
+  });
+
+  try {
+    await server.connect(transport);
+    await transport.handleRequest(req, res);
+  } catch (error) {
+    console.error("Error handling MCP request", error);
+    if (!res.headersSent) {
+      res.writeHead(500).end("Internal server error");
+    }
+  }
+}
+
+// Traditional HTTP server for local development
 const port = Number(process.env.PORT ?? 8787);
 const MCP_PATH = process.env.MCP_PATH ?? "/mcp";
 
@@ -337,29 +365,7 @@ const httpServer = createServer(async (req, res) => {
 
   const MCP_METHODS = new Set(["POST", "GET", "DELETE"]);
   if (url.pathname.startsWith(MCP_PATH) && req.method && MCP_METHODS.has(req.method)) {
-    const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
-    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
-    res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
-
-    const server = createCarServer();
-    const transport = new StreamableHTTPServerTransport({
-      enableJsonResponse: true,
-    });
-
-    res.on("close", () => {
-      transport.close();
-      server.close();
-    });
-
-    try {
-      await server.connect(transport);
-      await transport.handleRequest(req, res);
-    } catch (error) {
-      console.error("Error handling MCP request", error);
-      if (!res.headersSent) {
-        res.writeHead(500).end("Internal server error");
-      }
-    }
+    await handleMcpRequest(req, res);
     return;
   }
 
