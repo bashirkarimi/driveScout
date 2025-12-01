@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "build": "pnpm --filter @drive-scout/search-widget build",
+    "vercel-build": "pnpm --filter @drive-scout/search-widget build",
     "dev": "pnpm build && pnpm --filter @drive-scout/search-server dev",
     "start": "pnpm build && pnpm --filter @drive-scout/search-server start",
     "widget:dev": "pnpm --filter @drive-scout/search-widget dev"
