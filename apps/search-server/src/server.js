@@ -105,7 +105,7 @@ async function buildWidgetHtml() {
     sourcemap: isDevelopment,
     outfile: "car-widget.js",
     loader: {
-      ".css": "text",
+      ".css": "css",
     },
     define: {
       "process.env.NODE_ENV": JSON.stringify(isDevelopment ? "development" : "production"),
@@ -211,7 +211,11 @@ function createCarServer() {
   server.registerResource(
     "search-widget",
     "ui://widget/car-widget.html",
-    {},
+    {
+      readOnlyHint: true,        // Skip confirmation prompts
+      destructiveHint: false,    // Not deleting data
+      openWorldHint: false       // Not publishing externally
+    },
     async () => {
       const html = await getWidgetHtml();
       return {
