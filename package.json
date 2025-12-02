@@ -4,8 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "20.x",
-    "pnpm": "9.x"
+    "node": "20.x"
   },
   "scripts": {
     "build": "pnpm --filter @drive-scout/search-widget build",
