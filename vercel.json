@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm install && npm run build",
+  "buildCommand": "npm install --legacy-peer-deps && npm run build",
   "outputDirectory": "apps/search-server/public",
-  "installCommand": "npm install",
+  "installCommand": "npm install --legacy-peer-deps",
   "functions": {
     "api/mcp.js": {
       "memory": 512,
