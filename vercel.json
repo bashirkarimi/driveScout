@@ -6,12 +6,12 @@
   "functions": {
     "api/mcp.js": {
       "memory": 512,
-      "maxDuration": 30,
-      "environment": {
-        "NODE_ENV": "production",
-        "ALLOWED_ORIGIN": "https://chatgpt.com"
-      }
+      "maxDuration": 30
     }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "ALLOWED_ORIGIN": "https://chatgpt.com"
   },
   "rewrites": [
     { "source": "/mcp", "destination": "/api/mcp" },
