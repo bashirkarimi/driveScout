@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "pnpm vercel-build",
-  "installCommand": "corepack enable && corepack prepare pnpm@8.15.8 --activate && pnpm install --no-frozen-lockfile",
+  "buildCommand": "npm run build --prefix packages/search-widget",
+  "installCommand": "npm install --prefix apps/search-server && npm install --prefix packages/search-widget",
   "rewrites": [
     {
       "source": "/mcp",
