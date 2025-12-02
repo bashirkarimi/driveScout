@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm install --frozen-lockfile && pnpm run build",
+  "buildCommand": "pnpm install && pnpm run build",
   "outputDirectory": "apps/search-server/public",
   "functions": {
     "api/mcp.js": {
