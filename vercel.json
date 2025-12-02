@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm install --frozen-lockfile && pnpm run build",
+  "outputDirectory": "apps/search-server/public",
+  "functions": {
+    "api/mcp.js": {
+      "memory": 512,
+      "maxDuration": 30,
+      "environment": {
+        "NODE_ENV": "production",
+        "ALLOWED_ORIGIN": "https://chatgpt.com"
+      }
+    }
+  },
+  "rewrites": [
+    { "source": "/mcp", "destination": "/api/mcp" },
+    { "source": "/mcp/(.*)", "destination": "/api/mcp" }
+  ]
+}
