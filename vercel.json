@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm install --legacy-peer-deps && npm run build",
+  "buildCommand": "pnpm install --frozen-lockfile && pnpm run build",
   "outputDirectory": "apps/search-server/public",
-  "installCommand": "npm install --legacy-peer-deps",
+  "installCommand": "corepack enable && corepack prepare pnpm@9 --activate && pnpm install --frozen-lockfile",
   "functions": {
     "api/mcp.js": {
       "memory": 512,

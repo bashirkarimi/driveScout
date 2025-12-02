@@ -3,18 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
   "engines": {
-    "node": "20.x"
+    "node": "20.x",
+    "pnpm": "9.x"
   },
   "scripts": {
-    "build": "npm run build --workspace=packages/search-widget",
-    "dev": "npm run build && npm run dev --workspace=apps/search-server",
-    "start": "npm run build && npm run start --workspace=apps/search-server",
-    "widget:dev": "npm run dev --workspace=packages/search-widget"
+    "build": "pnpm --filter @drive-scout/search-widget build",
+    "dev": "pnpm build && pnpm --filter @drive-scout/search-server dev",
+    "start": "pnpm build && pnpm --filter @drive-scout/search-server start",
+    "widget:dev": "pnpm --filter @drive-scout/search-widget dev"
   },
   "devDependencies": {
     
