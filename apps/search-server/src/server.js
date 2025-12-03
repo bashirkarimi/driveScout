@@ -231,8 +231,6 @@ function createCarServer() {
     "ui://widget/car-widget.html",
     {
       readOnlyHint: true,        // Skip confirmation prompts
-      destructiveHint: false,    // Not deleting data
-      openWorldHint: false       // Not publishing externally
     },
     async () => {
       const html = await getWidgetHtml();
@@ -258,6 +256,7 @@ function createCarServer() {
       title: "Search car inventory",
       description: "Searches the latest vehicles from the headless CMS.",
       inputSchema: searchInputSchema,
+      readOnlyHint: true,        // Mark as safe read-only operation
       _meta: {
         "openai/outputTemplate": "ui://widget/car-widget.html",
         "openai/toolInvocation/invoking": "Searching vehicles",
