@@ -229,9 +229,7 @@ function createCarServer() {
   server.registerResource(
     "search-widget",
     "ui://widget/car-widget.html",
-    {
-      readOnlyHint: true,        // Skip confirmation prompts
-    },
+    {},
     async () => {
       const html = await getWidgetHtml();
       return {
