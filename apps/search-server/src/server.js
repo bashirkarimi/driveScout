@@ -222,7 +222,7 @@ const replyWithResults = ({ results, summary, statusText }) => ({
 
 function createCarServer() {
   const server = new McpServer({
-    name: "car-search-app",
+    name: "Car Scout",
     version: "0.1.0",
   });
 
@@ -254,6 +254,9 @@ function createCarServer() {
       title: "Get vehicles",
       description: "Retrieves and displays vehicles from the inventory database. This is a read-only search operation.",
       inputSchema: searchInputSchema,
+      annotations: {
+        readOnlyHint: true,
+      },
       _meta: {
         "openai/outputTemplate": "ui://widget/car-widget.html",
         "openai/toolInvocation/invoking": "Searching vehicles",
