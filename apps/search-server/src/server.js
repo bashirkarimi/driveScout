@@ -220,6 +220,29 @@ const replyWithResults = ({ results, summary, statusText }) => ({
   },
 });
 
+// Some hosting proxies drop Accept; force SSE so the MCP transport stays happy.
+function ensureStreamableAccept(req) {
+  const rawAccept = req?.headers?.accept;
+  const accept = Array.isArray(rawAccept) ? rawAccept.join(",") : rawAccept;
+
+  if (!accept) {
+    req.headers.accept = "text/event-stream";
+    return;
+  }
+
+  const normalized = accept.toLowerCase();
+  if (normalized.includes("text/event-stream")) {
+    return;
+  }
+
+  if (normalized.trim() === "*/*") {
+    req.headers.accept = "text/event-stream";
+    return;
+  }
+
+  req.headers.accept = `${accept}, text/event-stream`;
+}
+
 function createCarServer() {
   const server = new McpServer({
     name: "Car Scout",
@@ -297,6 +320,7 @@ function createCarServer() {
 
 // Exported handler for both serverless and traditional server usage
 export async function handleMcpRequest(req, res) {
+  ensureStreamableAccept(req);
   const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
