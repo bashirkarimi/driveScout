@@ -1,7 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm install -g pnpm@8.15.0 && pnpm install --no-frozen-lockfile && pnpm run build",
+  "buildCommand": "npm ci && npm run build",
   "outputDirectory": "apps/search-server/public",
+  "installCommand": "npm install",
   "functions": {
     "api/mcp.js": {
       "memory": 512,
