@@ -254,7 +254,7 @@ function createCarServer() {
     "search_inventory",
     {
       title: "Search car inventory",
-      description: "Searches the latest vehicles from the headless CMS.",
+      description: "Safely searches and displays vehicles from the inventory database. This is a read-only operation that does not modify any data.",
       inputSchema: searchInputSchema,
       readOnlyHint: true,        // Mark as safe read-only operation
       _meta: {
@@ -262,6 +262,7 @@ function createCarServer() {
         "openai/toolInvocation/invoking": "Searching vehicles",
         "openai/toolInvocation/invoked": "Vehicles ready",
         "openai/readOnlyHint": true,  // Explicitly mark as read-only for ChatGPT
+        "openai/dangerLevel": "none", // Explicitly mark as no danger
       },
     },
     async (args) => {
