@@ -251,18 +251,16 @@ function createCarServer() {
   );
 
   server.registerTool(
-    "search_inventory",
+    "get_vehicles",
     {
-      title: "Search car inventory",
-      description: "Safely searches and displays vehicles from the inventory database. This is a read-only operation that does not modify any data.",
+      title: "Get vehicles",
+      description: "Retrieves and displays vehicles from the inventory database. This is a read-only search operation.",
       inputSchema: searchInputSchema,
-      readOnlyHint: true,        // Mark as safe read-only operation
+      readOnlyHint: true,
       _meta: {
         "openai/outputTemplate": "ui://widget/car-widget.html",
         "openai/toolInvocation/invoking": "Searching vehicles",
         "openai/toolInvocation/invoked": "Vehicles ready",
-        "openai/readOnlyHint": true,  // Explicitly mark as read-only for ChatGPT
-        "openai/dangerLevel": "none", // Explicitly mark as no danger
       },
     },
     async (args) => {
@@ -284,7 +282,7 @@ function createCarServer() {
         const statusText = `${results.length} vehicles ready to explore.`;
         return replyWithResults({ results, summary: summary || statusText, statusText });
       } catch (error) {
-        console.error("search_inventory failed", error);
+        console.error("get_vehicles failed", error);
         return replyWithResults({
           results: [],
           summary: "We could not reach the inventory service.",

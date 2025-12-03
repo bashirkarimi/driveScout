@@ -90,10 +90,10 @@ export const useCarSearch = () => {
       setIsLoading(true);
       if (window.openai?.callTool) {
         try {
-          const response = await window.openai.callTool("search_inventory", payload);
+          const response = await window.openai.callTool("get_vehicles", payload);
           updateFromResponse(response);
         } catch (error) {
-          console.error("search_inventory tool invocation failed", error);
+          console.error("get_vehicles tool invocation failed", error);
           setResults([]);
           setStatusMessage("Inventory lookup failed. Please retry in a moment.");
         } finally {
