@@ -251,15 +251,9 @@ function createCarServer() {
   server.registerTool(
     "get_vehicles",
     {
-      title: "Get vehicles",
+      title: "Get vehicles",  
       description: "Retrieves and displays vehicles from the inventory database. This is a read-only search operation.",
       inputSchema: searchInputSchema,
-      dangerous: false,
-      _meta: {
-        "openai/outputTemplate": "ui://widget/car-widget.html",
-        "openai/toolInvocation/invoking": "Searching vehicles",
-        "openai/toolInvocation/invoked": "Vehicles ready",
-      },
     },
     async (args) => {
       try {
@@ -269,23 +263,55 @@ function createCarServer() {
           limit: args?.limit,
         });
 
+        const html = await getWidgetHtml();
+
         if (!results.length) {
-          return replyWithResults({
-            results,
-            summary,
-            statusText: summary || "No vehicles matched your query.",
-          });
+          return {
+            content: [
+              { type: "text", text: summary || "No vehicles matched your query." },
+              {
+                type: "resource",
+                resource: {
+                  uri: "ui://widget/car-widget.html",
+                  mimeType: "text/html+skybridge",
+                  text: html,
+                },
+              },
+            ],
+            structuredContent: {
+              results: [],
+              summary: summary || "No vehicles matched your query.",
+            },
+          };
         }
 
         const statusText = `${results.length} vehicles ready to explore.`;
-        return replyWithResults({ results, summary: summary || statusText, statusText });
+        return {
+          content: [
+            { type: "text", text: summary || statusText },
+            {
+              type: "resource",
+              resource: {
+                uri: "ui://widget/car-widget.html",
+                mimeType: "text/html+skybridge",
+                text: html,
+              },
+            },
+          ],
+          structuredContent: {
+            results,
+            summary: summary || statusText,
+          },
+        };
       } catch (error) {
         console.error("get_vehicles failed", error);
-        return replyWithResults({
-          results: [],
-          summary: "We could not reach the inventory service.",
-          statusText: "Inventory lookup failed. Please retry in a moment.",
-        });
+        return {
+          content: [{ type: "text", text: "Inventory lookup failed. Please retry in a moment." }],
+          structuredContent: {
+            results: [],
+            summary: "We could not reach the inventory service.",
+          },
+        };
       }
     }
   );
