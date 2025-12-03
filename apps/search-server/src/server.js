@@ -261,6 +261,7 @@ function createCarServer() {
         "openai/outputTemplate": "ui://widget/car-widget.html",
         "openai/toolInvocation/invoking": "Searching vehicles",
         "openai/toolInvocation/invoked": "Vehicles ready",
+        "openai/readOnlyHint": true,  // Explicitly mark as read-only for ChatGPT
       },
     },
     async (args) => {
