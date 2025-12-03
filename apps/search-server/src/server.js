@@ -256,7 +256,7 @@ function createCarServer() {
       title: "Get vehicles",
       description: "Retrieves and displays vehicles from the inventory database. This is a read-only search operation.",
       inputSchema: searchInputSchema,
-      readOnlyHint: true,
+      dangerous: false,
       _meta: {
         "openai/outputTemplate": "ui://widget/car-widget.html",
         "openai/toolInvocation/invoking": "Searching vehicles",
