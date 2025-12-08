@@ -180,6 +180,26 @@ async function buildWidgetHtml() {
   if (!jsText) {
     throw new Error("Widget build produced no JS output. Check that 'pnpm build' was run and dist/widget.js exists.");
   }
+  
+  // Add error boundary and initialization debug
+  const debugScript = `
+    <script>
+      console.log('[Car Widget] Initializing...');
+      console.log('[Car Widget] NODE_ENV:', '${isDevelopment ? 'development' : 'production'}');
+      console.log('[Car Widget] JS loaded:', ${jsText.length}, 'bytes');
+      console.log('[Car Widget] CSS loaded:', ${replacement.includes('<style>') ? 'yes' : 'no'});
+      
+      window.addEventListener('error', function(e) {
+        console.error('[Car Widget] Global error:', e.error || e.message);
+      });
+      
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('[Car Widget] Unhandled promise rejection:', e.reason);
+      });
+    </script>
+  `;
+  
+  replacement += debugScript;
   replacement += `<script type="module">\n${jsText}\n</script>`;
   
   if (template.includes(WIDGET_PLACEHOLDER)) {
@@ -205,15 +225,23 @@ async function getWidgetHtml() {
 
   try {
     widgetHtmlCache = await buildWidgetHtml();
+    console.log("✓ Widget HTML built successfully", widgetHtmlCache.length, "bytes");
   } catch (error) {
-    console.error("Failed to build widget", error);
+    console.error("✗ Failed to build widget:", error.message);
+    console.error("   Stack:", error.stack);
     widgetHtmlCache = FALLBACK_WIDGET_HTML;
   }
 
   return widgetHtmlCache;
 }
 
-await getWidgetHtml();
+// Build widget on startup to catch errors early
+try {
+  await getWidgetHtml();
+  console.log("✓ Widget preloaded successfully");
+} catch (error) {
+  console.error("✗ Widget preload failed:", error.message);
+}
 
 // Validate environment variables on startup
 if (!isDevelopment) {
