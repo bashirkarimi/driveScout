@@ -1,12 +1,10 @@
 // Thin adapter for Vercel serverless deployment
 // Imports the shared MCP handler from the main server file
-import { handleMcpRequest } from "../apps/search-server/src/server.js";
-
-const isDevelopment = process.env.NODE_ENV !== "production";
+import { handleMcpRequest, resolveAllowedOrigin } from "../apps/search-server/src/server.js";
 
 // Serverless function handler for Vercel
 export default async function handler(req, res) {
-  const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
+  const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
 
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
