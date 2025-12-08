@@ -2,6 +2,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-1",
     title: "Audi Q4 e-tron RS",
+    model: "Q4 e-tron",
     subtitle: "Q4 e-tron | 627 kW (852 PS) | 302 km WLTP",
     heroImage: "https://picsum.photos/seed/29499c7ec4/800/600",
     gallery: [
@@ -56,6 +57,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-2",
     title: "Opel Corsa-e RS",
+    model: "Corsa-e",
     subtitle: "Corsa-e | 640 kW (870 PS) | 422 km WLTP",
     heroImage: "https://picsum.photos/seed/12a8211ab3/800/600",
     gallery: [
@@ -106,6 +108,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-3",
     title: "Renault Megane E-Tech Premium",
+    model: "Megane E-Tech",
     subtitle: "Megane E-Tech | 154 kW (209 PS) | 35 km EV",
     heroImage: "https://picsum.photos/seed/0820f852a2/800/600",
     gallery: [
@@ -161,6 +164,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-4",
     title: "Tesla Model 3",
+    model: "Model 3",
     subtitle: "Model 3 | 84 kW (114 PS)",
     heroImage: "https://picsum.photos/seed/f2a8e550e4/800/600",
     gallery: [
@@ -215,6 +219,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-5",
     title: "Tesla Model 3 Sport",
+    model: "Model 3",
     subtitle: "Model 3 | 147 kW (200 PS) | 77 km EV",
     heroImage: "https://picsum.photos/seed/b8e9435cb1/800/600",
     gallery: [
@@ -269,6 +274,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-6",
     title: "Nissan Ariya VZ",
+    model: "Ariya",
     subtitle: "Ariya | 99 kW (135 PS)",
     heroImage: "https://picsum.photos/seed/da22f015f6/800/600",
     gallery: [
@@ -324,6 +330,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-7",
     title: "Ford Mustang Mach-E S line",
+    model: "Mustang Mach-E",
     subtitle: "Mustang Mach-E | 648 kW (881 PS) | 521 km WLTP",
     heroImage: "https://picsum.photos/seed/c256c11cc9/800/600",
     gallery: [
@@ -383,6 +390,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-8",
     title: "Škoda Enyaq",
+    model: "Enyaq",
     subtitle: "Enyaq | 112 kW (152 PS)",
     heroImage: "https://picsum.photos/seed/d36f4a1bdf/800/600",
     gallery: [
@@ -433,6 +441,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-9",
     title: "Audi A4 Sport",
+    model: "A4",
     subtitle: "A4 | 551 kW (749 PS) | 533 km WLTP",
     heroImage: "https://picsum.photos/seed/3ca4d64b65/800/600",
     gallery: [
@@ -488,6 +497,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-10",
     title: "Toyota Yaris Hybrid GTX",
+    model: "Yaris Hybrid",
     subtitle: "Yaris Hybrid | 298 kW (405 PS) | 299 km WLTP",
     heroImage: "https://picsum.photos/seed/47ccf5050c/800/600",
     gallery: [
@@ -539,6 +549,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-11",
     title: "Seat Leon M Sport",
+    model: "Leon",
     subtitle: "Leon | 377 kW (513 PS) | 288 km WLTP",
     heroImage: "https://picsum.photos/seed/28a50ee7ed/800/600",
     gallery: [
@@ -593,6 +604,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-12",
     title: "BMW X3 RS",
+    model: "X3",
     subtitle: "X3 | 143 kW (194 PS)",
     heroImage: "https://picsum.photos/seed/117b20a580/800/600",
     gallery: [
@@ -643,6 +655,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-13",
     title: "Toyota Yaris Hybrid Standard",
+    model: "Yaris Hybrid",
     subtitle: "Yaris Hybrid | 345 kW (469 PS) | 285 km WLTP",
     heroImage: "https://picsum.photos/seed/3642ebcf52/800/600",
     gallery: [
@@ -694,6 +707,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-14",
     title: "Škoda Kodiaq",
+    model: "Kodiaq",
     subtitle: "Kodiaq | 98 kW (133 PS) | 30 km EV",
     heroImage: "https://picsum.photos/seed/94b38402af/800/600",
     gallery: [
@@ -748,6 +762,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-15",
     title: "Kia EV6",
+    model: "EV6",
     subtitle: "EV6 | 106 kW (144 PS) | 38 km EV",
     heroImage: "https://picsum.photos/seed/25bd49f97a/800/600",
     gallery: [
@@ -802,6 +817,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-16",
     title: "Tesla Model 3 Standard",
+    model: "Model 3",
     subtitle: "Model 3 | 137 kW (186 PS)",
     heroImage: "https://picsum.photos/seed/a5629f0061/800/600",
     gallery: [
@@ -853,6 +869,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-17",
     title: "Mercedes-Benz E-Class S line",
+    model: "E-Class",
     subtitle: "E-Class | 80 kW (109 PS)",
     heroImage: "https://picsum.photos/seed/a55f8a06ab/800/600",
     gallery: [
@@ -899,6 +916,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-18",
     title: "Volvo XC90",
+    model: "XC90",
     subtitle: "XC90 | 133 kW (181 PS)",
     heroImage: "https://picsum.photos/seed/8c4e00560f/800/600",
     gallery: [
@@ -949,6 +967,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-19",
     title: "Ford Kuga S line",
+    model: "Kuga",
     subtitle: "Kuga | 141 kW (192 PS)",
     heroImage: "https://picsum.photos/seed/63ca7d1fbd/800/600",
     gallery: [
@@ -999,6 +1018,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-20",
     title: "Nissan Ariya M Sport",
+    model: "Ariya",
     subtitle: "Ariya | 272 kW (370 PS) | 612 km WLTP",
     heroImage: "https://picsum.photos/seed/95fc498c7c/800/600",
     gallery: [
@@ -1054,6 +1074,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-21",
     title: "Kia Sportage S line",
+    model: "Sportage",
     subtitle: "Sportage | 112 kW (152 PS) | 42 km EV",
     heroImage: "https://picsum.photos/seed/932415ad84/800/600",
     gallery: [
@@ -1104,6 +1125,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-22",
     title: "Seat Leon VZ",
+    model: "Leon",
     subtitle: "Leon | 113 kW (154 PS)",
     heroImage: "https://picsum.photos/seed/ad09fa87c8/800/600",
     gallery: [
@@ -1162,6 +1184,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-23",
     title: "Volkswagen Tiguan M Sport",
+    model: "Tiguan",
     subtitle: "Tiguan | 178 kW (242 PS) | 61 km EV",
     heroImage: "https://picsum.photos/seed/2587496095/800/600",
     gallery: [
@@ -1217,6 +1240,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-24",
     title: "Seat Arona GTX",
+    model: "Arona",
     subtitle: "Arona | 199 kW (271 PS)",
     heroImage: "https://picsum.photos/seed/6124d5f9eb/800/600",
     gallery: [
@@ -1262,6 +1286,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-25",
     title: "Kia EV6 RS",
+    model: "EV6",
     subtitle: "EV6 | 526 kW (715 PS) | 291 km WLTP",
     heroImage: "https://picsum.photos/seed/73a2b6a40f/800/600",
     gallery: [
@@ -1317,6 +1342,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-26",
     title: "BMW 4 Series e-HYBRID",
+    model: "4 Series",
     subtitle: "4 Series | 170 kW (231 PS) | 49 km EV",
     heroImage: "https://picsum.photos/seed/daafb9265d/800/600",
     gallery: [
@@ -1372,6 +1398,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-27",
     title: "CUPRA Leon GT",
+    model: "Leon",
     subtitle: "Leon | 180 kW (245 PS) | 67 km EV",
     heroImage: "https://picsum.photos/seed/51c676f0ac/800/600",
     gallery: [
@@ -1422,6 +1449,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-28",
     title: "Volkswagen Tiguan Standard",
+    model: "Tiguan",
     subtitle: "Tiguan | 169 kW (230 PS) | 44 km EV",
     heroImage: "https://picsum.photos/seed/b445940b8e/800/600",
     gallery: [
@@ -1481,6 +1509,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-29",
     title: "Tesla Model Y GT",
+    model: "Model Y",
     subtitle: "Model Y | 109 kW (148 PS) | 79 km EV",
     heroImage: "https://picsum.photos/seed/f9e3847fa0/800/600",
     gallery: [
@@ -1531,6 +1560,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-30",
     title: "Mercedes-Benz E-Class VZ",
+    model: "E-Class",
     subtitle: "E-Class | 97 kW (132 PS) | 62 km EV",
     heroImage: "https://picsum.photos/seed/a92eec7681/800/600",
     gallery: [
@@ -1582,6 +1612,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-31",
     title: "Toyota RAV4 Hybrid M Sport",
+    model: "RAV4 Hybrid",
     subtitle: "RAV4 Hybrid | 138 kW (188 PS)",
     heroImage: "https://picsum.photos/seed/d05faa1013/800/600",
     gallery: [
@@ -1633,6 +1664,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-32",
     title: "Tesla Model Y VZ",
+    model: "Model Y",
     subtitle: "Model Y | 128 kW (174 PS) | 35 km EV",
     heroImage: "https://picsum.photos/seed/5b4418c869/800/600",
     gallery: [
@@ -1688,6 +1720,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-33",
     title: "Renault Zoe VZ",
+    model: "Zoe",
     subtitle: "Zoe | 631 kW (858 PS) | 531 km WLTP",
     heroImage: "https://picsum.photos/seed/c494a44a48/800/600",
     gallery: [
@@ -1738,6 +1771,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-34",
     title: "Nissan Ariya Premium",
+    model: "Ariya",
     subtitle: "Ariya | 366 kW (498 PS) | 434 km WLTP",
     heroImage: "https://picsum.photos/seed/11f5038923/800/600",
     gallery: [
@@ -1793,6 +1827,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-35",
     title: "BMW X5 RS",
+    model: "X5",
     subtitle: "X5 | 167 kW (227 PS) | 41 km EV",
     heroImage: "https://picsum.photos/seed/77331374a1/800/600",
     gallery: [
@@ -1843,6 +1878,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-36",
     title: "Hyundai Ioniq 5 GTX",
+    model: "Ioniq 5",
     subtitle: "Ioniq 5 | 551 kW (749 PS) | 469 km WLTP",
     heroImage: "https://picsum.photos/seed/0a03d0f5e8/800/600",
     gallery: [
@@ -1898,6 +1934,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-37",
     title: "BMW X3 GTX",
+    model: "X3",
     subtitle: "X3 | 154 kW (209 PS) | 32 km EV",
     heroImage: "https://picsum.photos/seed/9afd67f263/800/600",
     gallery: [
@@ -1948,6 +1985,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-38",
     title: "Škoda Enyaq Standard",
+    model: "Enyaq",
     subtitle: "Enyaq | 215 kW (292 PS)",
     heroImage: "https://picsum.photos/seed/8675568783/800/600",
     gallery: [
@@ -1999,6 +2037,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-39",
     title: "Tesla Model 3 Premium",
+    model: "Model 3",
     subtitle: "Model 3 | 217 kW (295 PS)",
     heroImage: "https://picsum.photos/seed/8ac5b83ad0/800/600",
     gallery: [
@@ -2058,6 +2097,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-40",
     title: "Volvo XC60 GT",
+    model: "XC60",
     subtitle: "XC60 | 503 kW (684 PS) | 397 km WLTP",
     heroImage: "https://picsum.photos/seed/e3f94dad90/800/600",
     gallery: [
@@ -2109,6 +2149,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-41",
     title: "Toyota RAV4 Hybrid Standard",
+    model: "RAV4 Hybrid",
     subtitle: "RAV4 Hybrid | 317 kW (431 PS) | 397 km WLTP",
     heroImage: "https://picsum.photos/seed/78062537a3/800/600",
     gallery: [
@@ -2160,6 +2201,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-42",
     title: "Škoda Octavia RS",
+    model: "Octavia",
     subtitle: "Octavia | 176 kW (239 PS)",
     heroImage: "https://picsum.photos/seed/291ceddd78/800/600",
     gallery: [
@@ -2211,6 +2253,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-43",
     title: "Nissan Ariya Standard",
+    model: "Ariya",
     subtitle: "Ariya | 220 kW (299 PS)",
     heroImage: "https://picsum.photos/seed/8ca07ba8c8/800/600",
     gallery: [
@@ -2266,6 +2309,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-44",
     title: "Toyota RAV4 Hybrid M Sport",
+    model: "RAV4 Hybrid",
     subtitle: "RAV4 Hybrid | 108 kW (147 PS)",
     heroImage: "https://picsum.photos/seed/fbccf92336/800/600",
     gallery: [
@@ -2321,6 +2365,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-45",
     title: "Toyota RAV4 Hybrid S line",
+    model: "RAV4 Hybrid",
     subtitle: "RAV4 Hybrid | 100 kW (136 PS) | 51 km EV",
     heroImage: "https://picsum.photos/seed/2b744d530f/800/600",
     gallery: [
@@ -2376,6 +2421,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-46",
     title: "CUPRA Leon Standard",
+    model: "Leon",
     subtitle: "Leon | 278 kW (378 PS) | 400 km WLTP",
     heroImage: "https://picsum.photos/seed/77f91f0ff4/800/600",
     gallery: [
@@ -2426,6 +2472,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-47",
     title: "Škoda Enyaq GTX",
+    model: "Enyaq",
     subtitle: "Enyaq | 380 kW (517 PS) | 591 km WLTP",
     heroImage: "https://picsum.photos/seed/6f1ec01e0c/800/600",
     gallery: [
@@ -2481,6 +2528,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-48",
     title: "Hyundai Ioniq 5 e-HYBRID",
+    model: "Ioniq 5",
     subtitle: "Ioniq 5 | 155 kW (211 PS) | 31 km EV",
     heroImage: "https://picsum.photos/seed/f826cd7598/800/600",
     gallery: [
@@ -2536,6 +2584,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-49",
     title: "Škoda Kodiaq Premium",
+    model: "Kodiaq",
     subtitle: "Kodiaq | 159 kW (216 PS) | 80 km EV",
     heroImage: "https://picsum.photos/seed/478eca6857/800/600",
     gallery: [
@@ -2587,6 +2636,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-50",
     title: "Toyota RAV4 Hybrid S line",
+    model: "RAV4 Hybrid",
     subtitle: "RAV4 Hybrid | 288 kW (392 PS) | 322 km WLTP",
     heroImage: "https://picsum.photos/seed/a37dc82134/800/600",
     gallery: [
@@ -2642,6 +2692,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-51",
     title: "Porsche Taycan Premium",
+    model: "Taycan",
     subtitle: "Taycan | 262 kW (356 PS) | 567 km WLTP",
     heroImage: "https://picsum.photos/seed/d589c54d92/800/600",
     gallery: [
@@ -2693,6 +2744,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-52",
     title: "Škoda Octavia GTX",
+    model: "Octavia",
     subtitle: "Octavia | 218 kW (296 PS) | 56 km EV",
     heroImage: "https://picsum.photos/seed/c7d1c3da26/800/600",
     gallery: [
@@ -2748,6 +2800,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-53",
     title: "Renault Zoe Standard",
+    model: "Zoe",
     subtitle: "Zoe | 312 kW (424 PS) | 482 km WLTP",
     heroImage: "https://picsum.photos/seed/4d5f0d1183/800/600",
     gallery: [
@@ -2799,6 +2852,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-54",
     title: "Hyundai Ioniq 5 GT",
+    model: "Ioniq 5",
     subtitle: "Ioniq 5 | 70 kW (95 PS)",
     heroImage: "https://picsum.photos/seed/fbd065f31f/800/600",
     gallery: [
@@ -2850,6 +2904,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-55",
     title: "Mercedes-Benz C-Class M Sport",
+    model: "C-Class",
     subtitle: "C-Class | 282 kW (383 PS) | 493 km WLTP",
     heroImage: "https://picsum.photos/seed/904bdd2a5b/800/600",
     gallery: [
@@ -2905,6 +2960,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-56",
     title: "Audi e-tron GTX",
+    model: "e-tron",
     subtitle: "e-tron | 152 kW (207 PS)",
     heroImage: "https://picsum.photos/seed/40dd7c4b2c/800/600",
     gallery: [
@@ -2959,6 +3015,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-57",
     title: "Ford Kuga GTX",
+    model: "Kuga",
     subtitle: "Kuga | 482 kW (655 PS) | 454 km WLTP",
     heroImage: "https://picsum.photos/seed/353a487414/800/600",
     gallery: [
@@ -3014,6 +3071,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-58",
     title: "Škoda Kodiaq Standard",
+    model: "Kodiaq",
     subtitle: "Kodiaq | 213 kW (290 PS)",
     heroImage: "https://picsum.photos/seed/fe64193f3c/800/600",
     gallery: [
@@ -3065,6 +3123,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-59",
     title: "Audi Q5 VZ",
+    model: "Q5",
     subtitle: "Q5 | 392 kW (533 PS) | 543 km WLTP",
     heroImage: "https://picsum.photos/seed/9fdcc7ccba/800/600",
     gallery: [
@@ -3115,6 +3174,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-60",
     title: "Škoda Kodiaq",
+    model: "Kodiaq",
     subtitle: "Kodiaq | 629 kW (855 PS) | 574 km WLTP",
     heroImage: "https://picsum.photos/seed/f1e4a2bd28/800/600",
     gallery: [
@@ -3160,6 +3220,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-61",
     title: "Škoda Enyaq e-HYBRID",
+    model: "Enyaq",
     subtitle: "Enyaq | 149 kW (203 PS) | 58 km EV",
     heroImage: "https://picsum.photos/seed/27fe23bd81/800/600",
     gallery: [
@@ -3215,6 +3276,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-62",
     title: "BMW i5 RS",
+    model: "i5",
     subtitle: "i5 | 135 kW (184 PS)",
     heroImage: "https://picsum.photos/seed/7100dd46ca/800/600",
     gallery: [
@@ -3266,6 +3328,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-63",
     title: "Mercedes-Benz A-Class Standard",
+    model: "A-Class",
     subtitle: "A-Class | 150 kW (204 PS)",
     heroImage: "https://picsum.photos/seed/0f9ed583ca/800/600",
     gallery: [
@@ -3317,6 +3380,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-64",
     title: "Volkswagen Tiguan RS",
+    model: "Tiguan",
     subtitle: "Tiguan | 420 kW (571 PS) | 648 km WLTP",
     heroImage: "https://picsum.photos/seed/016b936d5e/800/600",
     gallery: [
@@ -3375,6 +3439,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-65",
     title: "Volkswagen Golf",
+    model: "Golf",
     subtitle: "Golf | 194 kW (264 PS) | 73 km EV",
     heroImage: "https://picsum.photos/seed/11c57baea0/800/600",
     gallery: [
@@ -3434,6 +3499,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-66",
     title: "Volkswagen Arteon e-HYBRID",
+    model: "Arteon",
     subtitle: "Arteon | 547 kW (744 PS) | 533 km WLTP",
     heroImage: "https://picsum.photos/seed/f38afdb1a5/800/600",
     gallery: [
@@ -3485,6 +3551,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-67",
     title: "CUPRA Formentor Sport",
+    model: "Formentor",
     subtitle: "Formentor | 474 kW (644 PS) | 518 km WLTP",
     heroImage: "https://picsum.photos/seed/73262cfd32/800/600",
     gallery: [
@@ -3536,6 +3603,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-68",
     title: "Škoda Octavia Premium",
+    model: "Octavia",
     subtitle: "Octavia | 169 kW (230 PS) | 49 km EV",
     heroImage: "https://picsum.photos/seed/b0f999f821/800/600",
     gallery: [
@@ -3591,6 +3659,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-69",
     title: "Ford Kuga GTX",
+    model: "Kuga",
     subtitle: "Kuga | 320 kW (435 PS) | 329 km WLTP",
     heroImage: "https://picsum.photos/seed/c681f321e8/800/600",
     gallery: [
@@ -3645,6 +3714,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-70",
     title: "CUPRA Leon Standard",
+    model: "Leon",
     subtitle: "Leon | 618 kW (840 PS) | 371 km WLTP",
     heroImage: "https://picsum.photos/seed/f90aad4a00/800/600",
     gallery: [
@@ -3695,6 +3765,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-71",
     title: "Seat Arona M Sport",
+    model: "Arona",
     subtitle: "Arona | 121 kW (165 PS) | 42 km EV",
     heroImage: "https://picsum.photos/seed/4e3a0c246b/800/600",
     gallery: [
@@ -3750,6 +3821,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-72",
     title: "Hyundai Ioniq 5 S line",
+    model: "Ioniq 5",
     subtitle: "Ioniq 5 | 452 kW (615 PS) | 507 km WLTP",
     heroImage: "https://picsum.photos/seed/4f3ec71ef1/800/600",
     gallery: [
@@ -3801,6 +3873,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-73",
     title: "Škoda Kodiaq GTX",
+    model: "Kodiaq",
     subtitle: "Kodiaq | 100 kW (136 PS) | 31 km EV",
     heroImage: "https://picsum.photos/seed/646e2a827f/800/600",
     gallery: [
@@ -3851,6 +3924,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-74",
     title: "Toyota Yaris Hybrid",
+    model: "Yaris Hybrid",
     subtitle: "Yaris Hybrid | 116 kW (158 PS) | 48 km EV",
     heroImage: "https://picsum.photos/seed/516f20acd3/800/600",
     gallery: [
@@ -3902,6 +3976,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-75",
     title: "BMW X3 GTX",
+    model: "X3",
     subtitle: "X3 | 175 kW (238 PS) | 46 km EV",
     heroImage: "https://picsum.photos/seed/dbfd974b8f/800/600",
     gallery: [
@@ -3956,6 +4031,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-76",
     title: "Seat Arona",
+    model: "Arona",
     subtitle: "Arona | 86 kW (117 PS)",
     heroImage: "https://picsum.photos/seed/52f1f80f52/800/600",
     gallery: [
@@ -4001,6 +4077,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-77",
     title: "Kia Sportage Standard",
+    model: "Sportage",
     subtitle: "Sportage | 149 kW (203 PS) | 37 km EV",
     heroImage: "https://picsum.photos/seed/67fdef32f4/800/600",
     gallery: [
@@ -4052,6 +4129,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-78",
     title: "CUPRA Leon S line",
+    model: "Leon",
     subtitle: "Leon | 588 kW (799 PS) | 401 km WLTP",
     heroImage: "https://picsum.photos/seed/99c68a40cd/800/600",
     gallery: [
@@ -4107,6 +4185,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-79",
     title: "Volkswagen Tiguan S line",
+    model: "Tiguan",
     subtitle: "Tiguan | 110 kW (150 PS)",
     heroImage: "https://picsum.photos/seed/d3374bda3a/800/600",
     gallery: [
@@ -4158,6 +4237,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-80",
     title: "Škoda Kodiaq S line",
+    model: "Kodiaq",
     subtitle: "Kodiaq | 392 kW (533 PS) | 377 km WLTP",
     heroImage: "https://picsum.photos/seed/385bb1448b/800/600",
     gallery: [
@@ -4208,6 +4288,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-81",
     title: "Ford Mustang Mach-E GT",
+    model: "Mustang Mach-E",
     subtitle: "Mustang Mach-E | 338 kW (460 PS) | 615 km WLTP",
     heroImage: "https://picsum.photos/seed/e9174095fb/800/600",
     gallery: [
@@ -4254,6 +4335,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-82",
     title: "Hyundai Tucson Sport",
+    model: "Tucson",
     subtitle: "Tucson | 502 kW (683 PS) | 263 km WLTP",
     heroImage: "https://picsum.photos/seed/73bc05043e/800/600",
     gallery: [
@@ -4305,6 +4387,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-83",
     title: "Volkswagen Golf S line",
+    model: "Golf",
     subtitle: "Golf | 488 kW (663 PS) | 598 km WLTP",
     heroImage: "https://picsum.photos/seed/e03be8724d/800/600",
     gallery: [
@@ -4360,6 +4443,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-84",
     title: "Kia EV6 RS",
+    model: "EV6",
     subtitle: "EV6 | 150 kW (204 PS) | 38 km EV",
     heroImage: "https://picsum.photos/seed/f65971eb0d/800/600",
     gallery: [
@@ -4410,6 +4494,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-85",
     title: "Mercedes-Benz GLC Premium",
+    model: "GLC",
     subtitle: "GLC | 217 kW (295 PS)",
     heroImage: "https://picsum.photos/seed/433668d2cf/800/600",
     gallery: [
@@ -4456,6 +4541,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-86",
     title: "CUPRA Leon M Sport",
+    model: "Leon",
     subtitle: "Leon | 167 kW (227 PS) | 68 km EV",
     heroImage: "https://picsum.photos/seed/196cee812e/800/600",
     gallery: [
@@ -4511,6 +4597,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-87",
     title: "Mercedes-Benz E-Class M Sport",
+    model: "E-Class",
     subtitle: "E-Class | 143 kW (194 PS) | 40 km EV",
     heroImage: "https://picsum.photos/seed/ad5cc2e616/800/600",
     gallery: [
@@ -4566,6 +4653,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-88",
     title: "Renault Megane E-Tech Standard",
+    model: "Megane E-Tech",
     subtitle: "Megane E-Tech | 200 kW (272 PS) | 48 km EV",
     heroImage: "https://picsum.photos/seed/3a564e049d/800/600",
     gallery: [
@@ -4617,6 +4705,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-89",
     title: "Nissan Ariya VZ",
+    model: "Ariya",
     subtitle: "Ariya | 100 kW (136 PS)",
     heroImage: "https://picsum.photos/seed/b4f96b062c/800/600",
     gallery: [
@@ -4672,6 +4761,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-90",
     title: "Škoda Kodiaq VZ",
+    model: "Kodiaq",
     subtitle: "Kodiaq | 563 kW (765 PS) | 413 km WLTP",
     heroImage: "https://picsum.photos/seed/0da3849f1c/800/600",
     gallery: [
@@ -4723,6 +4813,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-91",
     title: "Audi e-tron e-HYBRID",
+    model: "e-tron",
     subtitle: "e-tron | 76 kW (103 PS)",
     heroImage: "https://picsum.photos/seed/7e91d0cdd0/800/600",
     gallery: [
@@ -4778,6 +4869,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-92",
     title: "Ford Mustang Mach-E GTX",
+    model: "Mustang Mach-E",
     subtitle: "Mustang Mach-E | 461 kW (627 PS) | 603 km WLTP",
     heroImage: "https://picsum.photos/seed/19059daf6e/800/600",
     gallery: [
@@ -4829,6 +4921,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-93",
     title: "Volvo XC60 GTX",
+    model: "XC60",
     subtitle: "XC60 | 431 kW (586 PS) | 596 km WLTP",
     heroImage: "https://picsum.photos/seed/30f03dea16/800/600",
     gallery: [
@@ -4883,6 +4976,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-94",
     title: "Kia EV6 e-HYBRID",
+    model: "EV6",
     subtitle: "EV6 | 181 kW (246 PS) | 52 km EV",
     heroImage: "https://picsum.photos/seed/39dc1a12fb/800/600",
     gallery: [
@@ -4934,6 +5028,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-95",
     title: "Tesla Model 3 Premium",
+    model: "Model 3",
     subtitle: "Model 3 | 131 kW (178 PS)",
     heroImage: "https://picsum.photos/seed/3c5dae87f5/800/600",
     gallery: [
@@ -4985,6 +5080,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-96",
     title: "Toyota RAV4 Hybrid",
+    model: "RAV4 Hybrid",
     subtitle: "RAV4 Hybrid | 143 kW (194 PS)",
     heroImage: "https://picsum.photos/seed/e54069fdf5/800/600",
     gallery: [
@@ -5036,6 +5132,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-97",
     title: "Mercedes-Benz A-Class GTX",
+    model: "A-Class",
     subtitle: "A-Class | 144 kW (196 PS)",
     heroImage: "https://picsum.photos/seed/5a61471720/800/600",
     gallery: [
@@ -5087,6 +5184,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-98",
     title: "Tesla Model 3 Standard",
+    model: "Model 3",
     subtitle: "Model 3 | 401 kW (545 PS) | 540 km WLTP",
     heroImage: "https://picsum.photos/seed/67f0fd3582/800/600",
     gallery: [
@@ -5142,6 +5240,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-99",
     title: "Hyundai Tucson RS",
+    model: "Tucson",
     subtitle: "Tucson | 635 kW (863 PS) | 386 km WLTP",
     heroImage: "https://picsum.photos/seed/1c9b511cd0/800/600",
     gallery: [
@@ -5193,6 +5292,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-100",
     title: "Kia EV6",
+    model: "EV6",
     subtitle: "EV6 | 363 kW (494 PS) | 362 km WLTP",
     heroImage: "https://picsum.photos/seed/382042d5d8/800/600",
     gallery: [
@@ -5238,6 +5338,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-101",
     title: "Seat Arona Premium",
+    model: "Arona",
     subtitle: "Arona | 530 kW (721 PS) | 508 km WLTP",
     heroImage: "https://picsum.photos/seed/d0d7f9fd9b/800/600",
     gallery: [
@@ -5288,6 +5389,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-102",
     title: "Seat Arona Standard",
+    model: "Arona",
     subtitle: "Arona | 251 kW (341 PS) | 631 km WLTP",
     heroImage: "https://picsum.photos/seed/985a4f12ef/800/600",
     gallery: [
@@ -5342,6 +5444,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-103",
     title: "Opel Corsa-e M Sport",
+    model: "Corsa-e",
     subtitle: "Corsa-e | 166 kW (226 PS)",
     heroImage: "https://picsum.photos/seed/8f2157b6d9/800/600",
     gallery: [
@@ -5397,6 +5500,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-104",
     title: "Seat Arona VZ",
+    model: "Arona",
     subtitle: "Arona | 133 kW (181 PS)",
     heroImage: "https://picsum.photos/seed/0fcae385b8/800/600",
     gallery: [
@@ -5452,6 +5556,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-105",
     title: "Mercedes-Benz C-Class Standard",
+    model: "C-Class",
     subtitle: "C-Class | 526 kW (715 PS) | 361 km WLTP",
     heroImage: "https://picsum.photos/seed/31464e3f55/800/600",
     gallery: [
@@ -5498,6 +5603,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-106",
     title: "Mercedes-Benz S-Class e-HYBRID",
+    model: "S-Class",
     subtitle: "S-Class | 179 kW (243 PS)",
     heroImage: "https://picsum.photos/seed/cc0ad73591/800/600",
     gallery: [
@@ -5557,6 +5663,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-107",
     title: "Hyundai Ioniq 5 GT",
+    model: "Ioniq 5",
     subtitle: "Ioniq 5 | 94 kW (128 PS) | 65 km EV",
     heroImage: "https://picsum.photos/seed/ee9f0dbdd2/800/600",
     gallery: [
@@ -5612,6 +5719,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-108",
     title: "Ford Mustang Mach-E GTX",
+    model: "Mustang Mach-E",
     subtitle: "Mustang Mach-E | 155 kW (211 PS)",
     heroImage: "https://picsum.photos/seed/3ef207f01f/800/600",
     gallery: [
@@ -5667,6 +5775,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-109",
     title: "Renault Zoe RS",
+    model: "Zoe",
     subtitle: "Zoe | 207 kW (281 PS) | 59 km EV",
     heroImage: "https://picsum.photos/seed/9c69a0ea56/800/600",
     gallery: [
@@ -5717,6 +5826,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-110",
     title: "Škoda Enyaq S line",
+    model: "Enyaq",
     subtitle: "Enyaq | 375 kW (510 PS) | 505 km WLTP",
     heroImage: "https://picsum.photos/seed/b73f46c6c2/800/600",
     gallery: [
@@ -5767,6 +5877,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-111",
     title: "Mercedes-Benz S-Class Standard",
+    model: "S-Class",
     subtitle: "S-Class | 82 kW (111 PS)",
     heroImage: "https://picsum.photos/seed/9cbdcc48ba/800/600",
     gallery: [
@@ -5822,6 +5933,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-112",
     title: "Nissan Ariya VZ",
+    model: "Ariya",
     subtitle: "Ariya | 607 kW (825 PS) | 595 km WLTP",
     heroImage: "https://picsum.photos/seed/5fe32ffd97/800/600",
     gallery: [
@@ -5873,6 +5985,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-113",
     title: "Seat Leon Sport",
+    model: "Leon",
     subtitle: "Leon | 100 kW (136 PS) | 71 km EV",
     heroImage: "https://picsum.photos/seed/4f47a3e7e0/800/600",
     gallery: [
@@ -5928,6 +6041,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-114",
     title: "Hyundai Tucson e-HYBRID",
+    model: "Tucson",
     subtitle: "Tucson | 288 kW (392 PS) | 600 km WLTP",
     heroImage: "https://picsum.photos/seed/2a7bf4f519/800/600",
     gallery: [
@@ -5974,6 +6088,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-115",
     title: "Hyundai Ioniq 5",
+    model: "Ioniq 5",
     subtitle: "Ioniq 5 | 636 kW (865 PS) | 628 km WLTP",
     heroImage: "https://picsum.photos/seed/73950c37ba/800/600",
     gallery: [
@@ -6024,6 +6139,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-116",
     title: "Toyota Yaris Hybrid S line",
+    model: "Yaris Hybrid",
     subtitle: "Yaris Hybrid | 180 kW (245 PS)",
     heroImage: "https://picsum.photos/seed/61fbcd82d5/800/600",
     gallery: [
@@ -6079,6 +6195,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-117",
     title: "Porsche Taycan S line",
+    model: "Taycan",
     subtitle: "Taycan | 407 kW (553 PS) | 477 km WLTP",
     heroImage: "https://picsum.photos/seed/f1990f6ccd/800/600",
     gallery: [
@@ -6130,6 +6247,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-118",
     title: "Kia Sportage M Sport",
+    model: "Sportage",
     subtitle: "Sportage | 536 kW (729 PS) | 374 km WLTP",
     heroImage: "https://picsum.photos/seed/58300334a7/800/600",
     gallery: [
@@ -6185,6 +6303,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-119",
     title: "Hyundai Ioniq 5 e-HYBRID",
+    model: "Ioniq 5",
     subtitle: "Ioniq 5 | 304 kW (413 PS) | 319 km WLTP",
     heroImage: "https://picsum.photos/seed/aa9dc105a2/800/600",
     gallery: [
@@ -6236,6 +6355,7 @@ export const FALLBACK_RESULTS = [
   {
     id: "veh-120",
     title: "Volvo XC90",
+    model: "XC90",
     subtitle: "XC90 | 132 kW (179 PS)",
     heroImage: "https://picsum.photos/seed/14e1ed4dad/800/600",
     gallery: [
