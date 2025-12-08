@@ -6,7 +6,8 @@
   "functions": {
     "api/mcp.js": {
       "memory": 512,
-      "maxDuration": 30
+      "maxDuration": 30,
+      "includeFiles": "packages/search-widget/dist/**"
     }
   },
   "env": {
