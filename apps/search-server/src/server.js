@@ -45,6 +45,15 @@ export function resolveAllowedOrigin(requestOrigin) {
   return configuredOrigins[0] ?? DEFAULT_ALLOWED_ORIGINS[0];
 }
 
+export function getCorsHeaders(requestOrigin, additionalHeaders = {}) {
+  return {
+    "Access-Control-Allow-Origin": resolveAllowedOrigin(requestOrigin),
+    "Access-Control-Allow-Credentials": "true",
+    "Vary": "Origin",
+    ...additionalHeaders,
+  };
+}
+
 const FALLBACK_WIDGET_HTML = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -375,23 +384,19 @@ function createCarServer() {
 export async function handleMcpRequest(req, res) {
   // Handle browser GET requests with a simple info message
   if (req.method === "GET" && !req.headers["mcp-session-id"]) {
-    const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
     res.writeHead(200, {
       "content-type": "text/plain",
-      "Access-Control-Allow-Origin": allowedOrigin,
-      "Access-Control-Allow-Credentials": "true",
-      "Vary": "Origin",
+      ...getCorsHeaders(req.headers?.origin),
     });
     res.end("Car search MCP server is running. Connect via an MCP client (e.g., ChatGPT) to use the search tool.");
     return;
   }
 
   ensureStreamableAccept(req);
-  const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
-  res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
-  res.setHeader("Vary", "Origin");
+  const corsHeaders = getCorsHeaders(req.headers?.origin, {
+    "Access-Control-Expose-Headers": "Mcp-Session-Id",
+  });
+  Object.entries(corsHeaders).forEach(([key, value]) => res.setHeader(key, value));
 
   const server = createCarServer();
   const transport = new StreamableHTTPServerTransport({
@@ -427,15 +432,13 @@ const httpServer = createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host ?? "localhost"}`);
 
   if (req.method === "OPTIONS" && url.pathname.startsWith(MCP_PATH)) {
-    const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
     const requestedHeaders = req.headers?.["access-control-request-headers"];
     res.writeHead(204, {
-      "Access-Control-Allow-Origin": allowedOrigin,
-      "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": requestedHeaders || "content-type, mcp-session-id",
-      "Access-Control-Expose-Headers": "Mcp-Session-Id",
-      "Access-Control-Allow-Credentials": "true",
-      Vary: "Origin",
+      ...getCorsHeaders(req.headers?.origin, {
+        "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": requestedHeaders || "content-type, mcp-session-id",
+        "Access-Control-Expose-Headers": "Mcp-Session-Id",
+      }),
     });
     res.end();
     return;
