@@ -17,6 +17,9 @@ export default defineConfig({
     host: "127.0.0.1",
     port: 4173,
   },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  },
   build: {
     outDir: resolve(__dirname, "dist"),
     emptyOutDir: true,
