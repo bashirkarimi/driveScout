@@ -18,7 +18,9 @@ export default defineConfig({
     port: 4173,
   },
   define: {
-    'process.env.NODE_ENV': JSON.stringify('production'),
+    "process.env.NODE_ENV": JSON.stringify(
+      process.env.NODE_ENV || "production"
+    ),
   },
   build: {
     outDir: resolve(__dirname, "dist"),
@@ -29,12 +31,20 @@ export default defineConfig({
       formats: ["es"],
       fileName: () => "widget.js",
     },
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
       output: {
         entryFileNames: "widget.js",
         chunkFileNames: "widget-[name].js",
         assetFileNames: "widget-[name][extname]",
+        manualChunks: undefined, // Prevent code splitting
       },
+      external: [],
     },
   },
 });
