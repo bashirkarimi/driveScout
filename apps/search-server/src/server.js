@@ -182,12 +182,13 @@ async function buildWidgetHtml() {
   }
   
   // Add error boundary and initialization debug
+  const hasCSS = replacement.includes('<style>');
   const debugScript = `
     <script>
       console.log('[Car Widget] Initializing...');
       console.log('[Car Widget] NODE_ENV:', '${isDevelopment ? 'development' : 'production'}');
       console.log('[Car Widget] JS loaded:', ${jsText.length}, 'bytes');
-      console.log('[Car Widget] CSS loaded:', ${replacement.includes('<style>') ? 'yes' : 'no'});
+      console.log('[Car Widget] CSS loaded:', ${hasCSS});
       
       window.addEventListener('error', function(e) {
         console.error('[Car Widget] Global error:', e.error || e.message);
