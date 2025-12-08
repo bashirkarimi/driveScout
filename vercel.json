@@ -7,12 +7,7 @@
     "api/mcp.js": {
       "memory": 512,
       "maxDuration": 30,
-      "includeFiles": [
-        "packages/search-widget/dist/widget.js",
-        "packages/search-widget/dist/widget-style.css",
-        "apps/search-server/public/car-widget.html",
-        "apps/search-server/src/**"
-      ]
+      "includeFiles": "{packages/search-widget/dist/**,apps/search-server/public/**,apps/search-server/src/**}"
     }
   },
   "env": {
