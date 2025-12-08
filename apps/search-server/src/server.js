@@ -341,6 +341,19 @@ function createCarServer() {
 
 // Exported handler for both serverless and traditional server usage
 export async function handleMcpRequest(req, res) {
+  // Handle browser GET requests with a simple info message
+  if (req.method === "GET" && !req.headers["mcp-session-id"]) {
+    const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
+    res.writeHead(200, {
+      "content-type": "text/plain",
+      "Access-Control-Allow-Origin": allowedOrigin,
+      "Access-Control-Allow-Credentials": "true",
+      "Vary": "Origin",
+    });
+    res.end("Car search MCP server is running. Connect via an MCP client (e.g., ChatGPT) to use the search tool.");
+    return;
+  }
+
   ensureStreamableAccept(req);
   const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
