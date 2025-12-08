@@ -25,6 +25,27 @@ const publicDir = resolve(serverRoot, "public");
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
+const DEFAULT_ALLOWED_ORIGINS = ["https://chatgpt.com", "https://chat.openai.com"];
+
+export function resolveAllowedOrigin(requestOrigin) {
+  if (isDevelopment) {
+    return "*";
+  }
+
+  const configuredOrigins = (process.env.ALLOWED_ORIGIN ?? "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  const allowList = new Set([...configuredOrigins, ...DEFAULT_ALLOWED_ORIGINS]);
+
+  if (requestOrigin && allowList.has(requestOrigin)) {
+    return requestOrigin;
+  }
+
+  return configuredOrigins[0] ?? DEFAULT_ALLOWED_ORIGINS[0];
+}
+
 const FALLBACK_WIDGET_HTML = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -187,7 +208,7 @@ if (!isDevelopment) {
     console.warn(`Warning: Missing environment variables: ${missing.join(', ')}. Using defaults.`);
   }
   if (!process.env.ALLOWED_ORIGIN) {
-    console.log('ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com');
+    console.log('ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com, https://chat.openai.com');
   }
 }
 
@@ -321,7 +342,7 @@ function createCarServer() {
 // Exported handler for both serverless and traditional server usage
 export async function handleMcpRequest(req, res) {
   ensureStreamableAccept(req);
-  const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
+  const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
   res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
 
@@ -359,7 +380,7 @@ const httpServer = createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host ?? "localhost"}`);
 
   if (req.method === "OPTIONS" && url.pathname.startsWith(MCP_PATH)) {
-    const allowedOrigin = isDevelopment ? "*" : (process.env.ALLOWED_ORIGIN || "https://chatgpt.com");
+    const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
     res.writeHead(204, {
       "Access-Control-Allow-Origin": allowedOrigin,
       "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
