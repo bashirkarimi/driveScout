@@ -344,7 +344,9 @@ export async function handleMcpRequest(req, res) {
   ensureStreamableAccept(req);
   const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
   res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
+  res.setHeader("Vary", "Origin");
 
   const server = createCarServer();
   const transport = new StreamableHTTPServerTransport({
@@ -381,11 +383,14 @@ const httpServer = createServer(async (req, res) => {
 
   if (req.method === "OPTIONS" && url.pathname.startsWith(MCP_PATH)) {
     const allowedOrigin = resolveAllowedOrigin(req.headers?.origin);
+    const requestedHeaders = req.headers?.["access-control-request-headers"];
     res.writeHead(204, {
       "Access-Control-Allow-Origin": allowedOrigin,
       "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "content-type, mcp-session-id",
+      "Access-Control-Allow-Headers": requestedHeaders || "content-type, mcp-session-id",
       "Access-Control-Expose-Headers": "Mcp-Session-Id",
+      "Access-Control-Allow-Credentials": "true",
+      Vary: "Origin",
     });
     res.end();
     return;

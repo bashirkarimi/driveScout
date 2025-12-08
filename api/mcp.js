@@ -8,10 +8,13 @@ export default async function handler(req, res) {
 
   // Handle CORS preflight
   if (req.method === "OPTIONS") {
+    const requestedHeaders = req.headers?.["access-control-request-headers"];
     res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
     res.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "content-type, mcp-session-id");
+    res.setHeader("Access-Control-Allow-Headers", requestedHeaders || "content-type, mcp-session-id");
     res.setHeader("Access-Control-Expose-Headers", "Mcp-Session-Id");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Vary", "Origin");
     return res.status(204).end();
   }
 
