@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm install -g pnpm@9.15.1 && pnpm install --frozen-lockfile && pnpm run build",
+  "buildCommand": "corepack enable && corepack prepare pnpm@9.15.1 --activate && pnpm install --frozen-lockfile && pnpm run build",
+  "installCommand": "echo 'Skipping install phase'",
   "outputDirectory": "apps/search-server/public",
-  "installCommand": "npm install -g pnpm@9.15.1 && pnpm install --frozen-lockfile",
   "functions": {
     "api/mcp.js": {
       "memory": 512,
@@ -15,7 +15,13 @@
     "ALLOWED_ORIGIN": "https://chatgpt.com"
   },
   "rewrites": [
-    { "source": "/mcp", "destination": "/api/mcp" },
-    { "source": "/mcp/(.*)", "destination": "/api/mcp" }
+    {
+      "source": "/mcp",
+      "destination": "/api/mcp"
+    },
+    {
+      "source": "/mcp/(.*)",
+      "destination": "/api/mcp"
+    }
   ]
 }
