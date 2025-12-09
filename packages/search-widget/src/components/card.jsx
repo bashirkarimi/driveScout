@@ -19,7 +19,7 @@ return (
       className="h-48 w-full object-cover md:h-52"
     />
     <div className="flex flex-col gap-4 p-4 h-full">
-      <div className="flex flex-col gap-2">
+      <header className="flex flex-col gap-2">
         <h2 className="text-lg font-semibold text-slate-900">
           {title ?? "Unnamed vehicle"}
         </h2>
@@ -29,7 +29,7 @@ return (
             {badge}
           </span>
         )}
-      </div>
+      </header>
       <div className="flex flex-wrap gap-2 text-xs text-slate-500">
         {[
           highlights.year && {
@@ -51,7 +51,10 @@ return (
               key={item.key}
               className="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 font-medium text-slate-600"
             >
-              {item.value}
+              <p>
+                <span className="sr-only">{item.key}: </span>
+                {item.value}
+              </p>
             </span>
           ))}
       </div>
@@ -69,7 +72,11 @@ return (
             {actions.primary?.label ?? "View details"}
           </a>
           {actions.secondary[0] && (
-            <a key={actions.secondary[0].label} href="#" className="px-3 py-2 border border-gray-300 rounded-md ml-2">
+            <a
+              key={actions.secondary[0].label}
+              href="#"
+              className="px-3 py-2 border border-gray-300 rounded-md ml-2"
+            >
               {actions.secondary[0].label}
             </a>
           )}
