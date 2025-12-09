@@ -1,4 +1,5 @@
 import { PLACEHOLDER_IMAGE } from "../constants.js";
+import { Button } from "./button";
 
 export const Card = ({ car }) => {
   const {
@@ -63,22 +64,24 @@ return (
       )}
       {actions && (
         <div className="pt-3 mt-auto">
+          <Button variant="primary"  asChild>
           <a
             href={actions.primary?.url ?? "#"}
             rel="noopener noreferrer"
             target="_blank"
-            className="inline-flex items-center rounded-md bg-blue-400 px-3 py-2 font-semibold text-slate-800 transition-colors hover:bg-orange-500 hover:text-white"
           >
             {actions.primary?.label ?? "View details"}
           </a>
+          </Button>
           {actions.secondary[0] && (
-            <a
-              key={actions.secondary[0].label}
-              href="#"
-              className="px-3 py-2 border border-gray-300 rounded-md ml-2"
-            >
-              {actions.secondary[0].label}
-            </a>
+            <Button variant="secondary"  asChild>
+              <a
+                key={actions.secondary[0].label}
+                href="#"
+              >
+                {actions.secondary[0].label}
+              </a>
+            </Button>
           )}
         </div>
       )}
