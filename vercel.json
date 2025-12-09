@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "corepack enable && corepack prepare pnpm@9.15.1 --activate && pnpm install --frozen-lockfile && pnpm run build",
+  "buildCommand": "npm install -g pnpm@9.15.1 && pnpm install --frozen-lockfile && pnpm run build",
   "outputDirectory": "apps/search-server/public",
-  "installCommand": "corepack enable && corepack prepare pnpm@9.15.1 --activate && pnpm install --frozen-lockfile",
+  "installCommand": "npm install -g pnpm@9.15.1 && pnpm install --frozen-lockfile",
   "functions": {
     "api/mcp.js": {
       "memory": 512,
