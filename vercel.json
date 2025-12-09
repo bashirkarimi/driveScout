@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "npm ci && npm run build",
+  "buildCommand": "pnpm install --frozen-lockfile && pnpm run build",
   "outputDirectory": "apps/search-server/public",
-  "installCommand": "npm install",
+  "installCommand": "pnpm install --frozen-lockfile",
   "functions": {
     "api/mcp.js": {
       "memory": 512,

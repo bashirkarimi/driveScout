@@ -39,11 +39,16 @@ export default async function handler(req, res) { ... }
 
 1. Install Vercel CLI:
    ```bash
+   pnpm add -g vercel
+   ```
+   Or with npm:
+   ```bash
    npm i -g vercel
    ```
 
-2. Build the widget:
+2. Install dependencies and build the widget:
    ```bash
+   pnpm install --frozen-lockfile
    pnpm build
    ```
 

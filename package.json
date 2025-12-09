@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "packageManager": "pnpm@9.15.1",
   "engines": {
-    "node": "22.x"
+    "node": "22.x",
+    "pnpm": ">=9.0.0"
   },
   "scripts": {
-    "build": "npm run build --workspace=@drive-scout/search-widget",
-    "dev": "npm run build && npm run dev --workspace=@drive-scout/search-server",
-    "start": "npm run build && npm run start --workspace=@drive-scout/search-server",
-    "widget:dev": "npm run dev --workspace=@drive-scout/search-widget"
+    "build": "pnpm --filter @drive-scout/search-widget build",
+    "dev": "pnpm build && pnpm --filter @drive-scout/search-server dev",
+    "start": "pnpm build && pnpm --filter @drive-scout/search-server start",
+    "widget:dev": "pnpm --filter @drive-scout/search-widget dev",
+    "clean": "pnpm -r exec rm -rf node_modules dist",
+    "install:all": "pnpm install --frozen-lockfile"
   },
   "devDependencies": {
     
