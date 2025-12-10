@@ -144,7 +144,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                   : "border-transparent hover:border-slate-300"
               }`}
               aria-label={`Go to image ${index + 1}`}
-              aria-current={index === currentIndex ? "true" : "false"}
+              aria-current={index === currentIndex}
             >
               <img
                 src={image}
