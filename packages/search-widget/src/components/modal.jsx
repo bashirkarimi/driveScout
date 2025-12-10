@@ -2,16 +2,25 @@ import { useEffect } from "react";
 
 export const Modal = ({ isOpen, onClose, children }) => {
   useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    const originalPaddingRight = document.body.style.paddingRight;
+
     if (isOpen) {
-      // Prevent body scroll when modal is open
+      // Prevent body scroll when modal is open and avoid layout shift
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
     } else {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = originalOverflow || "";
+      document.body.style.paddingRight = originalPaddingRight || "";
     }
 
     // Cleanup on unmount
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = originalOverflow || "";
+      document.body.style.paddingRight = originalPaddingRight || "";
     };
   }, [isOpen]);
 
