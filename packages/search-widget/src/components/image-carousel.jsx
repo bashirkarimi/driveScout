@@ -1,63 +1,27 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
   const thumbnailRefs = useRef([]);
 
-  if (!images || images.length === 0) {
-    return null;
-  }
-
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? (images?.length || 1) - 1 : prevIndex - 1
     );
-  };
+  }, [images?.length]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === (images?.length || 1) - 1 ? 0 : prevIndex + 1
     );
-  };
+  }, [images?.length]);
 
-  const goToSlide = (index) => {
+  const goToSlide = useCallback((index) => {
     setCurrentIndex(index);
-  };
+  }, []);
 
-  const goToFirst = () => {
-    setCurrentIndex(0);
-  };
-
-  const goToLast = () => {
-    setCurrentIndex(images.length - 1);
-  };
-
-  const handleKeyDown = (e) => {
-    // Handle keyboard navigation
-    switch (e.key) {
-      case "ArrowLeft":
-        e.preventDefault();
-        goToPrevious();
-        break;
-      case "ArrowRight":
-        e.preventDefault();
-        goToNext();
-        break;
-      case "Home":
-        e.preventDefault();
-        goToFirst();
-        break;
-      case "End":
-        e.preventDefault();
-        goToLast();
-        break;
-      default:
-        break;
-    }
-  };
-
-  // Scroll the active thumbnail into view when currentIndex changes
+  // Scroll thumbnail into view when current index changes
   useEffect(() => {
     if (thumbnailRefs.current[currentIndex]) {
       thumbnailRefs.current[currentIndex].scrollIntoView({
@@ -68,16 +32,46 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
     }
   }, [currentIndex]);
 
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!carouselRef.current?.contains(document.activeElement)) {
+        return;
+      }
+
+      switch (e.key) {
+        case "ArrowLeft":
+          e.preventDefault();
+          goToPrevious();
+          break;
+        case "ArrowRight":
+          e.preventDefault();
+          goToNext();
+          break;
+        case "Home":
+          e.preventDefault();
+          goToSlide(0);
+          break;
+        case "End":
+          e.preventDefault();
+          goToSlide((images?.length || 1) - 1);
+          break;
+        default:
+          break;
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [goToPrevious, goToNext, goToSlide, images?.length]);
+
+  if (!images || images.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="relative w-full">
-      <div 
-        ref={carouselRef}
-        className="relative aspect-video w-full overflow-hidden bg-slate-100 focus:outline-none focus:ring-2 focus:ring-elm-500"
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
-        role="region"
-        aria-label="Image carousel"
-      >
+    <div className="relative w-full" ref={carouselRef}>
+      <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
         <img
           src={images[currentIndex]}
           alt={`${alt} - Image ${currentIndex + 1}`}
@@ -133,7 +127,12 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
       </div>
 
       {images.length > 1 && (
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Image thumbnails">
+        <div 
+          className="mt-3 flex gap-2 overflow-x-auto pb-2"
+          role="region"
+          aria-label="Image thumbnails"
+          tabIndex={0}
+        >
           {images.map((image, index) => (
             <button
               key={image}
@@ -145,8 +144,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                   : "border-transparent hover:border-slate-300"
               }`}
               aria-label={`Go to image ${index + 1}`}
-              aria-current={index === currentIndex ? "true" : undefined}
-              tabIndex={index === currentIndex ? 0 : -1}
+              aria-current={index === currentIndex}
             >
               <img
                 src={image}
