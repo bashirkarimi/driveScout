@@ -84,7 +84,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
         <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
           {images.map((image, index) => (
             <button
-              key={index}
+              key={image}
               onClick={() => goToSlide(index)}
               className={`flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
                 index === currentIndex
