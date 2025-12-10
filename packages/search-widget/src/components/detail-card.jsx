@@ -47,9 +47,9 @@ export const DetailCard = ({ car, onClose }) => {
         <header className="flex flex-col gap-3">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
+              <h2 className="text-2xl font-bold text-slate-900 md:text-3xl">
                 {title || "Unnamed vehicle"}
-              </h1>
+              </h2>
               {subtitle && (
                 <p className="mt-1 text-base text-slate-600">{subtitle}</p>
               )}
@@ -86,18 +86,18 @@ export const DetailCard = ({ car, onClose }) => {
 
         {description && (
           <div>
-            <h2 className="mb-2 text-lg font-semibold text-slate-900">
+            <h3 className="mb-2 text-lg font-semibold text-slate-900">
               Description
-            </h2>
+            </h3>
             <p className="leading-relaxed text-slate-600">{description}</p>
           </div>
         )}
 
         {highlights && (
           <div>
-            <h2 className="mb-3 text-lg font-semibold text-slate-900">
+            <h3 className="mb-3 text-lg font-semibold text-slate-900">
               Vehicle Highlights
-            </h2>
+            </h3>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
               {highlights.engineType && (
                 <div className="flex flex-col rounded-lg border border-slate-200 bg-slate-50 p-3">
@@ -185,9 +185,9 @@ export const DetailCard = ({ car, onClose }) => {
 
         {location && (
           <div>
-            <h2 className="mb-3 text-lg font-semibold text-slate-900">
+            <h3 className="mb-3 text-lg font-semibold text-slate-900">
               Location
-            </h2>
+            </h3>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               {location.dealer && (
                 <p className="font-semibold text-slate-900">{location.dealer}</p>
@@ -220,12 +220,15 @@ export const DetailCard = ({ car, onClose }) => {
               {actions.secondary && actions.secondary.length > 0 && (
                 <div className="flex flex-col gap-2 sm:flex-row">
                   {actions.secondary.map((action, index) => (
-                    <button
-                      key={action.url || action.label || index}
+                    <a
+                      key={index}
+                      href={action.url || "#"}
                       className="flex-1 rounded-lg border border-slate-300 px-4 py-2 text-center font-medium text-slate-700 transition-colors hover:bg-slate-50"
+                      rel="noopener noreferrer"
+                      target="_blank"
                     >
                       {action.label}
-                    </button>
+                    </a>
                   ))}
                 </div>
               )}
