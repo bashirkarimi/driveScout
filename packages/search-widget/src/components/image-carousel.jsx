@@ -1,29 +1,25 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const carouselRef = useRef(null);
   const thumbnailRefs = useRef([]);
 
-  if (!images || images.length === 0) {
-    return null;
-  }
-
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? (images?.length || 1) - 1 : prevIndex - 1
     );
-  };
+  }, [images?.length]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === (images?.length || 1) - 1 ? 0 : prevIndex + 1
     );
-  };
+  }, [images?.length]);
 
-  const goToSlide = (index) => {
+  const goToSlide = useCallback((index) => {
     setCurrentIndex(index);
-  };
+  }, []);
 
   // Scroll thumbnail into view when current index changes
   useEffect(() => {
@@ -58,7 +54,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
           break;
         case "End":
           e.preventDefault();
-          goToSlide(images.length - 1);
+          goToSlide((images?.length || 1) - 1);
           break;
         default:
           break;
@@ -67,7 +63,11 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [images.length]);
+  }, [goToPrevious, goToNext, goToSlide, images?.length]);
+
+  if (!images || images.length === 0) {
+    return null;
+  }
 
   return (
     <div className="relative w-full" ref={carouselRef}>
@@ -135,7 +135,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
         >
           {images.map((image, index) => (
             <button
-              key={index}
+              key={image}
               ref={(el) => (thumbnailRefs.current[index] = el)}
               onClick={() => goToSlide(index)}
               className={`flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
