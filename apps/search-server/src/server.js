@@ -341,7 +341,7 @@ const searchInputSchema = {
 };
 
 const replyWithResults = ({ results, summary, statusText }) => ({
-  content: statusText ? [{ type: "text", text: statusText }] : summary ? [{ type: "text", text: summary }] : [],
+  content: statusText ? [{ type: "text", text: statusText }] : [],
   structuredContent: {
     results: Array.isArray(results) ? results : [],
     summary: summary ?? statusText ?? "",
