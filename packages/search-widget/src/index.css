@@ -1,8 +1,34 @@
-@import "tailwindcss/index.css";
+@import "tailwindcss";
+
+@theme {
+  /* Elm Color Palette */
+  --color-elm-50: #f3faf9;
+  --color-elm-100: #d6f1ee;
+  --color-elm-200: #ade2dd;
+  --color-elm-300: #7dcbc7;
+  --color-elm-400: #51b0ae;
+  --color-elm-500: #389493;
+  --color-elm-600: #2c7a7b;
+  --color-elm-700: #255f60;
+  --color-elm-800: #224c4d;
+  --color-elm-900: #204041;
+  --color-elm-950: #0d2426;
+
+  /* Semantic Colors */
+  --color-primary: #2c7a7b;
+  --color-foreground: #0f172a;
+  --color-background: #ffffff;
+
+  /* Font Family */
+  --font-family-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Custom Shadow */
+  --shadow-widget: 0 16px 32px rgba(15, 23, 42, 0.08);
+}
 
 @layer base {
   :root {
-    @apply bg-slate-50  text-slate-900;
+    @apply bg-slate-50 text-slate-900;
   }
 
   body {
@@ -12,5 +38,5 @@
 
   #root {
     @apply min-h-screen;
-  } 
+  }
 }

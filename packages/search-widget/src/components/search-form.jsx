@@ -31,7 +31,7 @@ export const SearchForm = ({
     <button
       type="submit"
       disabled={isLoading}
-      className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-500 px-5 py-3 font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+      className="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-elm-700 to-elm-600 px-5 py-3 font-semibold text-white shadow-lg shadow-indigo-500/30 transition hover:-translate-y-0.5 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
     >
       <span>{isLoading ? "Searching..." : "Show results"}</span>
     </button>
