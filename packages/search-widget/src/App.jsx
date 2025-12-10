@@ -6,6 +6,7 @@ import { EmptyState } from "./components/empty-state";
 import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
 import { useCarSearch } from "./hooks/useCarSearch.js";
+import { Logo } from './components/logo';
 
 export default function App() {
   const {
@@ -31,8 +32,11 @@ export default function App() {
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
-      <header className="flex flex-col gap-3">
-        <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">Car Scout</h1>
+      <header className="flex gap-3">
+        <Logo size={40} />
+        <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
+          Drive Scout
+        </h1>
       </header>
       <SearchForm
         engineType={engineType}
