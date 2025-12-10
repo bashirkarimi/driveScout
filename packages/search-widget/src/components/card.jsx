@@ -1,6 +1,7 @@
 import { PLACEHOLDER_IMAGE } from "../constants.js";
+import { Button } from "./button";
 
-export const Card = ({ car }) => {
+export const Card = ({ car, onViewDetails }) => {
   const {
     title,
     subtitle,
@@ -25,7 +26,7 @@ return (
         </h2>
         <p className="text-sm text-gray-600">{subtitle}</p>
         {badge && (
-          <span className="inline-flex w-fit items-center rounded-full bg-blue-200 px-2 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-blue-800">
+          <span className="inline-flex w-fit items-center rounded-full bg-elm-200 px-2 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-elm-800">
             {badge}
           </span>
         )}
@@ -61,27 +62,11 @@ return (
       {description && (
         <p className="text-sm leading-relaxed text-slate-500">{description}</p>
       )}
-      {actions && (
-        <div className="pt-3 mt-auto">
-          <a
-            href={actions.primary?.url ?? "#"}
-            rel="noopener noreferrer"
-            target="_blank"
-            className="inline-flex items-center rounded-md bg-blue-400 px-3 py-2 font-semibold text-slate-800 transition-colors hover:bg-orange-500 hover:text-white"
-          >
-            {actions.primary?.label ?? "View details"}
-          </a>
-          {actions.secondary[0] && (
-            <a
-              key={actions.secondary[0].label}
-              href="#"
-              className="px-3 py-2 border border-gray-300 rounded-md ml-2"
-            >
-              {actions.secondary[0].label}
-            </a>
-          )}
-        </div>
-      )}
+      <div className="pt-3 mt-auto">
+        <Button variant="primary" onClick={() => onViewDetails(car)}>
+          Open Full Details
+        </Button>
+      </div>
     </div>
   </article>
 );
