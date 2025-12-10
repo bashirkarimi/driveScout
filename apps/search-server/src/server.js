@@ -24,7 +24,13 @@ const widgetCssPath = resolve(widgetPackageRoot, "dist/widget-style.css");
 const publicDir = resolve(serverRoot, "public");
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
+
 const DEFAULT_ALLOWED_ORIGINS = ["https://chatgpt.com", "https://chat.openai.com"];
+const MAX_QUERY_LENGTH = 120;
+const MIN_QUERY_LENGTH = 1;
+const MAX_VEHICLES_LIMIT = 12;
+const MIN_VEHICLES_LIMIT = 1;
+const DEFAULT_VEHICLE_LIMIT = 9;
 
 export function resolveAllowedOrigin(requestOrigin) {
   if (isDevelopment) {
@@ -256,20 +262,22 @@ if (!isDevelopment) {
 const searchInputSchema = {
   query: z
     .string()
-    .min(1, "query is required")
-    .max(120, "query is too long")
+    .min(MIN_QUERY_LENGTH, "query is required")
+    .max(MAX_QUERY_LENGTH, "query is too long")
     .describe("Free text search for vehicles."),
   engineType: z
     .enum(["combustion", "hybrid", "electric"], {
-      errorMap: () => ({ message: "engineType must be combustion, hybrid, or electric" }),
+      errorMap: () => ({
+        message: "engineType must be combustion, hybrid, or electric",
+      }),
     })
     .optional()
     .describe("Optional engine type filter."),
   limit: z
     .number()
-    .int()
-    .min(1)
-    .max(24)
+    .int(DEFAULT_VEHICLE_LIMIT)
+    .min(MIN_VEHICLES_LIMIT)
+    .max(MAX_VEHICLES_LIMIT)
     .optional()
     .describe("Maximum number of vehicles to return."),
 };
