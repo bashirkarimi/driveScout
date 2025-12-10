@@ -195,9 +195,9 @@ export const DetailCard = ({ car, onClose }) => {
               {location.city && (
                 <p className="text-slate-600">{location.city}</p>
               )}
-              {location.distance_km && (
+              {location.distanceKm && (
                 <p className="mt-1 text-sm text-slate-500">
-                  {location.distance_km} km away
+                  {location.distanceKm} km away
                 </p>
               )}
             </div>
