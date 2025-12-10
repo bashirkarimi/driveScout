@@ -333,10 +333,10 @@ const searchInputSchema = {
     .describe("Optional engine type filter."),
   limit: z
     .number()
-    .int(DEFAULT_VEHICLE_LIMIT)
+    .int()
     .min(MIN_VEHICLES_LIMIT)
     .max(MAX_VEHICLES_LIMIT)
-    .optional()
+    .default(DEFAULT_VEHICLE_LIMIT)
     .describe("Maximum number of vehicles to return."),
 };
 
