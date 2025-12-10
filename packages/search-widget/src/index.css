@@ -39,4 +39,10 @@
   #root {
     @apply min-h-screen;
   }
+
+  button,
+  a,
+  [role="button"] {
+    @apply cursor-pointer;
+  }
 }

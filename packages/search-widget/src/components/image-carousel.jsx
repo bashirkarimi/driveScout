@@ -88,7 +88,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
               onClick={() => goToSlide(index)}
               className={`flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
                 index === currentIndex
-                  ? "border-blue-500 ring-2 ring-blue-300"
+                  ? "border-elm-500 ring-2 ring-elm-300"
                   : "border-transparent hover:border-slate-300"
               }`}
               aria-label={`Go to image ${index + 1}`}

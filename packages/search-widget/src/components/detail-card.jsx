@@ -55,14 +55,14 @@ export const DetailCard = ({ car, onClose }) => {
               )}
             </div>
             {badge && (
-              <span className="inline-flex items-center rounded-full bg-blue-200 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-800">
+              <span className="inline-flex items-center rounded-full bg-elm-200 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-elm-800">
                 {badge}
               </span>
             )}
           </div>
 
           {pricing && (
-            <div className="rounded-lg bg-blue-50 p-4">
+            <div className="rounded-lg bg-elm-50 p-4">
               <div className="flex flex-wrap items-baseline gap-2">
                 {pricing.priceFormatted && (
                   <span className="text-3xl font-bold text-slate-900">
@@ -212,7 +212,7 @@ export const DetailCard = ({ car, onClose }) => {
                   href={actions.primary.url || "#"}
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="inline-flex w-full items-center justify-center rounded-lg bg-blue-500 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-blue-600"
+                  className="inline-flex w-full items-center justify-center rounded-lg bg-elm-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-elm-700"
                 >
                   {actions.primary.label || "View details"}
                 </a>

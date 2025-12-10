@@ -26,7 +26,7 @@ return (
         </h2>
         <p className="text-sm text-gray-600">{subtitle}</p>
         {badge && (
-          <span className="inline-flex w-fit items-center rounded-full bg-blue-200 px-2 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-blue-800">
+          <span className="inline-flex w-fit items-center rounded-full bg-elm-200 px-2 py-1 text-[0.625rem] font-semibold uppercase tracking-[0.18em] text-elm-800">
             {badge}
           </span>
         )}
