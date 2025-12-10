@@ -1,7 +1,7 @@
 import { PLACEHOLDER_IMAGE } from "../constants.js";
 import { Button } from "./button";
 
-export const Card = ({ car }) => {
+export const Card = ({ car, onViewDetails }) => {
   const {
     title,
     subtitle,
@@ -62,29 +62,11 @@ return (
       {description && (
         <p className="text-sm leading-relaxed text-slate-500">{description}</p>
       )}
-      {actions && (
-        <div className="pt-3 mt-auto">
-          <Button variant="primary"  asChild>
-          <a
-            href={actions.primary?.url ?? "#"}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {actions.primary?.label ?? "View details"}
-          </a>
-          </Button>
-          {actions.secondary[0] && (
-            <Button variant="secondary"  asChild>
-              <a
-                key={actions.secondary[0].label}
-                href="#"
-              >
-                {actions.secondary[0].label}
-              </a>
-            </Button>
-          )}
-        </div>
-      )}
+      <div className="pt-3 mt-auto">
+        <Button variant="primary" onClick={() => onViewDetails(car)}>
+          Open Full Details
+        </Button>
+      </div>
     </div>
   </article>
 );
