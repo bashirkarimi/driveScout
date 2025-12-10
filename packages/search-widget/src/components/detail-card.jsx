@@ -220,12 +220,15 @@ export const DetailCard = ({ car, onClose }) => {
               {actions.secondary && actions.secondary.length > 0 && (
                 <div className="flex flex-col gap-2 sm:flex-row">
                   {actions.secondary.map((action, index) => (
-                    <button
-                      key={action.url || action.label || index}
+                    <a
+                      key={index}
+                      href={action.url || "#"}
                       className="flex-1 rounded-lg border border-slate-300 px-4 py-2 text-center font-medium text-slate-700 transition-colors hover:bg-slate-50"
+                      rel="noopener noreferrer"
+                      target="_blank"
                     >
                       {action.label}
-                    </button>
+                    </a>
                   ))}
                 </div>
               )}
