@@ -77,7 +77,6 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
         onKeyDown={handleKeyDown}
         role="region"
         aria-label="Image carousel"
-        aria-live="polite"
       >
         <img
           src={images[currentIndex]}
@@ -134,7 +133,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
       </div>
 
       {images.length > 1 && (
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Image thumbnails">
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Image thumbnails">
           {images.map((image, index) => (
             <button
               key={image}
@@ -145,9 +144,8 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                   ? "border-elm-500 ring-2 ring-elm-300"
                   : "border-transparent hover:border-slate-300"
               }`}
-              role="tab"
               aria-label={`Go to image ${index + 1}`}
-              aria-selected={index === currentIndex}
+              aria-current={index === currentIndex ? "true" : "false"}
               tabIndex={index === currentIndex ? 0 : -1}
             >
               <img
