@@ -1,7 +1,7 @@
 import { Card } from "./card";
 import { buildVehicleKey } from "../utils/cars.js";
 
-export const CardGrid = ({ data, onViewDetails }) => {
+export const CardGrid = ({ data, onViewDetails, onBookTestDrive }) => {
   if (!data || !data.length) {
     return null;
   }
@@ -13,7 +13,12 @@ export const CardGrid = ({ data, onViewDetails }) => {
   return (
     <section className={gridClass} aria-live="polite">
       {data.map((car, index) => (
-        <Card car={car} key={buildVehicleKey(car, index)} onViewDetails={onViewDetails} />
+        <Card 
+          car={car} 
+          key={buildVehicleKey(car, index)} 
+          onViewDetails={onViewDetails}
+          onBookTestDrive={onBookTestDrive}
+        />
       ))}
     </section>
   );

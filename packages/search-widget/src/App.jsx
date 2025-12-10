@@ -5,6 +5,7 @@ import { CardGrid } from "./components/card-grid";
 import { EmptyState } from "./components/empty-state";
 import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
+import { LeadForm } from "./components/lead-form";
 import { useCarSearch } from "./hooks/useCarSearch.js";
 import { Logo } from './components/logo';
 
@@ -21,6 +22,8 @@ export default function App() {
   } = useCarSearch();
 
   const [selectedCar, setSelectedCar] = useState(null);
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const [leadFormCar, setLeadFormCar] = useState(null);
 
   const handleViewDetails = (car) => {
     setSelectedCar(car);
@@ -28,6 +31,30 @@ export default function App() {
 
   const handleCloseModal = () => {
     setSelectedCar(null);
+  };
+
+  const handleBookTestDrive = (car) => {
+    setLeadFormCar(car);
+    setShowLeadForm(true);
+    setSelectedCar(null); // Close the detail modal if open
+  };
+
+  const handleCloseLeadForm = () => {
+    setShowLeadForm(false);
+    setLeadFormCar(null);
+  };
+
+  const handleSubmitLead = async (leadData) => {
+    // In a real application, this would send data to your backend
+    console.log("Lead form submitted:", leadData);
+    
+    // For now, we'll just simulate an API call
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log("Lead successfully submitted:", leadData);
+        resolve({ success: true });
+      }, 1000);
+    });
   };
 
   return (
@@ -47,12 +74,30 @@ export default function App() {
         query={query}
       />
       <StatusMessage isLoading={isLoading} message={statusMessage} />
-      <CardGrid data={results} onViewDetails={handleViewDetails} />
+      <CardGrid 
+        data={results} 
+        onViewDetails={handleViewDetails}
+        onBookTestDrive={handleBookTestDrive}
+      />
       <EmptyState shouldHide={results.length !== 0} />
+
+      {showLeadForm && leadFormCar && (
+        <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">
+          <LeadForm
+            car={leadFormCar}
+            onClose={handleCloseLeadForm}
+            onSubmit={handleSubmitLead}
+          />
+        </div>
+      )}
 
       <Modal isOpen={!!selectedCar} onClose={handleCloseModal}>
         {selectedCar && (
-          <DetailCard car={selectedCar} onClose={handleCloseModal} />
+          <DetailCard 
+            car={selectedCar} 
+            onClose={handleCloseModal}
+            onBookTestDrive={handleBookTestDrive}
+          />
         )}
       </Modal>
     </main>

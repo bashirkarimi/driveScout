@@ -9,6 +9,23 @@ This project demonstrates an end-to-end ChatGPT app built with the [OpenAI Apps 
 - **React-powered widget:** Uses a React component (bundled on-demand with esbuild) to manage form state and render the iframe UI.
 - **Apps SDK + MCP server:** Implements an MCP server that exposes the widget resource and a `search_inventory` tool, keeping UI and structured content in sync through `window.openai`.
 - **Local mock data:** Provides high-quality fallback inventory data so the widget can be previewed without live CMS credentials.
+- **🆕 Lead Capture Form:** Users can book test drives directly from vehicle detail pages with a comprehensive contact form.
+
+## New: Lead Form Feature 🎉
+
+Users can now contact dealers/companies by clicking the **"Book Test Drive"** button on any vehicle detail page. The feature includes:
+
+- ✅ Professional contact form with validation
+- ✅ Real-time input validation
+- ✅ Success confirmation with animation
+- ✅ MCP tool for backend integration
+- ✅ Ready for CRM integration
+
+**Documentation:**
+- [Lead Form Feature Guide](./LEAD_FORM_FEATURE.md) - Complete feature overview
+- [Flow Diagrams](./LEAD_FORM_FLOW.md) - Visual architecture and user journey
+- [Production Integration](./PRODUCTION_INTEGRATION.md) - Backend setup guide
+- [Quick Summary](./LEAD_FORM_SUMMARY.md) - Implementation summary
 
 ## Prerequisites
 
