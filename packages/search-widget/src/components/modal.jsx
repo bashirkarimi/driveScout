@@ -46,7 +46,12 @@ export const Modal = ({ isOpen, onClose, children }) => {
         }
       }}
     >
-      <div className="my-8 w-full max-w-4xl rounded-xl bg-white shadow-2xl">
+      <div 
+        className="my-8 w-full max-w-4xl rounded-xl bg-white shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+      >
         {children}
       </div>
     </div>

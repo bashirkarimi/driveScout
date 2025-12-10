@@ -47,7 +47,7 @@ export const DetailCard = ({ car, onClose }) => {
         <header className="flex flex-col gap-3">
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
+              <h1 id="modal-title" className="text-2xl font-bold text-slate-900 md:text-3xl">
                 {title || "Unnamed vehicle"}
               </h1>
               {subtitle && (
