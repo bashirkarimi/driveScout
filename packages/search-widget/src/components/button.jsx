@@ -3,25 +3,25 @@ import { cva } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 const buttonVariants = cva(
-  "cursor-pointer focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "cursor-pointer focus-visible:border-primary focus-visible:ring-primary/50 aria-invalid:ring-red-500/20 dark:aria-invalid:ring-red-400/40 aria-invalid:border-red-500 inline-flex shrink-0 items-center justify-center gap-2 rounded-md text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
         primary:
           "bg-primary text-white hover:bg-elm-700 hover:shadow-lg",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-elm-300 border-elm-300 border shadow-sm",
+          "bg-gray-200 text-gray-800 hover:bg-elm-300 border-elm-300 border shadow-sm",
         link: "text-primary hover:text-astral-700 dark:hover:text-astral-300 px-0 underline-offset-4 hover:underline",
         outline:
           "border-astral-400 bg-background text-astral-700 dark:text-astral-300 hover:bg-astral-100 hover:border-astral-500 dark:hover:bg-astral-900 dark:hover:border-astral-400 border-2",
         ghost:
           "text-astral-700 dark:text-astral-300 hover:bg-astral-100 hover:text-astral-800 dark:hover:bg-astral-900 dark:hover:text-astral-200",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-md hover:shadow-lg",
+          "bg-red-600 text-white hover:bg-red-700 shadow-md hover:shadow-lg",
         success:
-          "bg-success text-success-foreground hover:bg-success/90 shadow-md hover:shadow-lg",
+          "bg-green-600 text-white hover:bg-green-700 shadow-md hover:shadow-lg",
         accent:
-          "bg-accent text-accent-foreground hover:bg-astral-600 dark:hover:bg-astral-400 shadow-md hover:shadow-lg",
+          "bg-blue-600 text-white hover:bg-astral-600 dark:hover:bg-astral-400 shadow-md hover:shadow-lg",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
