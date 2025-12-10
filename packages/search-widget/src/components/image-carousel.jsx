@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef(null);
+  const thumbnailRefs = useRef([]);
 
   if (!images || images.length === 0) {
     return null;
@@ -23,9 +25,60 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
     setCurrentIndex(index);
   };
 
+  const goToFirst = () => {
+    setCurrentIndex(0);
+  };
+
+  const goToLast = () => {
+    setCurrentIndex(images.length - 1);
+  };
+
+  const handleKeyDown = (e) => {
+    // Handle keyboard navigation
+    switch (e.key) {
+      case "ArrowLeft":
+        e.preventDefault();
+        goToPrevious();
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        goToNext();
+        break;
+      case "Home":
+        e.preventDefault();
+        goToFirst();
+        break;
+      case "End":
+        e.preventDefault();
+        goToLast();
+        break;
+      default:
+        break;
+    }
+  };
+
+  // Scroll the active thumbnail into view when currentIndex changes
+  useEffect(() => {
+    if (thumbnailRefs.current[currentIndex]) {
+      thumbnailRefs.current[currentIndex].scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, [currentIndex]);
+
   return (
     <div className="relative w-full">
-      <div className="relative aspect-video w-full overflow-hidden bg-slate-100">
+      <div 
+        ref={carouselRef}
+        className="relative aspect-video w-full overflow-hidden bg-slate-100 focus:outline-none focus:ring-2 focus:ring-elm-500"
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
+        role="region"
+        aria-label="Image carousel"
+        aria-live="polite"
+      >
         <img
           src={images[currentIndex]}
           alt={`${alt} - Image ${currentIndex + 1}`}
@@ -81,17 +134,21 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
       </div>
 
       {images.length > 1 && (
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-2">
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-2" role="tablist" aria-label="Image thumbnails">
           {images.map((image, index) => (
             <button
               key={image}
+              ref={(el) => (thumbnailRefs.current[index] = el)}
               onClick={() => goToSlide(index)}
-              className={`flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+              className={`flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-elm-500 ${
                 index === currentIndex
                   ? "border-elm-500 ring-2 ring-elm-300"
                   : "border-transparent hover:border-slate-300"
               }`}
+              role="tab"
               aria-label={`Go to image ${index + 1}`}
+              aria-selected={index === currentIndex}
+              tabIndex={index === currentIndex ? 0 : -1}
             >
               <img
                 src={image}
