@@ -6,8 +6,14 @@ import dotenv from "dotenv";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
-import { searchVehicles } from "@drive-scout/search-data";
 import { getWidgetHtml, preloadWidget } from "./widget-builder.js";
+import {
+  getCorsHeaders,
+  resolveAllowedOrigin,
+  ensureStreamableAccept,
+} from "./cors-utils.js";
+import { getVehiclesHandler } from "./tools/get-vehicles.js";
+import { submitLeadHandler } from "./tools/submit-lead.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,10 +22,7 @@ const publicDir = resolve(serverRoot, "public");
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 dotenv.config({ path: resolve(serverRoot, "..", "..", ".env") });
-const DEFAULT_ALLOWED_ORIGINS = [
-  "https://chatgpt.com",
-  "https://chat.openai.com",
-];
+
 const MAX_QUERY_LENGTH = 120;
 const MIN_QUERY_LENGTH = 1;
 const MAX_VEHICLES_LIMIT = 12;
@@ -33,34 +36,6 @@ const MIME_TYPES = {
   ".webp": "image/webp",
   ".gif": "image/gif",
 };
-
-export function resolveAllowedOrigin(requestOrigin) {
-  if (isDevelopment) {
-    return "*";
-  }
-
-  const configuredOrigins = (process.env.ALLOWED_ORIGIN ?? "")
-    .split(",")
-    .map((origin) => origin.trim())
-    .filter(Boolean);
-
-  const allowList = new Set([...configuredOrigins, ...DEFAULT_ALLOWED_ORIGINS]);
-
-  if (requestOrigin && allowList.has(requestOrigin)) {
-    return requestOrigin;
-  }
-
-  return configuredOrigins[0] ?? DEFAULT_ALLOWED_ORIGINS[0];
-}
-
-export function getCorsHeaders(requestOrigin, additionalHeaders = {}) {
-  return {
-    "Access-Control-Allow-Origin": resolveAllowedOrigin(requestOrigin),
-    "Access-Control-Allow-Credentials": "true",
-    Vary: "Origin",
-    ...additionalHeaders,
-  };
-}
 
 // Build widget on startup to catch errors early
 await preloadWidget();
@@ -136,37 +111,6 @@ const leadSubmissionSchema = {
   timestamp: z.string().describe("ISO timestamp of the submission."),
 };
 
-const replyWithResults = ({ results, summary, statusText }) => ({
-  content: statusText ? [{ type: "text", text: statusText }] : [],
-  structuredContent: {
-    results: Array.isArray(results) ? results : [],
-    summary: summary ?? statusText ?? "",
-  },
-});
-
-// Some hosting proxies drop Accept; force SSE so the MCP transport stays happy.
-function ensureStreamableAccept(req) {
-  const rawAccept = req?.headers?.accept;
-  const accept = Array.isArray(rawAccept) ? rawAccept.join(",") : rawAccept;
-
-  if (!accept) {
-    req.headers.accept = "text/event-stream";
-    return;
-  }
-
-  const normalized = accept.toLowerCase();
-  if (normalized.includes("text/event-stream")) {
-    return;
-  }
-
-  if (normalized.trim() === "*/*") {
-    req.headers.accept = "text/event-stream";
-    return;
-  }
-
-  req.headers.accept = `${accept}, text/event-stream`;
-}
-
 function createCarServer() {
   const server = new McpServer({
     name: "Car Scout",
@@ -211,37 +155,7 @@ function createCarServer() {
         "openai/toolInvocation/invoked": "Vehicles ready",
       },
     },
-    async (args) => {
-      try {
-        const { results, summary } = await searchVehicles({
-          query: args?.query,
-          engineType: args?.engineType,
-          limit: args?.limit,
-        });
-
-        if (!results.length) {
-          return replyWithResults({
-            results,
-            summary,
-            statusText: summary || "No vehicles matched your query.",
-          });
-        }
-
-        const statusText = `${results.length} vehicles ready to explore.`;
-        return replyWithResults({
-          results,
-          summary: summary || statusText,
-          statusText,
-        });
-      } catch (error) {
-        console.error("get_vehicles failed", error);
-        return replyWithResults({
-          results: [],
-          summary: "We could not reach the inventory service.",
-          statusText: "Inventory lookup failed. Please retry in a moment.",
-        });
-      }
-    }
+    getVehiclesHandler
   );
 
   server.registerTool(
@@ -259,61 +173,7 @@ function createCarServer() {
         "openai/toolInvocation/invoked": "Lead submitted successfully",
       },
     },
-    async (args) => {
-      try {
-        // Log the lead submission (in production, this would save to a database)
-        console.log("Lead submission received:", {
-          customer: `${args.firstName} ${args.lastName}`,
-          email: args.email,
-          phone: args.phone,
-          vehicle: args.vehicleTitle,
-          vehicleId: args.vehicleId,
-          requestType: args.requestType,
-          message: args.message,
-          timestamp: args.timestamp,
-        });
-
-        // In a real application, you would:
-        // 1. Save to database
-        // 2. Send confirmation email to customer
-        // 3. Notify dealer/sales team
-        // 4. Create CRM entry
-
-        const responseMessage = `Thank you, ${args.firstName}! Your request for a test drive of the ${args.vehicleTitle} has been received. A dealer representative will contact you at ${args.email} or ${args.phone} shortly.`;
-
-        return {
-          content: [
-            {
-              type: "text",
-              text: responseMessage,
-            },
-          ],
-          structuredContent: {
-            success: true,
-            leadId: `lead_${Date.now()}`, // Mock lead ID
-            customerName: `${args.firstName} ${args.lastName}`,
-            vehicleTitle: args.vehicleTitle,
-            contactEmail: args.email,
-            contactPhone: args.phone,
-            message: responseMessage,
-          },
-        };
-      } catch (error) {
-        console.error("submit_lead failed", error);
-        return {
-          content: [
-            {
-              type: "text",
-              text: "Failed to submit your request. Please try again or contact us directly.",
-            },
-          ],
-          structuredContent: {
-            success: false,
-            error: "Submission failed",
-          },
-        };
-      }
-    }
+    submitLeadHandler
   );
 
   return server;
