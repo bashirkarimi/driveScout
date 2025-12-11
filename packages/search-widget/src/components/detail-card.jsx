@@ -2,7 +2,7 @@ import { PLACEHOLDER_IMAGE } from "../constants.js";
 import { ImageCarousel } from "./image-carousel.jsx";
 import { Button } from "./button.jsx";
 
-export const DetailCard = ({ car, onClose, onBookTestDrive }) => {
+export const DetailCard = ({ vehicleDetails, onClose, onBookTestDrive }) => {
   const {
     title,
     subtitle,
@@ -15,9 +15,10 @@ export const DetailCard = ({ car, onClose, onBookTestDrive }) => {
     location,
     actions,
     meta,
-  } = car;
+  } = vehicleDetails;
 
-  const displayImages = gallery && gallery.length > 0 ? gallery : [heroImage || PLACEHOLDER_IMAGE];
+  const displayImages =
+    gallery && gallery.length > 0 ? gallery : [heroImage || PLACEHOLDER_IMAGE];
 
   return (
     <div className="flex h-full flex-col overflow-y-auto bg-white">
@@ -211,19 +212,19 @@ export const DetailCard = ({ car, onClose, onBookTestDrive }) => {
           <div className="flex flex-row gap-3">
             {actions?.primary && (
               <Button variant="primary" asChild>
-              <a
-                href={actions.primary.url || "#"}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {actions.primary.label || "View details"}
-              </a>
+                <a
+                  href={actions.primary.url || "#"}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {actions.primary.label || "View details"}
+                </a>
               </Button>
             )}
-            
+
             {actions?.secondary && actions.secondary.length > 0 && (
               <div className="flex flex-col gap-2 sm:flex-row">
-                {actions.secondary.map((action, index) => 
+                {actions.secondary.map((action, index) =>
                   action.action === "test_drive" ? (
                     <Button
                       key={index}
@@ -231,7 +232,7 @@ export const DetailCard = ({ car, onClose, onBookTestDrive }) => {
                       onClick={() => onBookTestDrive(car)}
                     >
                       {action.label}
-                    </Button> 
+                    </Button>
                   ) : (
                     <Button key={index} variant="secondary" asChild>
                       <a

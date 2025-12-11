@@ -7,7 +7,8 @@ export const Modal = ({ isOpen, onClose, children }) => {
 
     if (isOpen) {
       // Prevent body scroll when modal is open and avoid layout shift
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
       if (scrollbarWidth > 0) {
         document.body.style.paddingRight = `${scrollbarWidth}px`;

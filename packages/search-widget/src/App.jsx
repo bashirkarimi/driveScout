@@ -21,22 +21,22 @@ export default function App() {
     handleSubmit,
   } = useCarSearch();
 
-  const [selectedCar, setSelectedCar] = useState(null);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadFormCar, setLeadFormCar] = useState(null);
 
-  const handleViewDetails = (car) => {
-    setSelectedCar(car);
+  const handleViewDetails = (vehicle) => {
+    setSelectedVehicle(vehicle);
   };
 
   const handleCloseModal = () => {
-    setSelectedCar(null);
+    setSelectedVehicle(null);
   };
 
-  const handleBookTestDrive = (car) => {
-    setLeadFormCar(car);
+  const handleBookTestDrive = (vehicle) => {
+    setLeadFormCar(vehicle);
     setShowLeadForm(true);
-    setSelectedCar(null); // Close the detail modal if open
+    setSelectedVehicle(null); // Close the detail modal if open
   };
 
   const handleCloseLeadForm = () => {
@@ -91,10 +91,10 @@ export default function App() {
         </div>
       )}
 
-      <Modal isOpen={!!selectedCar} onClose={handleCloseModal}>
-        {selectedCar && (
+      <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
+        {selectedVehicle && (
           <DetailCard
-            car={selectedCar}
+            vehicleDetails={selectedVehicle}
             onClose={handleCloseModal}
             onBookTestDrive={handleBookTestDrive}
           />

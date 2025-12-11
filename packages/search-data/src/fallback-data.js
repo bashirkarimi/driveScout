@@ -10,6 +10,10 @@ export const FALLBACK_RESULTS = [
       "https://loremflickr.com/800/600/car,vehicle?random=29499c7ec4-1",
       "https://loremflickr.com/800/600/car,sport?random=29499c7ec4-2",
       "https://loremflickr.com/800/600/car,luxury?random=29499c7ec4-3",
+      "https://loremflickr.com/800/600/car,automobile?random=29499c7ec4-0",
+      "https://loremflickr.com/800/600/car,vehicle?random=29499c7ec4-1",
+      "https://loremflickr.com/800/600/car,sport?random=29499c7ec4-2",
+      "https://loremflickr.com/800/600/car,luxury?random=29499c7ec4-3",
     ],
     highlights: {
       engineType: "electric",

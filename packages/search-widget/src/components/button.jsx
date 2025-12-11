@@ -7,8 +7,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
-          "bg-primary text-white hover:bg-elm-700 hover:shadow-lg",
+        primary: "bg-primary text-white hover:bg-elm-700 hover:shadow-lg",
         secondary:
           " text-gray-800 hover:bg-elm-100 border-elm-800 border-2 shadow-sm",
         link: "text-primary hover:text-astral-700 dark:hover:text-astral-300 px-0 underline-offset-4 hover:underline",
@@ -37,20 +36,19 @@ const buttonVariants = cva(
       variant: "primary",
       size: "default",
     },
-  },
+  }
 );
 
-
 const Button = ({ className, variant, size, asChild, ...props }) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        data-slot="button"
-        className={twMerge(buttonVariants({ variant, size }), className)}
-        {...props}
-      />
-    );
-  };
+  const Comp = asChild ? Slot : "button";
+  return (
+    <Comp
+      data-slot="button"
+      className={twMerge(buttonVariants({ variant, size }), className)}
+      {...props}
+    />
+  );
+};
 Button.displayName = "Button";
 
 export { Button };
