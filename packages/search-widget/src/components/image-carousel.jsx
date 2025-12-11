@@ -88,7 +88,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
       {images.length > 1 && (
         <div className="flex content-between mt-1 md:mt-3">
           <div
-            className=" flex gap-2 overflow-x-auto py-2 px-1"
+            className="flex gap-2 overflow-x-auto py-2 px-1"
             role="region"
             aria-label="Image thumbnails"
             tabIndex={0}
