@@ -181,26 +181,27 @@ export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
               placeholder="Doe"
             />
           </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <FormInput
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+              placeholder="john.doe@example.com"
+            />
 
-          <FormInput
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={errors.email}
-            placeholder="john.doe@example.com"
-          />
-
-          <FormInput
-            label="Phone Number"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            error={errors.phone}
-            placeholder="+1 (555) 123-4567"
-          />
+            <FormInput
+              label="Phone Number"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              error={errors.phone}
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
 
           <FormInput
             label="Message (Optional)"
@@ -218,13 +219,12 @@ export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
             </div>
           )}
 
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row ml-auto">
             <Button
               type="submit"
               variant="primary"
               size="lg"
               disabled={isSubmitting}
-              className="flex-1"
             >
               {isSubmitting ? (
                 <>
