@@ -21,10 +21,12 @@ const widgetEntryPoint = resolve(widgetPackageRoot, "src/index.jsx");
 // Prebuilt assets produced by Vite during the workspace build
 const widgetJsPath = resolve(widgetPackageRoot, "dist/widget.js");
 const widgetCssPath = resolve(widgetPackageRoot, "dist/widget-style.css");
+const fallbackWidgetPath = resolve(__dirname, "fallback-widget.html");
 const publicDir = resolve(serverRoot, "public");
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
+const FALLBACK_WIDGET_HTML = readFileSync(fallbackWidgetPath, "utf8");
 const DEFAULT_ALLOWED_ORIGINS = ["https://chatgpt.com", "https://chat.openai.com"];
 const MAX_QUERY_LENGTH = 120;
 const MIN_QUERY_LENGTH = 1;
@@ -59,58 +61,6 @@ export function getCorsHeaders(requestOrigin, additionalHeaders = {}) {
     ...additionalHeaders,
   };
 }
-
-const FALLBACK_WIDGET_HTML = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Car search widget unavailable</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      :root {
-        color: #0f172a;
-        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
-          "Segoe UI", sans-serif;
-        background-color: #f4f6fb;
-      }
-
-      body {
-        margin: 0;
-        padding: 56px 24px;
-        background: #f4f6fb;
-      }
-
-      main {
-        max-width: 560px;
-        margin: 0 auto;
-        padding: 32px;
-        background: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
-      }
-
-      h1 {
-        margin-top: 0;
-        font-size: 1.6rem;
-      }
-
-      p {
-        color: #475569;
-        font-size: 0.95rem;
-        line-height: 1.5;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>Car search widget unavailable</h1>
-      <p>
-        The React bundle for the Fahrzeugsuche experience could not be built. Check the server logs for details and
-        ensure dependencies are installed.
-      </p>
-    </main>
-  </body>
-</html>`;
 
 let widgetHtmlCache = null;
 
