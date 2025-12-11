@@ -1,4 +1,37 @@
 import { searchVehicles } from "@drive-scout/search-data";
+import { z } from "zod";
+
+const MAX_QUERY_LENGTH = 120;
+const MIN_QUERY_LENGTH = 1;
+const MAX_VEHICLES_LIMIT = 12;
+const MIN_VEHICLES_LIMIT = 1;
+const DEFAULT_VEHICLE_LIMIT = 9;
+
+/**
+ * Zod validation schema for vehicle search input
+ */
+export const searchInputSchema = {
+  query: z
+    .string()
+    .min(MIN_QUERY_LENGTH, "query is required")
+    .max(MAX_QUERY_LENGTH, "query is too long")
+    .describe("Free text search for vehicles."),
+  engineType: z
+    .enum(["combustion", "hybrid", "electric"], {
+      errorMap: () => ({
+        message: "engineType must be combustion, hybrid, or electric",
+      }),
+    })
+    .optional()
+    .describe("Optional engine type filter."),
+  limit: z
+    .number()
+    .int()
+    .min(MIN_VEHICLES_LIMIT)
+    .max(MAX_VEHICLES_LIMIT)
+    .default(DEFAULT_VEHICLE_LIMIT)
+    .describe("Maximum number of vehicles to return."),
+};
 
 /**
  * Helper function to format tool responses with structured content

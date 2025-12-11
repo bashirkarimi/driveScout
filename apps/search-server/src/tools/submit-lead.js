@@ -1,3 +1,38 @@
+import { z } from "zod";
+
+/**
+ * Zod validation schema for lead submission input
+ */
+export const leadSubmissionSchema = {
+  firstName: z
+    .string()
+    .min(1, "First name is required")
+    .describe("Customer's first name."),
+  lastName: z
+    .string()
+    .min(1, "Last name is required")
+    .describe("Customer's last name."),
+  email: z
+    .string()
+    .email("Invalid email address")
+    .describe("Customer's email address."),
+  phone: z
+    .string()
+    .min(10, "Phone number must be at least 10 characters")
+    .describe("Customer's phone number."),
+  message: z
+    .string()
+    .optional()
+    .describe("Optional message from the customer."),
+  vehicleTitle: z.string().describe("Title of the vehicle of interest."),
+  vehicleId: z.string().describe("ID of the vehicle of interest."),
+  requestType: z
+    .string()
+    .default("test_drive")
+    .describe("Type of request (e.g., test_drive, contact)."),
+  timestamp: z.string().describe("ISO timestamp of the submission."),
+};
+
 /**
  * Tool handler for submitting customer leads
  * @param {Object} args - Tool arguments

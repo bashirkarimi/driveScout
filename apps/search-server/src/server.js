@@ -5,15 +5,20 @@ import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
-import { z } from "zod";
 import { getWidgetHtml, preloadWidget } from "./widget-builder.js";
 import {
   getCorsHeaders,
   resolveAllowedOrigin,
   ensureStreamableAccept,
 } from "./cors-utils.js";
-import { getVehiclesHandler } from "./tools/get-vehicles.js";
-import { submitLeadHandler } from "./tools/submit-lead.js";
+import {
+  getVehiclesHandler,
+  searchInputSchema,
+} from "./tools/get-vehicles.js";
+import {
+  submitLeadHandler,
+  leadSubmissionSchema,
+} from "./tools/submit-lead.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,11 +28,6 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 
 dotenv.config({ path: resolve(serverRoot, "..", "..", ".env") });
 
-const MAX_QUERY_LENGTH = 120;
-const MIN_QUERY_LENGTH = 1;
-const MAX_VEHICLES_LIMIT = 12;
-const MIN_VEHICLES_LIMIT = 1;
-const DEFAULT_VEHICLE_LIMIT = 9;
 const MIME_TYPES = {
   ".svg": "image/svg+xml",
   ".png": "image/png",
@@ -57,59 +57,6 @@ if (!isDevelopment) {
     );
   }
 }
-
-const searchInputSchema = {
-  query: z
-    .string()
-    .min(MIN_QUERY_LENGTH, "query is required")
-    .max(MAX_QUERY_LENGTH, "query is too long")
-    .describe("Free text search for vehicles."),
-  engineType: z
-    .enum(["combustion", "hybrid", "electric"], {
-      errorMap: () => ({
-        message: "engineType must be combustion, hybrid, or electric",
-      }),
-    })
-    .optional()
-    .describe("Optional engine type filter."),
-  limit: z
-    .number()
-    .int()
-    .min(MIN_VEHICLES_LIMIT)
-    .max(MAX_VEHICLES_LIMIT)
-    .default(DEFAULT_VEHICLE_LIMIT)
-    .describe("Maximum number of vehicles to return."),
-};
-
-const leadSubmissionSchema = {
-  firstName: z
-    .string()
-    .min(1, "First name is required")
-    .describe("Customer's first name."),
-  lastName: z
-    .string()
-    .min(1, "Last name is required")
-    .describe("Customer's last name."),
-  email: z
-    .string()
-    .email("Invalid email address")
-    .describe("Customer's email address."),
-  phone: z
-    .string()
-    .min(10, "Phone number must be at least 10 characters")
-    .describe("Customer's phone number."),
-  message: z
-    .string()
-    .optional()
-    .describe("Optional message from the customer."),
-  vehicleTitle: z.string().describe("Title of the vehicle of interest."),
-  vehicleId: z.string().describe("ID of the vehicle of interest."),
-  requestType: z
-    .string()
-    .default("test_drive")
-    .describe("Type of request (e.g., test_drive, contact)."),
-  timestamp: z.string().describe("ISO timestamp of the submission."),
-};
 
 function createCarServer() {
   const server = new McpServer({
