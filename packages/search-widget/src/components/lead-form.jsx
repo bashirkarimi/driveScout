@@ -2,9 +2,10 @@ import { useState, useRef, useEffect } from "react";
 import { FormInput } from "./form-input";
 import { Button } from "./button";
 
-export const LeadForm = ({ car, onClose, onSubmit }) => {
+export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
+  const { id: vehicleId, title, subtitle, pricing } = vehicleData;
   const formRef = useRef(null);
-  
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,9 +20,9 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
 
   useEffect(() => {
     if (formRef.current) {
-      formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-  }, [car.title]);
+  }, [vehicleData.title]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -72,14 +73,14 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
       // Call the parent onSubmit handler with form data and car info
       await onSubmit({
         ...formData,
-        vehicleTitle: car.title,
-        vehicleId: car.id || car.title,
+        vehicleTitle: title,
+        vehicleId: vehicleId || title,
         requestType: "test_drive",
         timestamp: new Date().toISOString(),
       });
 
       setSubmitSuccess(true);
-      
+
       // Close form after 2 seconds
       setTimeout(() => {
         onClose();
@@ -113,14 +114,18 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
           Request Sent!
         </h3>
         <p className="text-slate-600">
-          Thank you for your interest in the {car.title}. A dealer representative will contact you shortly.
+          Thank you for your interest in the {title}. A dealer representative
+          will contact you shortly.
         </p>
       </div>
     );
   }
 
   return (
-    <div ref={formRef} className="flex h-full flex-col overflow-y-auto bg-white">
+    <div
+      ref={formRef}
+      className="flex h-full flex-col overflow-y-auto bg-white"
+    >
       <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-white p-4">
         <h3 className="text-xl font-bold text-slate-900">Book Test Drive</h3>
         <button
@@ -146,13 +151,11 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
 
       <div className="flex flex-col gap-6 p-6">
         <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-          <h4 className="font-semibold text-slate-900">{car.title}</h4>
-          {car.subtitle && (
-            <p className="text-sm text-slate-600">{car.subtitle}</p>
-          )}
-          {car.pricing?.priceFormatted && (
+          <h4 className="font-semibold text-slate-900">{title}</h4>
+          {subtitle && <p className="text-sm text-slate-600">{subtitle}</p>}
+          {pricing?.priceFormatted && (
             <p className="mt-1 text-lg font-bold text-elm-600">
-              {car.pricing.priceFormatted}
+              {pricing.priceFormatted}
             </p>
           )}
         </div>
@@ -178,26 +181,27 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
               placeholder="Doe"
             />
           </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <FormInput
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+              placeholder="john.doe@example.com"
+            />
 
-          <FormInput
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={errors.email}
-            placeholder="john.doe@example.com"
-          />
-
-          <FormInput
-            label="Phone Number"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            error={errors.phone}
-            placeholder="+1 (555) 123-4567"
-          />
+            <FormInput
+              label="Phone Number"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              error={errors.phone}
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
 
           <FormInput
             label="Message (Optional)"
@@ -215,13 +219,12 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
             </div>
           )}
 
-          <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row ml-auto">
             <Button
               type="submit"
               variant="primary"
               size="lg"
               disabled={isSubmitting}
-              className="flex-1"
             >
               {isSubmitting ? (
                 <>

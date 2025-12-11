@@ -79,7 +79,7 @@ Users can now contact dealers/companies by clicking the **"Book Test Drive"** bu
 ## Customization Tips
 
 - Update the widget styling in `public/car-widget.html` to further match brand guidelines or add additional filters (price range, body style, etc.).
-- Extend `searchCars` in `packages/search-data/src/data-provider.js` to integrate with your CMS and map additional fields such as mileage or availability dates.
+- Extend `searchVehicles` in `packages/search-data/src/data-provider.js` to integrate with your CMS and map additional fields such as mileage or availability dates.
 - When you change tools or metadata, refresh the connector in ChatGPT (Settings → Connectors → Refresh) so the new schema is picked up.
 
 ## Deploying

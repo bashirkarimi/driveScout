@@ -7,7 +7,7 @@ import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
 import { LeadForm } from "./components/lead-form";
 import { useCarSearch } from "./hooks/useCarSearch.js";
-import { Logo } from './components/logo';
+import { Logo } from "./components/logo";
 
 export default function App() {
   const {
@@ -21,22 +21,22 @@ export default function App() {
     handleSubmit,
   } = useCarSearch();
 
-  const [selectedCar, setSelectedCar] = useState(null);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadFormCar, setLeadFormCar] = useState(null);
 
-  const handleViewDetails = (car) => {
-    setSelectedCar(car);
+  const handleViewDetails = (vehicle) => {
+    setSelectedVehicle(vehicle);
   };
 
   const handleCloseModal = () => {
-    setSelectedCar(null);
+    setSelectedVehicle(null);
   };
 
-  const handleBookTestDrive = (car) => {
-    setLeadFormCar(car);
+  const handleBookTestDrive = (vehicle) => {
+    setLeadFormCar(vehicle);
     setShowLeadForm(true);
-    setSelectedCar(null); // Close the detail modal if open
+    setSelectedVehicle(null); // Close the detail modal if open
   };
 
   const handleCloseLeadForm = () => {
@@ -47,7 +47,7 @@ export default function App() {
   const handleSubmitLead = async (leadData) => {
     // In a real application, this would send data to your backend
     console.log("Lead form submitted:", leadData);
-    
+
     // For now, we'll just simulate an API call
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -74,8 +74,8 @@ export default function App() {
         query={query}
       />
       <StatusMessage isLoading={isLoading} message={statusMessage} />
-      <CardGrid 
-        data={results} 
+      <CardGrid
+        data={results}
         onViewDetails={handleViewDetails}
         onBookTestDrive={handleBookTestDrive}
       />
@@ -84,17 +84,17 @@ export default function App() {
       {showLeadForm && leadFormCar && (
         <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">
           <LeadForm
-            car={leadFormCar}
+            vehicleData={leadFormCar}
             onClose={handleCloseLeadForm}
             onSubmit={handleSubmitLead}
           />
         </div>
       )}
 
-      <Modal isOpen={!!selectedCar} onClose={handleCloseModal}>
-        {selectedCar && (
-          <DetailCard 
-            car={selectedCar} 
+      <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
+        {selectedVehicle && (
+          <DetailCard
+            vehicleDetails={selectedVehicle}
             onClose={handleCloseModal}
             onBookTestDrive={handleBookTestDrive}
           />

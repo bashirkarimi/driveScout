@@ -1,6 +1,6 @@
 import { FALLBACK_RESULTS } from "./fallback-data.js";
 
-export async function searchCars({
+export async function searchVehicles({
   query,
   engineType,
   limit = 9,

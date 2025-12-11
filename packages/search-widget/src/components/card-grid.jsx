@@ -6,16 +6,17 @@ export const CardGrid = ({ data, onViewDetails, onBookTestDrive }) => {
     return null;
   }
 
-  const gridClass = data.length === 1 
-    ? "flex justify-center" 
-    : "grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3";
+  const gridClass =
+    data.length === 1
+      ? "flex justify-center"
+      : "grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3";
 
   return (
     <section className={gridClass} aria-live="polite">
-      {data.map((car, index) => (
-        <Card 
-          car={car} 
-          key={buildVehicleKey(car, index)} 
+      {data.map((vehicle, index) => (
+        <Card
+          vehicle={vehicle}
+          key={buildVehicleKey(vehicle, index)}
           onViewDetails={onViewDetails}
           onBookTestDrive={onBookTestDrive}
         />

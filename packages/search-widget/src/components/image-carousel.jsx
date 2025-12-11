@@ -79,10 +79,45 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
         />
 
         {images.length > 1 && (
-          <>
+          <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 rounded-full bg-black/50 px-2 py-0.5 md:px-3 md:py-1 text-sm text-white">
+            {currentIndex + 1} / {images.length}
+          </div>
+        )}
+      </div>
+
+      {images.length > 1 && (
+        <div className="flex content-between mt-1 md:mt-3">
+          <div
+            className="flex gap-2 overflow-x-auto py-2 px-1"
+            role="region"
+            aria-label="Image thumbnails"
+            tabIndex={0}
+          >
+            {images.map((image, index) => (
+              <button
+                key={image}
+                ref={(el) => (thumbnailRefs.current[index] = el)}
+                onClick={() => goToSlide(index)}
+                className={`shrink-0 overflow-hidden rounded-lg border transition-all focus:outline-none focus:ring-1 focus:ring-elm-500 ${
+                  index === currentIndex
+                    ? "border-elm-500 ring-1 ring-elm-300"
+                    : "border-transparent hover:border-slate-300"
+                }`}
+                aria-label={`Go to image ${index + 1}`}
+                aria-current={index === currentIndex}
+              >
+                <img
+                  src={image}
+                  alt={`Thumbnail ${index + 1}`}
+                  className="h-10 w-12 md:h-16 md:w-20 object-cover"
+                />
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-2 items-center ml-auto pl-2">
             <button
               onClick={goToPrevious}
-              className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+              className="rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
               aria-label="Previous image"
             >
               <svg
@@ -101,7 +136,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
             </button>
             <button
               onClick={goToNext}
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+              className="rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
               aria-label="Next image"
             >
               <svg
@@ -118,41 +153,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                 />
               </svg>
             </button>
-
-            <div className="absolute bottom-4 right-4 rounded-full bg-black/50 px-3 py-1 text-sm text-white">
-              {currentIndex + 1} / {images.length}
-            </div>
-          </>
-        )}
-      </div>
-
-      {images.length > 1 && (
-        <div
-          className="mt-1 md:mt-3 flex gap-2 overflow-x-auto py-2 px-1"
-          role="region"
-          aria-label="Image thumbnails"
-          tabIndex={0}
-        >
-          {images.map((image, index) => (
-            <button
-              key={image}
-              ref={(el) => (thumbnailRefs.current[index] = el)}
-              onClick={() => goToSlide(index)}
-              className={`flex-shrink-0 overflow-hidden rounded-lg border transition-all focus:outline-none focus:ring-1 focus:ring-elm-500 ${
-                index === currentIndex
-                  ? "border-elm-500 ring-1 ring-elm-300"
-                  : "border-transparent hover:border-slate-300"
-              }`}
-              aria-label={`Go to image ${index + 1}`}
-              aria-current={index === currentIndex}
-            >
-              <img
-                src={image}
-                alt={`Thumbnail ${index + 1}`}
-                className="h-10 w-12 md:h-16 md:w-20 object-cover"
-              />
-            </button>
-          ))}
+          </div>
         </div>
       )}
     </div>
