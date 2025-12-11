@@ -7,7 +7,7 @@ import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
 import { LeadForm } from "./components/lead-form";
 import { useCarSearch } from "./hooks/useCarSearch.js";
-import { Logo } from './components/logo';
+import { Logo } from "./components/logo";
 
 export default function App() {
   const {
@@ -47,7 +47,7 @@ export default function App() {
   const handleSubmitLead = async (leadData) => {
     // In a real application, this would send data to your backend
     console.log("Lead form submitted:", leadData);
-    
+
     // For now, we'll just simulate an API call
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -74,8 +74,8 @@ export default function App() {
         query={query}
       />
       <StatusMessage isLoading={isLoading} message={statusMessage} />
-      <CardGrid 
-        data={results} 
+      <CardGrid
+        data={results}
         onViewDetails={handleViewDetails}
         onBookTestDrive={handleBookTestDrive}
       />
@@ -84,7 +84,7 @@ export default function App() {
       {showLeadForm && leadFormCar && (
         <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">
           <LeadForm
-            car={leadFormCar}
+            vehicleData={leadFormCar}
             onClose={handleCloseLeadForm}
             onSubmit={handleSubmitLead}
           />
@@ -93,8 +93,8 @@ export default function App() {
 
       <Modal isOpen={!!selectedCar} onClose={handleCloseModal}>
         {selectedCar && (
-          <DetailCard 
-            car={selectedCar} 
+          <DetailCard
+            car={selectedCar}
             onClose={handleCloseModal}
             onBookTestDrive={handleBookTestDrive}
           />
