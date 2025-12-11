@@ -1,7 +1,7 @@
 import { PLACEHOLDER_IMAGE } from "../constants.js";
 import { Button } from "./button";
 
-export const Card = ({ car, onViewDetails }) => {
+export const Card = ({ car, onViewDetails, onBookTestDrive }) => {
   const {
     title,
     subtitle,
@@ -55,9 +55,20 @@ return (
       {description && (
         <p className="text-sm leading-relaxed text-slate-500">{description}</p>
       )}
-      <div className="pt-3 mt-auto">
-        <Button variant="primary" onClick={() => onViewDetails(car)}>
-          Open Full Details
+      <div className="pt-3 mt-auto flex flex-col gap-2 sm:flex-row">
+        <Button
+          variant="primary"
+          onClick={() => onBookTestDrive(car)}
+          className="flex-1"
+        >
+          Book Test Drive
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => onViewDetails(car)}
+          className="flex-1"
+        >
+          Open Details
         </Button>
       </div>
     </div>

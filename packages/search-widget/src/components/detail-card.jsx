@@ -1,7 +1,8 @@
 import { PLACEHOLDER_IMAGE } from "../constants.js";
 import { ImageCarousel } from "./image-carousel.jsx";
+import { Button } from "./button.jsx";
 
-export const DetailCard = ({ car, onClose }) => {
+export const DetailCard = ({ car, onClose, onBookTestDrive }) => {
   const {
     title,
     subtitle,
@@ -190,7 +191,9 @@ export const DetailCard = ({ car, onClose }) => {
             </h3>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               {location.dealer && (
-                <p className="font-semibold text-slate-900">{location.dealer}</p>
+                <p className="font-semibold text-slate-900">
+                  {location.dealer}
+                </p>
               )}
               {location.city && (
                 <p className="text-slate-600">{location.city}</p>
@@ -204,37 +207,47 @@ export const DetailCard = ({ car, onClose }) => {
           </div>
         )}
 
-        {actions && (
-          <div className="sticky bottom-0 border-t border-slate-200 bg-white pt-6">
-            <div className="flex flex-col gap-3">
-              {actions.primary && (
-                <a
-                  href={actions.primary.url || "#"}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className="inline-flex w-full items-center justify-center rounded-lg bg-elm-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-elm-700"
-                >
-                  {actions.primary.label || "View details"}
-                </a>
-              )}
-              {actions.secondary && actions.secondary.length > 0 && (
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  {actions.secondary.map((action, index) => (
-                    <a
+        <div className="sticky bottom-0 border-t border-slate-200 bg-white pt-6">
+          <div className="flex flex-row gap-3">
+            {actions?.primary && (
+              <Button variant="primary" asChild>
+              <a
+                href={actions.primary.url || "#"}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {actions.primary.label || "View details"}
+              </a>
+              </Button>
+            )}
+            
+            {actions?.secondary && actions.secondary.length > 0 && (
+              <div className="flex flex-col gap-2 sm:flex-row">
+                {actions.secondary.map((action, index) => 
+                  action.action === "test_drive" ? (
+                    <Button
                       key={index}
-                      href={action.url || "#"}
-                      className="flex-1 rounded-lg border border-slate-300 px-4 py-2 text-center font-medium text-slate-700 transition-colors hover:bg-slate-50"
-                      rel="noopener noreferrer"
-                      target="_blank"
+                      variant="secondary"
+                      onClick={() => onBookTestDrive(car)}
                     >
                       {action.label}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
+                    </Button> 
+                  ) : (
+                    <Button key={index} variant="secondary" asChild>
+                      <a
+                        href={action.url || "#"}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {action.label}
+                      </a>
+                    </Button>
+                  )
+                )}
+              </div>
+            )}
           </div>
-        )}
+        </div>
 
         {meta?.created_at && (
           <div className="border-t border-slate-200 pt-4 text-xs text-slate-500">

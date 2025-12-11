@@ -10,7 +10,7 @@ const buttonVariants = cva(
         primary:
           "bg-primary text-white hover:bg-elm-700 hover:shadow-lg",
         secondary:
-          "bg-gray-200 text-gray-800 hover:bg-elm-300 border-elm-300 border shadow-sm",
+          " text-gray-800 hover:bg-elm-100 border-elm-800 border-2 shadow-sm",
         link: "text-primary hover:text-astral-700 dark:hover:text-astral-300 px-0 underline-offset-4 hover:underline",
         outline:
           "border-astral-400 bg-background text-astral-700 dark:text-astral-300 hover:bg-astral-100 hover:border-astral-500 dark:hover:bg-astral-900 dark:hover:border-astral-400 border-2",
