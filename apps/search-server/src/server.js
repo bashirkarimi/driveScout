@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from "zod";
-import { searchCars } from "@drive-scout/search-data";
+import { searchVehicles } from "@drive-scout/search-data";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -452,7 +452,7 @@ function createCarServer() {
     },
     async (args) => {
       try {
-        const { results, summary } = await searchCars({
+        const { results, summary } = await searchVehicles({
           query: args?.query,
           engineType: args?.engineType,
           limit: args?.limit,
