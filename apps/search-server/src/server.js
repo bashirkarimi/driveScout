@@ -27,12 +27,26 @@ const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 const FALLBACK_WIDGET_HTML = readFileSync(fallbackWidgetPath, "utf8");
-const DEFAULT_ALLOWED_ORIGINS = ["https://chatgpt.com", "https://chat.openai.com"];
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://chatgpt.com",
+  "https://chat.openai.com",
+];
 const MAX_QUERY_LENGTH = 120;
 const MIN_QUERY_LENGTH = 1;
 const MAX_VEHICLES_LIMIT = 12;
 const MIN_VEHICLES_LIMIT = 1;
 const DEFAULT_VEHICLE_LIMIT = 9;
+const MIME_TYPES = {
+  ".svg": "image/svg+xml",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".gif": "image/gif",
+};
+
+const readWidgetTemplate = () => readFileSync(widgetTemplatePath, "utf8");
+let widgetHtmlCache = null;
 
 export function resolveAllowedOrigin(requestOrigin) {
   if (isDevelopment) {
@@ -57,23 +71,10 @@ export function getCorsHeaders(requestOrigin, additionalHeaders = {}) {
   return {
     "Access-Control-Allow-Origin": resolveAllowedOrigin(requestOrigin),
     "Access-Control-Allow-Credentials": "true",
-    "Vary": "Origin",
+    Vary: "Origin",
     ...additionalHeaders,
   };
 }
-
-let widgetHtmlCache = null;
-
-const MIME_TYPES = {
-  ".svg": "image/svg+xml",
-  ".png": "image/png",
-  ".jpg": "image/jpeg",
-  ".jpeg": "image/jpeg",
-  ".webp": "image/webp",
-  ".gif": "image/gif",
-};
-
-const readWidgetTemplate = () => readFileSync(widgetTemplatePath, "utf8");
 
 /**
  * Builds the widget bundle in development mode using esbuild
@@ -96,10 +97,14 @@ async function buildDevelopmentWidget() {
     loader: { ".css": "css" },
     define: { "process.env.NODE_ENV": JSON.stringify("development") },
   });
-  
-  const jsText = (result.outputFiles ?? []).find((file) => file.path.endsWith(".js"))?.text ?? null;
-  const cssText = (result.outputFiles ?? []).find((file) => file.path.endsWith(".css"))?.text ?? null;
-  
+
+  const jsText =
+    (result.outputFiles ?? []).find((file) => file.path.endsWith(".js"))
+      ?.text ?? null;
+  const cssText =
+    (result.outputFiles ?? []).find((file) => file.path.endsWith(".css"))
+      ?.text ?? null;
+
   return { jsText, cssText };
 }
 
@@ -109,13 +114,16 @@ async function buildDevelopmentWidget() {
  */
 function buildProductionWidget() {
   let jsText = null;
-  
+
   try {
     jsText = readFileSync(widgetJsPath, "utf8");
   } catch (error) {
-    console.error(`✗ Failed to read widget JS from ${widgetJsPath}:`, error.message);
+    console.error(
+      `✗ Failed to read widget JS from ${widgetJsPath}:`,
+      error.message
+    );
   }
-  
+
   return { jsText, cssText: null };
 }
 
@@ -126,7 +134,7 @@ function buildProductionWidget() {
  */
 function injectStyles(prebuiltCss) {
   let styles = "";
-  
+
   // Try to read the pre-built Tailwind CSS from the widget package first
   try {
     const widgetCss = readFileSync(widgetCssPath, "utf8");
@@ -135,9 +143,12 @@ function injectStyles(prebuiltCss) {
       return styles;
     }
   } catch (error) {
-    console.error(`✗ Failed to read widget CSS from ${widgetCssPath}:`, error.message);
+    console.error(
+      `✗ Failed to read widget CSS from ${widgetCssPath}:`,
+      error.message
+    );
   }
-  
+
   // Fallback to esbuild CSS output if pre-built CSS is not available
   if (prebuiltCss) {
     styles += `<style>\n${prebuiltCss}\n</style>\n`;
@@ -145,7 +156,7 @@ function injectStyles(prebuiltCss) {
   } else {
     console.warn("⚠ No CSS found. Widget will render without styles.");
   }
-  
+
   return styles;
 }
 
@@ -159,11 +170,13 @@ function generateDebugScript(jsSize, hasCSS) {
   if (!isDevelopment) {
     return "";
   }
-  
+
   return `
     <script>
       console.log('[Car Widget] Initializing...');
-      console.log('[Car Widget] NODE_ENV:', '${isDevelopment ? 'development' : 'production'}');
+      console.log('[Car Widget] NODE_ENV:', '${
+        isDevelopment ? "development" : "production"
+      }');
       console.log('[Car Widget] JS loaded:', ${jsSize}, 'bytes');
       console.log('[Car Widget] CSS loaded:', ${hasCSS});
       
@@ -186,12 +199,14 @@ function generateDebugScript(jsSize, hasCSS) {
  */
 function injectScripts(jsText, hasCSS) {
   if (!jsText) {
-    throw new Error("Widget build produced no JS output. Check that 'pnpm build' was run and dist/widget.js exists.");
+    throw new Error(
+      "Widget build produced no JS output. Check that 'pnpm build' was run and dist/widget.js exists."
+    );
   }
-  
+
   const debugScript = generateDebugScript(jsText.length, hasCSS);
   const mainScript = `<script type="module">\n${jsText}\n</script>`;
-  
+
   return debugScript + mainScript;
 }
 
@@ -201,23 +216,23 @@ function injectScripts(jsText, hasCSS) {
  */
 async function buildWidgetHtml() {
   const template = readWidgetTemplate();
-  
+
   // Build widget based on environment
-  const { jsText, cssText } = isDevelopment 
-    ? await buildDevelopmentWidget() 
+  const { jsText, cssText } = isDevelopment
+    ? await buildDevelopmentWidget()
     : buildProductionWidget();
-  
+
   // Inject styles and scripts
   const styles = injectStyles(cssText);
-  const hasCSS = styles.includes('<style>');
+  const hasCSS = styles.includes("<style>");
   const scripts = injectScripts(jsText, hasCSS);
   const replacement = styles + scripts;
-  
+
   // Insert into template
   if (template.includes(WIDGET_PLACEHOLDER)) {
     return template.replace(WIDGET_PLACEHOLDER, replacement);
   }
-  
+
   return `${template}\n${replacement}`;
 }
 
@@ -237,7 +252,11 @@ async function getWidgetHtml() {
 
   try {
     widgetHtmlCache = await buildWidgetHtml();
-    console.log("✓ Widget HTML built successfully", widgetHtmlCache.length, "bytes");
+    console.log(
+      "✓ Widget HTML built successfully",
+      widgetHtmlCache.length,
+      "bytes"
+    );
   } catch (error) {
     console.error("✗ Failed to build widget:", error.message);
     console.error("   Stack:", error.stack);
@@ -257,13 +276,19 @@ try {
 
 // Validate environment variables on startup
 if (!isDevelopment) {
-  const requiredEnvVars = ['PORT', 'MCP_PATH'];
-  const missing = requiredEnvVars.filter(key => !process.env[key]);
+  const requiredEnvVars = ["PORT", "MCP_PATH"];
+  const missing = requiredEnvVars.filter((key) => !process.env[key]);
   if (missing.length > 0) {
-    console.warn(`Warning: Missing environment variables: ${missing.join(', ')}. Using defaults.`);
+    console.warn(
+      `Warning: Missing environment variables: ${missing.join(
+        ", "
+      )}. Using defaults.`
+    );
   }
   if (!process.env.ALLOWED_ORIGIN) {
-    console.log('ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com, https://chat.openai.com');
+    console.log(
+      "ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com, https://chat.openai.com"
+    );
   }
 }
 
@@ -311,19 +336,13 @@ const leadSubmissionSchema = {
     .string()
     .optional()
     .describe("Optional message from the customer."),
-  vehicleTitle: z
-    .string()
-    .describe("Title of the vehicle of interest."),
-  vehicleId: z
-    .string()
-    .describe("ID of the vehicle of interest."),
+  vehicleTitle: z.string().describe("Title of the vehicle of interest."),
+  vehicleId: z.string().describe("ID of the vehicle of interest."),
   requestType: z
     .string()
     .default("test_drive")
     .describe("Type of request (e.g., test_drive, contact)."),
-  timestamp: z
-    .string()
-    .describe("ISO timestamp of the submission."),
+  timestamp: z.string().describe("ISO timestamp of the submission."),
 };
 
 const replyWithResults = ({ results, summary, statusText }) => ({
@@ -389,7 +408,8 @@ function createCarServer() {
     "get_vehicles",
     {
       title: "Get vehicles",
-      description: "Retrieves and displays vehicles from the inventory database. This is a read-only search operation.",
+      description:
+        "Retrieves and displays vehicles from the inventory database. This is a read-only search operation.",
       inputSchema: searchInputSchema,
       annotations: {
         readOnlyHint: true,
@@ -417,7 +437,11 @@ function createCarServer() {
         }
 
         const statusText = `${results.length} vehicles ready to explore.`;
-        return replyWithResults({ results, summary: summary || statusText, statusText });
+        return replyWithResults({
+          results,
+          summary: summary || statusText,
+          statusText,
+        });
       } catch (error) {
         console.error("get_vehicles failed", error);
         return replyWithResults({
@@ -433,7 +457,8 @@ function createCarServer() {
     "submit_lead",
     {
       title: "Submit test drive lead",
-      description: "Submits a customer lead for a test drive or vehicle inquiry. This stores the customer's contact information and vehicle interest.",
+      description:
+        "Submits a customer lead for a test drive or vehicle inquiry. This stores the customer's contact information and vehicle interest.",
       inputSchema: leadSubmissionSchema,
       annotations: {
         readOnlyHint: false,
@@ -462,7 +487,7 @@ function createCarServer() {
         // 2. Send confirmation email to customer
         // 3. Notify dealer/sales team
         // 4. Create CRM entry
-        
+
         const responseMessage = `Thank you, ${args.firstName}! Your request for a test drive of the ${args.vehicleTitle} has been received. A dealer representative will contact you at ${args.email} or ${args.phone} shortly.`;
 
         return {
@@ -511,7 +536,9 @@ export async function handleMcpRequest(req, res) {
       "content-type": "text/plain",
       ...getCorsHeaders(req.headers?.origin),
     });
-    res.end("Car search MCP server is running. Connect via an MCP client (e.g., ChatGPT) to use the search tool.");
+    res.end(
+      "Drive Scout MCP server is running. Connect via an MCP client (e.g., ChatGPT) to use the search tool."
+    );
     return;
   }
 
@@ -519,7 +546,9 @@ export async function handleMcpRequest(req, res) {
   const corsHeaders = getCorsHeaders(req.headers?.origin, {
     "Access-Control-Expose-Headers": "Mcp-Session-Id",
   });
-  Object.entries(corsHeaders).forEach(([key, value]) => res.setHeader(key, value));
+  Object.entries(corsHeaders).forEach(([key, value]) =>
+    res.setHeader(key, value)
+  );
 
   const server = createCarServer();
   const transport = new StreamableHTTPServerTransport({
@@ -559,7 +588,8 @@ const httpServer = createServer(async (req, res) => {
     res.writeHead(204, {
       ...getCorsHeaders(req.headers?.origin, {
         "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": requestedHeaders || "content-type, mcp-session-id",
+        "Access-Control-Allow-Headers":
+          requestedHeaders || "content-type, mcp-session-id",
         "Access-Control-Expose-Headers": "Mcp-Session-Id",
       }),
     });
@@ -568,7 +598,9 @@ const httpServer = createServer(async (req, res) => {
   }
 
   if (req.method === "GET" && url.pathname === "/") {
-    res.writeHead(200, { "content-type": "text/plain" }).end("Car search MCP server");
+    res
+      .writeHead(200, { "content-type": "text/plain" })
+      .end("Car search MCP server");
     return;
   }
 
@@ -590,7 +622,11 @@ const httpServer = createServer(async (req, res) => {
   }
 
   const MCP_METHODS = new Set(["POST", "GET", "DELETE"]);
-  if (url.pathname.startsWith(MCP_PATH) && req.method && MCP_METHODS.has(req.method)) {
+  if (
+    url.pathname.startsWith(MCP_PATH) &&
+    req.method &&
+    MCP_METHODS.has(req.method)
+  ) {
     await handleMcpRequest(req, res);
     return;
   }
@@ -599,5 +635,7 @@ const httpServer = createServer(async (req, res) => {
 });
 
 httpServer.listen(port, () => {
-  console.log(`Car search MCP server listening on http://localhost:${port}${MCP_PATH}`);
+  console.log(
+    `Drive Scout MCP server listening on http://localhost:${port}${MCP_PATH}`
+  );
 });
