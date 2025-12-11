@@ -136,7 +136,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
             </button>
             <button
               onClick={goToNext}
-              className=" rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+              className="rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
               aria-label="Next image"
             >
               <svg
