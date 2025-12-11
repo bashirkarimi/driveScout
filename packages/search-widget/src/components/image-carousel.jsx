@@ -79,7 +79,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
         />
 
         {images.length > 1 && (
-          <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 rounded-full bg-black/50 px-2 py-0.5md:px-3 md:py-1 text-sm text-white">
+          <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 rounded-full bg-black/50 px-2 py-0.5 md:px-3 md:py-1 text-sm text-white">
             {currentIndex + 1} / {images.length}
           </div>
         )}
