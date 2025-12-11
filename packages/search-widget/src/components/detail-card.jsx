@@ -229,7 +229,7 @@ export const DetailCard = ({ vehicleDetails, onClose, onBookTestDrive }) => {
                     <Button
                       key={index}
                       variant="secondary"
-                      onClick={() => onBookTestDrive(car)}
+                      onClick={() => onBookTestDrive(vehicleDetails)}
                     >
                       {action.label}
                     </Button>
