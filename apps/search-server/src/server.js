@@ -6,11 +6,7 @@ import dotenv from "dotenv";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { getWidgetHtml, preloadWidget } from "./widget-builder.js";
-import {
-  getCorsHeaders,
-  resolveAllowedOrigin,
-  ensureStreamableAccept,
-} from "./cors-utils.js";
+import { getCorsHeaders, ensureStreamableAccept } from "./cors-utils.js";
 import {
   getVehiclesHandler,
   searchInputSchema,
@@ -37,30 +33,12 @@ const MIME_TYPES = {
   ".gif": "image/gif",
 };
 
-// Build widget on startup to catch errors early
-await preloadWidget();
+const MCP_METHODS = new Set(["POST", "GET", "DELETE"]);
 
-// Validate environment variables on startup
-if (!isDevelopment) {
-  const requiredEnvVars = ["PORT", "MCP_PATH"];
-  const missing = requiredEnvVars.filter((key) => !process.env[key]);
-  if (missing.length > 0) {
-    console.warn(
-      `Warning: Missing environment variables: ${missing.join(
-        ", "
-      )}. Using defaults.`
-    );
-  }
-  if (!process.env.ALLOWED_ORIGIN) {
-    console.log(
-      "ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com, https://chat.openai.com"
-    );
-  }
-}
-
-function createCarServer() {
+// MCP Server Factory
+function createDriveScoutServer() {
   const server = new McpServer({
-    name: "Car Scout",
+    name: "Drive Scout",
     version: "0.1.0",
   });
 
@@ -148,7 +126,7 @@ export async function handleMcpRequest(req, res) {
     res.setHeader(key, value)
   );
 
-  const server = createCarServer();
+  const server = createDriveScoutServer();
   const transport = new StreamableHTTPServerTransport({
     enableJsonResponse: true,
   });
@@ -169,7 +147,27 @@ export async function handleMcpRequest(req, res) {
   }
 }
 
-// Traditional HTTP server for local development
+// Startup: Validate environment and preload widget
+if (!isDevelopment) {
+  const requiredEnvVars = ["PORT", "MCP_PATH"];
+  const missing = requiredEnvVars.filter((key) => !process.env[key]);
+  if (missing.length > 0) {
+    console.warn(
+      `Warning: Missing environment variables: ${missing.join(
+        ", "
+      )}. Using defaults.`
+    );
+  }
+  if (!process.env.ALLOWED_ORIGIN) {
+    console.log(
+      "ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com, https://chat.openai.com"
+    );
+  }
+}
+
+await preloadWidget();
+
+// HTTP Server for local development
 const port = Number(process.env.PORT ?? 8787);
 const MCP_PATH = process.env.MCP_PATH ?? "/mcp";
 
@@ -198,7 +196,7 @@ const httpServer = createServer(async (req, res) => {
   if (req.method === "GET" && url.pathname === "/") {
     res
       .writeHead(200, { "content-type": "text/plain" })
-      .end("Car search MCP server");
+      .end("Drive Scout MCP server");
     return;
   }
 
@@ -219,7 +217,6 @@ const httpServer = createServer(async (req, res) => {
     }
   }
 
-  const MCP_METHODS = new Set(["POST", "GET", "DELETE"]);
   if (
     url.pathname.startsWith(MCP_PATH) &&
     req.method &&
