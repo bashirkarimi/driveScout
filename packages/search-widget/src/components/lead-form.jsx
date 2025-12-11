@@ -178,7 +178,6 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
             value={formData.email}
             onChange={handleChange}
             error={errors.email}
-            required
             placeholder="john.doe@example.com"
           />
 
@@ -189,7 +188,6 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
             value={formData.phone}
             onChange={handleChange}
             error={errors.phone}
-            required
             placeholder="+1 (555) 123-4567"
           />
 

@@ -191,7 +191,9 @@ export const DetailCard = ({ car, onClose, onBookTestDrive }) => {
             </h3>
             <div className="rounded-lg border border-slate-200 bg-slate-50 p-4">
               {location.dealer && (
-                <p className="font-semibold text-slate-900">{location.dealer}</p>
+                <p className="font-semibold text-slate-900">
+                  {location.dealer}
+                </p>
               )}
               {location.city && (
                 <p className="text-slate-600">{location.city}</p>
@@ -206,51 +208,42 @@ export const DetailCard = ({ car, onClose, onBookTestDrive }) => {
         )}
 
         <div className="sticky bottom-0 border-t border-slate-200 bg-white pt-6">
-          <div className="flex flex-col gap-3">
-            <Button
-              variant="success"
-              size="lg"
-              onClick={() => onBookTestDrive(car)}
-              className="w-full"
-            >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Book Test Drive
-            </Button>
+          <div className="flex flex-row gap-3">
             {actions?.primary && (
+              <Button variant="primary" asChild>
               <a
                 href={actions.primary.url || "#"}
                 rel="noopener noreferrer"
                 target="_blank"
-                className="inline-flex w-full items-center justify-center rounded-lg bg-elm-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-elm-700"
               >
                 {actions.primary.label || "View details"}
               </a>
+              </Button>
             )}
+            
             {actions?.secondary && actions.secondary.length > 0 && (
               <div className="flex flex-col gap-2 sm:flex-row">
-                {actions.secondary.map((action, index) => (
-                  <a
-                    key={index}
-                    href={action.url || "#"}
-                    className="flex-1 rounded-lg border border-slate-300 px-4 py-2 text-center font-medium text-slate-700 transition-colors hover:bg-slate-50"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {action.label}
-                  </a>
-                ))}
+                {actions.secondary.map((action, index) => 
+                  action.action === "test_drive" ? (
+                    <Button
+                      key={index}
+                      variant="secondary"
+                      onClick={() => onBookTestDrive(car)}
+                    >
+                      {action.label}
+                    </Button> 
+                  ) : (
+                    <Button key={index} variant="secondary" asChild>
+                      <a
+                        href={action.url || "#"}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {action.label}
+                      </a>
+                    </Button>
+                  )
+                )}
               </div>
             )}
           </div>
