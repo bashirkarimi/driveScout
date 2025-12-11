@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FormInput } from "./form-input";
 import { Button } from "./button";
 
 export const LeadForm = ({ car, onClose, onSubmit }) => {
+  const formRef = useRef(null);
+  
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,6 +16,12 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [car.title]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -112,7 +120,7 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
   }
 
   return (
-    <div className="flex h-full flex-col overflow-y-auto bg-white">
+    <div ref={formRef} className="flex h-full flex-col overflow-y-auto bg-white">
       <div className="sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-white p-4">
         <h3 className="text-xl font-bold text-slate-900">Book Test Drive</h3>
         <button
@@ -253,13 +261,6 @@ export const LeadForm = ({ car, onClose, onSubmit }) => {
             </Button>
           </div>
         </form>
-
-        <div className="border-t border-slate-200 pt-4 text-xs text-slate-500">
-          <p>
-            By submitting this form, you agree to be contacted by the dealer regarding this vehicle.
-            Your information will be handled according to our privacy policy.
-          </p>
-        </div>
       </div>
     </div>
   );
