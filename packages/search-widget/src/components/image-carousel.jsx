@@ -86,7 +86,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
               aria-label="Previous image"
             >
               <svg
-                className="h-6 w-6"
+                className="h-4 w-4 md:h-6 md:w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -105,7 +105,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
               aria-label="Next image"
             >
               <svg
-                className="h-6 w-6"
+                className="h-4 w-4 md:h-6 md:w-6"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -127,8 +127,8 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
       </div>
 
       {images.length > 1 && (
-        <div 
-          className="mt-3 flex gap-2 overflow-x-auto pb-2"
+        <div
+          className="mt-1 md:mt-3 flex gap-2 overflow-x-auto py-2 px-1"
           role="region"
           aria-label="Image thumbnails"
           tabIndex={0}
@@ -138,9 +138,9 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
               key={image}
               ref={(el) => (thumbnailRefs.current[index] = el)}
               onClick={() => goToSlide(index)}
-              className={`flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all focus:outline-none focus:ring-2 focus:ring-elm-500 ${
+              className={`flex-shrink-0 overflow-hidden rounded-lg border transition-all focus:outline-none focus:ring-1 focus:ring-elm-500 ${
                 index === currentIndex
-                  ? "border-elm-500 ring-2 ring-elm-300"
+                  ? "border-elm-500 ring-1 ring-elm-300"
                   : "border-transparent hover:border-slate-300"
               }`}
               aria-label={`Go to image ${index + 1}`}
@@ -149,7 +149,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
               <img
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
-                className="h-16 w-20 object-cover"
+                className="h-10 w-12 md:h-16 md:w-20 object-cover"
               />
             </button>
           ))}
