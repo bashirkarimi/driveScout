@@ -15,7 +15,8 @@ export const searchInputSchema = {
     .string()
     .min(MIN_QUERY_LENGTH, "query is required")
     .max(MAX_QUERY_LENGTH, "query is too long")
-    .describe("Free text search for vehicles."),
+    .optional()
+    .describe("Free text search for vehicles. Optional if engineType is provided."),
   engineType: z
     .enum(["combustion", "hybrid", "electric"], {
       errorMap: () => ({
