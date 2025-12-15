@@ -105,6 +105,7 @@ function createDriveScoutServer() {
 }
 
 // Exported handler for both serverless and traditional server usage
+export { getCorsHeaders } from "./cors-utils.js";
 export async function handleMcpRequest(req, res) {
   // Handle browser GET requests with a simple info message
   if (req.method === "GET" && !req.headers["mcp-session-id"]) {
@@ -147,90 +148,96 @@ export async function handleMcpRequest(req, res) {
   }
 }
 
-// Startup: Validate environment and preload widget
-if (!isDevelopment) {
-  const requiredEnvVars = ["PORT", "MCP_PATH"];
-  const missing = requiredEnvVars.filter((key) => !process.env[key]);
-  if (missing.length > 0) {
-    console.warn(
-      `Warning: Missing environment variables: ${missing.join(
-        ", "
-      )}. Using defaults.`
-    );
-  }
-  if (!process.env.ALLOWED_ORIGIN) {
-    console.log(
-      "ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com, https://chat.openai.com"
-    );
-  }
-}
-
-await preloadWidget();
-
-// HTTP Server for local development
-const port = Number(process.env.PORT ?? 8787);
-const MCP_PATH = process.env.MCP_PATH ?? "/mcp";
-
-const httpServer = createServer(async (req, res) => {
-  if (!req?.url) {
-    res.writeHead(400).end("Missing URL");
-    return;
-  }
-
-  const url = new URL(req.url, `http://${req.headers.host ?? "localhost"}`);
-
-  if (req.method === "OPTIONS" && url.pathname.startsWith(MCP_PATH)) {
-    const requestedHeaders = req.headers?.["access-control-request-headers"];
-    res.writeHead(204, {
-      ...getCorsHeaders(req.headers?.origin, {
-        "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers":
-          requestedHeaders || "content-type, mcp-session-id",
-        "Access-Control-Expose-Headers": "Mcp-Session-Id",
-      }),
-    });
-    res.end();
-    return;
-  }
-
-  if (req.method === "GET" && url.pathname === "/") {
-    res
-      .writeHead(200, { "content-type": "text/plain" })
-      .end("Drive Scout MCP server");
-    return;
-  }
-
-  if (req.method === "GET" && !url.pathname.startsWith(MCP_PATH)) {
-    const candidatePath = resolve(publicDir, `.${url.pathname}`);
-    if (candidatePath.startsWith(publicDir)) {
-      try {
-        const asset = readFileSync(candidatePath);
-        const ext = extname(candidatePath).toLowerCase();
-        const mimeType = MIME_TYPES[ext] ?? "application/octet-stream";
-        res.writeHead(200, { "content-type": mimeType }).end(asset);
-        return;
-      } catch (error) {
-        if (error.code !== "ENOENT" && error.code !== "EISDIR") {
-          console.error("Static asset error", error);
-        }
-      }
+async function startServer() {
+  // Startup: Validate environment and preload widget
+  if (!isDevelopment) {
+    const requiredEnvVars = ["PORT", "MCP_PATH"];
+    const missing = requiredEnvVars.filter((key) => !process.env[key]);
+    if (missing.length > 0) {
+      console.warn(
+        `Warning: Missing environment variables: ${missing.join(
+          ", "
+        )}. Using defaults.`
+      );
+    }
+    if (!process.env.ALLOWED_ORIGIN) {
+      console.log(
+        "ALLOWED_ORIGIN not set. Defaulting to https://chatgpt.com, https://chat.openai.com"
+      );
     }
   }
 
-  if (
-    url.pathname.startsWith(MCP_PATH) &&
-    req.method &&
-    MCP_METHODS.has(req.method)
-  ) {
-    await handleMcpRequest(req, res);
-    return;
-  }
+  await preloadWidget();
 
-  res.writeHead(404).end("Not Found");
-});
+  // HTTP Server for local development
+  const port = Number(process.env.PORT ?? 8787);
+  const MCP_PATH = process.env.MCP_PATH ?? "/mcp";
 
-httpServer.listen(port, () => {
-  console.log(
-    `Drive Scout MCP server listening on http://localhost:${port}${MCP_PATH}`
-  );
-});
+  const httpServer = createServer(async (req, res) => {
+    if (!req?.url) {
+      res.writeHead(400).end("Missing URL");
+      return;
+    }
+
+    const url = new URL(req.url, `http://${req.headers.host ?? "localhost"}`);
+
+    if (req.method === "OPTIONS" && url.pathname.startsWith(MCP_PATH)) {
+      const requestedHeaders = req.headers?.["access-control-request-headers"];
+      res.writeHead(204, {
+        ...getCorsHeaders(req.headers?.origin, {
+          "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers":
+            requestedHeaders || "content-type, mcp-session-id",
+          "Access-Control-Expose-Headers": "Mcp-Session-Id",
+        }),
+      });
+      res.end();
+      return;
+    }
+
+    if (req.method === "GET" && url.pathname === "/") {
+      res
+        .writeHead(200, { "content-type": "text/plain" })
+        .end("Drive Scout MCP server");
+      return;
+    }
+
+    if (req.method === "GET" && !url.pathname.startsWith(MCP_PATH)) {
+      const candidatePath = resolve(publicDir, `.${url.pathname}`);
+      if (candidatePath.startsWith(publicDir)) {
+        try {
+          const asset = readFileSync(candidatePath);
+          const ext = extname(candidatePath).toLowerCase();
+          const mimeType = MIME_TYPES[ext] ?? "application/octet-stream";
+          res.writeHead(200, { "content-type": mimeType }).end(asset);
+          return;
+        } catch (error) {
+          if (error.code !== "ENOENT" && error.code !== "EISDIR") {
+            console.error("Static asset error", error);
+          }
+        }
+      }
+    }
+
+    if (
+      url.pathname.startsWith(MCP_PATH) &&
+      req.method &&
+      MCP_METHODS.has(req.method)
+    ) {
+      await handleMcpRequest(req, res);
+      return;
+    }
+
+    res.writeHead(404).end("Not Found");
+  });
+
+  httpServer.listen(port, () => {
+    console.log(
+      `Drive Scout MCP server listening on http://localhost:${port}${MCP_PATH}`
+    );
+  });
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  startServer();
+}
