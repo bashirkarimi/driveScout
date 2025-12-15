@@ -98,7 +98,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                 key={image}
                 ref={(el) => (thumbnailRefs.current[index] = el)}
                 onClick={() => goToSlide(index)}
-                className={`w-4 h-4 md:w-auto border-elm-700  md:h-auto shrink-0 overflow-hidden rounded-lg border transition-all focus:outline-none focus:ring-1 focus:ring-elm-500 ${
+                className={`w-4 h-4 md:w-auto border-elm-700 md:h-auto shrink-0 overflow-hidden rounded-lg border transition-all focus:outline-none focus:ring-1 focus:ring-elm-500 ${
                   index === currentIndex
                     ? "border-elm-500 ring-1 ring-elm-300"
                     : "md:border-transparent hover:border-slate-300"
