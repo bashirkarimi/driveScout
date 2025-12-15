@@ -16,7 +16,14 @@ const fallbackWidgetPath = resolve(__dirname, "fallback-widget.html");
 const WIDGET_PLACEHOLDER = "<!--APP_SCRIPT-->";
 const isDevelopment = process.env.NODE_ENV !== "production";
 
-const FALLBACK_WIDGET_HTML = readFileSync(fallbackWidgetPath, "utf8");
+let FALLBACK_WIDGET_HTML = "";
+try {
+  FALLBACK_WIDGET_HTML = readFileSync(fallbackWidgetPath, "utf8");
+} catch (error) {
+  console.warn("Warning: Could not load fallback widget template", error.message);
+  FALLBACK_WIDGET_HTML = "<div>Widget unavailable</div>";
+}
+
 const readWidgetTemplate = () => readFileSync(widgetTemplatePath, "utf8");
 
 let widgetHtmlCache = null;
