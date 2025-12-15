@@ -98,10 +98,10 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                 key={image}
                 ref={(el) => (thumbnailRefs.current[index] = el)}
                 onClick={() => goToSlide(index)}
-                className={`shrink-0 overflow-hidden rounded-lg border transition-all focus:outline-none focus:ring-1 focus:ring-elm-500 ${
+                className={`w-4 h-4 md:w-auto border-elm-700  md:h-auto shrink-0 overflow-hidden rounded-lg border transition-all focus:outline-none focus:ring-1 focus:ring-elm-500 ${
                   index === currentIndex
                     ? "border-elm-500 ring-1 ring-elm-300"
-                    : "border-transparent hover:border-slate-300"
+                    : "md:border-transparent hover:border-slate-300"
                 }`}
                 aria-label={`Go to image ${index + 1}`}
                 aria-current={index === currentIndex}
@@ -109,7 +109,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                 <img
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
-                  className="h-10 w-12 md:h-16 md:w-20 object-cover"
+                  className="hidden md:block h-10 w-12 md:h-16 md:w-20 object-cover p-0.5 rounded-lg"
                 />
               </button>
             ))}
