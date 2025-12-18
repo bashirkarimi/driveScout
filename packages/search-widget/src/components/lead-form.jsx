@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo } from "react";
 import { FormInput } from "./form-input";
 import { Button } from "./button";
 
-export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
+export const LeadForm = memo(({ vehicleData, onClose, onSubmit }) => {
   const { id: vehicleId, title, subtitle, pricing } = vehicleData;
   const formRef = useRef(null);
 
@@ -267,4 +267,4 @@ export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
       </div>
     </div>
   );
-};
+});

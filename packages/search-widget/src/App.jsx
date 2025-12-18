@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { SearchForm } from "./components/search-form";
 import { StatusMessage } from "./components/status-message";
 import { CardGrid } from "./components/card-grid";
@@ -39,12 +39,12 @@ export default function App() {
     setSelectedVehicle(null); // Close the detail modal if open
   };
 
-  const handleCloseLeadForm = () => {
+  const handleCloseLeadForm = useCallback(() => {
     setShowLeadForm(false);
     setLeadFormCar(null);
-  };
+  }, []);
 
-  const handleSubmitLead = async (leadData) => {
+  const handleSubmitLead = useCallback(async (leadData) => {
     // In a real application, this would send data to your backend
     console.log("Lead form submitted:", leadData);
 
@@ -55,7 +55,7 @@ export default function App() {
         resolve({ success: true });
       }, 1000);
     });
-  };
+  }, []);
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
