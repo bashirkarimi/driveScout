@@ -76,6 +76,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
           src={images[currentIndex]}
           alt={`${alt} - Image ${currentIndex + 1}`}
           className="h-full w-full object-cover"
+          loading="lazy"
         />
 
         {images.length > 1 && (
@@ -109,6 +110,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
                 <img
                   src={image}
                   alt={`Thumbnail ${index + 1}`}
+                  loading="lazy"
                   className="hidden md:block h-10 w-12 md:h-16 md:w-20 object-cover p-0.5 rounded-lg"
                 />
               </button>
