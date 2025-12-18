@@ -2,7 +2,7 @@ import { PLACEHOLDER_IMAGE } from "../constants.js";
 import { ImageCarousel } from "./image-carousel.jsx";
 import { Button } from "./button.jsx";
 
-export const DetailCard = ({ vehicleDetails, onClose, onBookTestDrive }) => {
+export const DetailCard = ({ vehicleDetails, onBookTestDrive }) => {
   const {
     title,
     subtitle,
@@ -22,28 +22,6 @@ export const DetailCard = ({ vehicleDetails, onClose, onBookTestDrive }) => {
 
   return (
     <div className="flex h-full flex-col overflow-y-auto bg-white">
-      <div className="sticky top-0 z-10 flex justify-end border-b border-slate-200 bg-white p-4">
-        <button
-          onClick={onClose}
-          className="rounded-full p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
-          aria-label="Close details"
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
-
       <div className="flex flex-col gap-6 p-6">
         <ImageCarousel images={displayImages} alt={title} />
         <header className="flex flex-col gap-3">
