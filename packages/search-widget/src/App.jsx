@@ -7,7 +7,7 @@ import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
 import { LeadForm } from "./components/lead-form";
 import { useCarSearch } from "./hooks/useCarSearch.js";
-import { Logo } from "./components/logo";
+import { Header } from "./components/header";
 
 export default function App() {
   const {
@@ -25,19 +25,19 @@ export default function App() {
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadFormCar, setLeadFormCar] = useState(null);
 
-  const handleViewDetails = (vehicle) => {
+  const handleViewDetails = useCallback((vehicle) => {
     setSelectedVehicle(vehicle);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setSelectedVehicle(null);
-  };
+  }, []);
 
-  const handleBookTestDrive = (vehicle) => {
+  const handleBookTestDrive = useCallback((vehicle) => {
     setLeadFormCar(vehicle);
     setShowLeadForm(true);
     setSelectedVehicle(null); // Close the detail modal if open
-  };
+  }, []);
 
   const handleCloseLeadForm = useCallback(() => {
     setShowLeadForm(false);
@@ -59,12 +59,7 @@ export default function App() {
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
-      <header className="flex gap-3">
-        <Logo size={40} />
-        <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
-          Drive Scout
-        </h1>
-      </header>
+      <Header />
       <SearchForm
         engineType={engineType}
         isLoading={isLoading}
