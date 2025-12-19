@@ -1,15 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export const Modal = ({ isOpen, onClose, children }) => {
   const dialogRef = useRef(null);
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
 
@@ -38,12 +33,8 @@ export const Modal = ({ isOpen, onClose, children }) => {
     return () => {
       document.body.style.overflow = originalOverflow;
       document.body.style.paddingRight = originalPaddingRight;
-      // Ensure dialog is closed on unmount
-      if (dialog && dialog.open) dialog.close();
     };
   }, [isOpen]);
-
-  if (!mounted) return null;
 
   return createPortal(
     <dialog

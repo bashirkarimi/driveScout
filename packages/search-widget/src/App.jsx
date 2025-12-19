@@ -86,15 +86,15 @@ export default function App() {
         </div>
       )}
 
-      <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
-        {selectedVehicle && (
+      {selectedVehicle && (
+        <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
           <DetailCard
             vehicleDetails={selectedVehicle}
             onClose={handleCloseModal}
             onBookTestDrive={handleBookTestDrive}
           />
-        )}
-      </Modal>
+        </Modal>
+      )}
     </main>
   );
 }
