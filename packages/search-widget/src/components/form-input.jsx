@@ -38,3 +38,5 @@ export const FormInput = memo(({
     </div>
   );
 });
+
+FormInput.displayName = "FormInput";
