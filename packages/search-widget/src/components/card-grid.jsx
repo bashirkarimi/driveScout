@@ -25,3 +25,5 @@ export const CardGrid = memo(({ data, onViewDetails, onBookTestDrive }) => {
     </section>
   );
 });
+
+CardGrid.displayName = "CardGrid";
