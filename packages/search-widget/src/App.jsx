@@ -90,7 +90,6 @@ export default function App() {
         <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
           <DetailCard
             vehicleDetails={selectedVehicle}
-            onClose={handleCloseModal}
             onBookTestDrive={handleBookTestDrive}
           />
         </Modal>
