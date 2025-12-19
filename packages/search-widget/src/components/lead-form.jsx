@@ -271,3 +271,5 @@ export const LeadForm = memo(({ vehicleData, onClose, onSubmit }) => {
     </div>
   );
 });
+
+LeadForm.displayName = "LeadForm";
