@@ -76,7 +76,7 @@ export const ImageCarousel = ({ images, alt = "Vehicle" }) => {
           src={images[currentIndex]}
           alt={`${alt} - Image ${currentIndex + 1}`}
           className="h-full w-full object-cover"
-          loading="lazy"
+          loading="eager"
         />
 
         {images.length > 1 && (
