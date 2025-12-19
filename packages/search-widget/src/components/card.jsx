@@ -8,22 +8,23 @@ export const Card = ({ vehicle, onViewDetails, onBookTestDrive }) => {
       <img
         alt={title ?? "Vehicle"}
         src={heroImage ?? PLACEHOLDER_IMAGE}
+        loading="lazy"
         className="h-48 w-full object-cover md:h-52"
       />
       <div className="flex flex-col gap-4 p-4 h-full">
-        <header className="flex flex-col gap-2">
+        <hgroup className="flex flex-col gap-2">
           <h2 className="text-lg font-semibold text-slate-900">
             {title ?? "Unnamed vehicle"}
           </h2>
           <p className="text-sm text-gray-600">{subtitle}</p>
-        </header>
+        </hgroup>
         <div className="flex flex-wrap gap-2 text-xs text-slate-500">
           {[
-            highlights.year && {
+            highlights?.year && {
               key: "year",
               value: highlights.year,
             },
-            highlights.engineType && {
+            highlights?.engineType && {
               key: "engine",
               value: highlights.engineType,
             },
@@ -36,7 +37,7 @@ export const Card = ({ vehicle, onViewDetails, onBookTestDrive }) => {
             .map((item) => (
               <span
                 key={item.key}
-                className="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 font-medium text-slate-600"
+                className="inline-flex items-center rounded-md bg-slate-100 px-2 py-1 font-medium text-slate-600 capitalize"
               >
                 <p>
                   <span className="sr-only">{item.key}: </span>

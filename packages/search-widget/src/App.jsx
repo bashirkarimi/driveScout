@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { SearchForm } from "./components/search-form";
 import { StatusMessage } from "./components/status-message";
 import { CardGrid } from "./components/card-grid";
@@ -7,7 +7,7 @@ import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
 import { LeadForm } from "./components/lead-form";
 import { useCarSearch } from "./hooks/useCarSearch.js";
-import { Logo } from "./components/logo";
+import { Header } from "./components/header";
 
 export default function App() {
   const {
@@ -25,26 +25,26 @@ export default function App() {
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [leadFormCar, setLeadFormCar] = useState(null);
 
-  const handleViewDetails = (vehicle) => {
+  const handleViewDetails = useCallback((vehicle) => {
     setSelectedVehicle(vehicle);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setSelectedVehicle(null);
-  };
+  }, []);
 
-  const handleBookTestDrive = (vehicle) => {
+  const handleBookTestDrive = useCallback((vehicle) => {
     setLeadFormCar(vehicle);
     setShowLeadForm(true);
     setSelectedVehicle(null); // Close the detail modal if open
-  };
+  }, []);
 
-  const handleCloseLeadForm = () => {
+  const handleCloseLeadForm = useCallback(() => {
     setShowLeadForm(false);
     setLeadFormCar(null);
-  };
+  }, []);
 
-  const handleSubmitLead = async (leadData) => {
+  const handleSubmitLead = useCallback(async (leadData) => {
     // In a real application, this would send data to your backend
     console.log("Lead form submitted:", leadData);
 
@@ -55,16 +55,11 @@ export default function App() {
         resolve({ success: true });
       }, 1000);
     });
-  };
+  }, []);
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
-      <header className="flex gap-3">
-        <Logo size={40} />
-        <h1 className="text-2xl font-bold text-slate-900 md:text-3xl">
-          Drive Scout
-        </h1>
-      </header>
+      <Header />
       <SearchForm
         engineType={engineType}
         isLoading={isLoading}
@@ -79,7 +74,7 @@ export default function App() {
         onViewDetails={handleViewDetails}
         onBookTestDrive={handleBookTestDrive}
       />
-      <EmptyState shouldHide={results.length !== 0} />
+      {results.length === 0 && <EmptyState />}
 
       {showLeadForm && leadFormCar && (
         <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">
@@ -91,15 +86,14 @@ export default function App() {
         </div>
       )}
 
-      <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
-        {selectedVehicle && (
+      {selectedVehicle && (
+        <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
           <DetailCard
             vehicleDetails={selectedVehicle}
-            onClose={handleCloseModal}
             onBookTestDrive={handleBookTestDrive}
           />
-        )}
-      </Modal>
+        </Modal>
+      )}
     </main>
   );
 }

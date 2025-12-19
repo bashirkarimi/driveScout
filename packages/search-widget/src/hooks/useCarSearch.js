@@ -16,12 +16,6 @@ export const useCarSearch = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (!statusMessage && results.length) {
-      setStatusMessage(`${results.length} vehicles ready to explore.`);
-    }
-  }, [results, statusMessage]);
-
   const runFallbackSearch = useCallback(
     (searchQuery, searchEngineType) => {
       const normalizedQuery = searchQuery.trim().toLowerCase();

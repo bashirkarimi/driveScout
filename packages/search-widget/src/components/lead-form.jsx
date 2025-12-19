@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo, useCallback } from "react";
 import { FormInput } from "./form-input";
 import { Button } from "./button";
 
-export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
+export const LeadForm = memo(({ vehicleData, onClose, onSubmit }) => {
   const { id: vehicleId, title, subtitle, pricing } = vehicleData;
   const formRef = useRef(null);
 
@@ -51,14 +51,17 @@ export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error for this field when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
+    setErrors((prev) => {
+      if (prev[name]) {
+        return { ...prev, [name]: "" };
+      }
+      return prev;
+    });
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -267,4 +270,6 @@ export const LeadForm = ({ vehicleData, onClose, onSubmit }) => {
       </div>
     </div>
   );
-};
+});
+
+LeadForm.displayName = "LeadForm";

@@ -1,12 +1,21 @@
-import { useEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 export const Modal = ({ isOpen, onClose, children }) => {
-  useEffect(() => {
+  const dialogRef = useRef(null);
+
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+
     const originalOverflow = document.body.style.overflow;
     const originalPaddingRight = document.body.style.paddingRight;
 
     if (isOpen) {
-      // Prevent body scroll when modal is open and avoid layout shift
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+      // Prevent body scroll
       const scrollbarWidth =
         window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
@@ -14,42 +23,49 @@ export const Modal = ({ isOpen, onClose, children }) => {
         document.body.style.paddingRight = `${scrollbarWidth}px`;
       }
     } else {
-      document.body.style.overflow = originalOverflow || "";
-      document.body.style.paddingRight = originalPaddingRight || "";
+      if (dialog.open) {
+        dialog.close();
+      }
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
     }
 
-    // Cleanup on unmount
     return () => {
-      document.body.style.overflow = originalOverflow || "";
-      document.body.style.paddingRight = originalPaddingRight || "";
+      document.body.style.overflow = originalOverflow;
+      document.body.style.paddingRight = originalPaddingRight;
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape" && isOpen) {
-        onClose();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/50 p-4 backdrop-blur-sm"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
-      }}
+  return createPortal(
+    <dialog
+      ref={dialogRef}
+      closedby="any"
+      onClose={onClose}
+      className="m-auto w-full max-w-4xl rounded-xl bg-white p-0 shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm open:animate-in open:fade-in-0 open:zoom-in-95"
     >
-      <div className="my-8 w-full max-w-4xl rounded-xl bg-white shadow-2xl">
-        {children}
+      <div className="sticky top-0 z-10 flex justify-end border-b border-slate-200 bg-white p-4">
+        <button
+          onClick={onClose}
+          className="rounded-full p-2 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+          aria-label="Close details"
+        >
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
       </div>
-    </div>
+      <div className="p-4">{children}</div>
+    </dialog>,
+    document.body
   );
 };

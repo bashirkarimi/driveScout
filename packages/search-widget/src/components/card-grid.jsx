@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { Card } from "./card";
 import { buildVehicleKey } from "../utils/cars.js";
 
-export const CardGrid = ({ data, onViewDetails, onBookTestDrive }) => {
+export const CardGrid = memo(({ data, onViewDetails, onBookTestDrive }) => {
   if (!data || !data.length) {
     return null;
   }
@@ -23,4 +24,6 @@ export const CardGrid = ({ data, onViewDetails, onBookTestDrive }) => {
       ))}
     </section>
   );
-};
+});
+
+CardGrid.displayName = "CardGrid";
