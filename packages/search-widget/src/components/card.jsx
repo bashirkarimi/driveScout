@@ -51,7 +51,7 @@ export const Card = ({ vehicle, onViewDetails, onBookTestDrive }) => {
             {description}
           </p>
         )}
-        <div className="pt-3 mt-auto flex flex-col gap-2 sm:flex-row">
+        <footer className="pt-3 mt-auto flex flex-col gap-2 sm:flex-row">
           <Button
             variant="primary"
             onClick={() => onBookTestDrive(vehicle)}
@@ -66,7 +66,7 @@ export const Card = ({ vehicle, onViewDetails, onBookTestDrive }) => {
           >
             Open Details
           </Button>
-        </div>
+        </footer>
       </div>
     </article>
   );
