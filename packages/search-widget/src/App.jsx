@@ -58,42 +58,44 @@ export default function App() {
   }, []);
 
   return (
-    <main className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
+    <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
       <Header />
-      <SearchForm
-        engineType={engineType}
-        isLoading={isLoading}
-        onEngineTypeChange={setEngineType}
-        onQueryChange={setQuery}
-        onSubmit={handleSubmit}
-        query={query}
-      />
-      <StatusMessage isLoading={isLoading} message={statusMessage} />
-      <CardGrid
-        data={results}
-        onViewDetails={handleViewDetails}
-        onBookTestDrive={handleBookTestDrive}
-      />
-      {results.length === 0 && <EmptyState />}
+      <main>
+        <SearchForm
+          engineType={engineType}
+          isLoading={isLoading}
+          onEngineTypeChange={setEngineType}
+          onQueryChange={setQuery}
+          onSubmit={handleSubmit}
+          query={query}
+        />
+        <StatusMessage isLoading={isLoading} message={statusMessage} />
+        <CardGrid
+          data={results}
+          onViewDetails={handleViewDetails}
+          onBookTestDrive={handleBookTestDrive}
+        />
+        {results.length === 0 && <EmptyState />}
 
-      {showLeadForm && leadFormCar && (
-        <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">
-          <LeadForm
-            vehicleData={leadFormCar}
-            onClose={handleCloseLeadForm}
-            onSubmit={handleSubmitLead}
-          />
-        </div>
-      )}
+        {showLeadForm && leadFormCar && (
+          <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">
+            <LeadForm
+              vehicleData={leadFormCar}
+              onClose={handleCloseLeadForm}
+              onSubmit={handleSubmitLead}
+            />
+          </div>
+        )}
 
-      {selectedVehicle && (
-        <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
-          <DetailCard
-            vehicleDetails={selectedVehicle}
-            onBookTestDrive={handleBookTestDrive}
-          />
-        </Modal>
-      )}
-    </main>
+        {selectedVehicle && (
+          <Modal isOpen={!!selectedVehicle} onClose={handleCloseModal}>
+            <DetailCard
+              vehicleDetails={selectedVehicle}
+              onBookTestDrive={handleBookTestDrive}
+            />
+          </Modal>
+        )}
+      </main>
+    </div>
   );
 }
