@@ -234,3 +234,58 @@ export async function preloadWidget() {
     console.error("✗ Widget preload failed:", error.message);
   }
 }
+
+/**
+ * Generates a lead form widget HTML for a specific vehicle
+ * @param {Object} vehicleData - Vehicle information
+ * @param {string} vehicleData.vehicleId - ID of the vehicle
+ * @param {string} vehicleData.vehicleTitle - Title of the vehicle
+ * @param {string} [vehicleData.vehicleSubtitle] - Subtitle of the vehicle
+ * @param {string} [vehicleData.priceFormatted] - Formatted price
+ * @returns {Promise<string>} Complete HTML for lead form widget
+ */
+export async function getLeadFormWidgetHtml(vehicleData) { 
+  const template = readWidgetTemplate();
+
+  // Build widget based on environment
+  const { jsText, cssText } = isDevelopment
+    ? await buildDevelopmentWidget()
+    : buildProductionWidget();
+
+  // Inject styles and scripts
+  const styles = injectStyles(cssText);
+  const hasCSS = styles.includes("<style>");
+  
+  // Create initialization script that pre-configures the lead form
+  // Ensure we always pass vehicleId and vehicleTitle, even if empty
+  const leadFormData = {
+    vehicleId: vehicleData.vehicleId || vehicleData.vehicleTitle || "",
+    vehicleTitle: vehicleData.vehicleTitle || "",
+  };
+  
+  // Only add optional fields if they have values
+  if (vehicleData.vehicleSubtitle) {
+    leadFormData.vehicleSubtitle = vehicleData.vehicleSubtitle;
+  }
+  if (vehicleData.priceFormatted) {
+    leadFormData.priceFormatted = vehicleData.priceFormatted;
+  }
+  
+  const initScript = `
+    <script>
+      window.__LEAD_FORM_DATA__ = ${JSON.stringify(leadFormData, null, 2)};
+      window.__SHOW_LEAD_FORM__ = true;
+      console.log('[Lead Form Widget] Initialized with data:', window.__LEAD_FORM_DATA__);
+    </script>
+  `;
+  
+  const scripts = injectScripts(jsText, hasCSS);
+  const replacement = styles + initScript + scripts;
+
+  // Insert into template
+  if (template.includes(WIDGET_PLACEHOLDER)) {
+    return template.replace(WIDGET_PLACEHOLDER, replacement);
+  }
+
+  return `${template}\n${replacement}`;
+}

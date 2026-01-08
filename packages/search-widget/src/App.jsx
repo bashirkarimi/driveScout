@@ -21,8 +21,32 @@ export default function App() {
   } = useCarSearch();
 
   const [selectedVehicle, setSelectedVehicle] = useState(null);
-  const [showLeadForm, setShowLeadForm] = useState(false);
-  const [leadFormCar, setLeadFormCar] = useState(null);
+  const [showLeadForm, setShowLeadForm] = useState(
+    () => window.__SHOW_LEAD_FORM__ || false
+  );
+  const [leadFormCar, setLeadFormCar] = useState(() => {
+    // Check if lead form should be pre-configured from widget data
+    if (window.__LEAD_FORM_DATA__) {
+      const data = window.__LEAD_FORM_DATA__;
+      console.log('[Lead Form] Loading data from window:', data);
+      
+      // Ensure we have at minimum a title
+      if (!data.vehicleTitle) {
+        console.warn('[Lead Form] Missing vehicleTitle in __LEAD_FORM_DATA__');
+        return null;
+      }
+      
+      return {
+        id: data.vehicleId || data.vehicleTitle,
+        title: data.vehicleTitle,
+        subtitle: data.vehicleSubtitle || undefined,
+        pricing: {
+          priceFormatted: data.priceFormatted || undefined,
+        },
+      };
+    }
+    return null;
+  });
 
   const handleViewDetails = useCallback((vehicle) => {
     setSelectedVehicle(vehicle);
