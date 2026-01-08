@@ -7,7 +7,6 @@ import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
 import { LeadForm } from "./components/lead-form";
 import { useCarSearch } from "./hooks/useCarSearch.js";
-import { Header } from "./components/header";
 
 export default function App() {
   const {
@@ -59,7 +58,6 @@ export default function App() {
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
-      <Header />
       <main>
         <SearchForm
           engineType={engineType}
