@@ -7,7 +7,6 @@ import { Modal } from "./components/modal";
 import { DetailCard } from "./components/detail-card";
 import { LeadForm } from "./components/lead-form";
 import { useCarSearch } from "./hooks/useCarSearch.js";
-import { Header } from "./components/header";
 
 export default function App() {
   const {
@@ -22,8 +21,32 @@ export default function App() {
   } = useCarSearch();
 
   const [selectedVehicle, setSelectedVehicle] = useState(null);
-  const [showLeadForm, setShowLeadForm] = useState(false);
-  const [leadFormCar, setLeadFormCar] = useState(null);
+  const [showLeadForm, setShowLeadForm] = useState(
+    () => window.__SHOW_LEAD_FORM__ || false
+  );
+  const [leadFormCar, setLeadFormCar] = useState(() => {
+    // Check if lead form should be pre-configured from widget data
+    if (window.__LEAD_FORM_DATA__) {
+      const data = window.__LEAD_FORM_DATA__;
+      console.log('[Lead Form] Loading data from window:', data);
+      
+      // Ensure we have at minimum a title
+      if (!data.vehicleTitle) {
+        console.warn('[Lead Form] Missing vehicleTitle in __LEAD_FORM_DATA__');
+        return null;
+      }
+      
+      return {
+        id: data.vehicleId || data.vehicleTitle,
+        title: data.vehicleTitle,
+        subtitle: data.vehicleSubtitle || undefined,
+        pricing: {
+          priceFormatted: data.priceFormatted || undefined,
+        },
+      };
+    }
+    return null;
+  });
 
   const handleViewDetails = useCallback((vehicle) => {
     setSelectedVehicle(vehicle);
@@ -59,7 +82,6 @@ export default function App() {
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-col gap-4 p-6 md:gap-6">
-      <Header />
       <main>
         <SearchForm
           engineType={engineType}
@@ -75,7 +97,6 @@ export default function App() {
           onViewDetails={handleViewDetails}
           onBookTestDrive={handleBookTestDrive}
         />
-        {results.length === 0 && <EmptyState />}
 
         {showLeadForm && leadFormCar && (
           <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">

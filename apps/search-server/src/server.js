@@ -15,6 +15,10 @@ import {
   submitLeadHandler,
   leadSubmissionSchema,
 } from "./tools/submit-lead.js";
+import {
+  loadLeadFormHandler,
+  loadLeadFormSchema,
+} from "./tools/load-lead-form.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -99,6 +103,24 @@ function createDriveScoutServer() {
       },
     },
     submitLeadHandler
+  );
+
+  server.registerTool(
+    "load_lead_form",
+    {
+      title: "Load contact form",
+      description:
+        "Displays a contact/lead form for a specific vehicle. ONLY use this when user explicitly wants to: book a test drive, schedule an appointment, contact dealer, request a callback, or submit their contact information. DO NOT use for browsing, viewing details, or general inquiries. IMPORTANT: You must extract and pass the vehicle's title, id (if available), subtitle, and priceFormatted from the search results.",
+      inputSchema: loadLeadFormSchema,
+      annotations: {
+        readOnlyHint: true,
+      },
+      _meta: {
+        "openai/toolInvocation/invoking": "Loading lead form",
+        "openai/toolInvocation/invoked": "Lead form ready",
+      },
+    },
+    loadLeadFormHandler
   );
 
   return server;
