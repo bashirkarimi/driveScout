@@ -73,7 +73,6 @@ export default function App() {
           onViewDetails={handleViewDetails}
           onBookTestDrive={handleBookTestDrive}
         />
-        {results.length === 0 && <EmptyState />}
 
         {showLeadForm && leadFormCar && (
           <div className="mt-8 rounded-xl border border-slate-200 bg-white shadow-lg">
